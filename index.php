@@ -1,0 +1,26 @@
+<?php
+    session_start();
+    ob_start();
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+
+    require_once "commons/functions.php";
+
+    require_once "controllers/accountController.php";
+    require_once "controllers/productController.php";
+    require_once "controllers/categoryController.php";
+
+    require_once "models/accountModel.php";
+    require_once "models/productModel.php";
+    require_once "models/categoryModel.php";
+
+    $home = new homeController;
+    $error = new errorController;
+
+    $act = $_GET['act'] ?? "/";
+    if ($act == "/"){
+        $home->home();
+    }
+    else {
+        $error->notFound();
+    }
+?>
