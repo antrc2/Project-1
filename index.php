@@ -13,8 +13,9 @@
     require_once "models/productModel.php";
     require_once "models/categoryModel.php";
 
-    $home = new homeController;
-    $error = new errorController;
+    $account = new accountController;
+    $product = new productController;
+    $category = new categoryController;
 
     $act = $_GET['act'] ?? "/";
     if ($act == "/"){
