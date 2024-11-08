@@ -35,32 +35,15 @@
         function getInformationUserByEmail($email){
             return $this->conn->query("SELECT * FROM account WHERE email='$email'")->fetch();
         }
-        function login($usernameOrEmail, $password){
-            $isUsername = count(explode("@", $usernameOrEmail))==1;
-            if ($isUsername){
-                $username = $usernameOrEmail;
-                if (!$this->checkIssetUsername($username)){
-                    return (['status'=>False, "message"=>"Tài khoản không tồn tại"]);
-                } else {
-                    $hashedPassword = $this->getInformationUserByUsername($username)['password'];
-                    if ($this->checkHashedPassword($hashedPassword, $password)){
-                        return (['status'=>True, "message"=>"Đăng nhập thành công"]);
-                    } else {
-                        return (['status'=>False, "message"=>"Sai mật khẩu"]);
-                    }
-                }
+        function login($username, $password){
+            if (!$this->checkIssetUsername($username)){
+                return (['status'=>False, "message"=>"Tài khoản không tồn tại"]);
+            }
+            $hashedPassword = $this->getInformationUserByUsername($username)['password'];
+            if ($this->checkHashedPassword($hashedPassword, $password)){
+                return (['status'=>True, "message"=>"Đăng nhập thành công"]);
             } else {
-                $email = $usernameOrEmail;
-                if (!$this->checkIssetEmail($email)){
-                    return (['status'=>False, "message"=>"Email không tồn tại"]);
-                } else {
-                    $hashedPassword = $this->getInformationUserByEmail($email)['password'];
-                    if ($this->checkHashedPassword($hashedPassword, $password)){
-                        return (['status'=>True, "message"=>"Đăng nhập thành công"]);
-                    } else {
-                        return (['status'=>False, "message"=>"Sai mật khẩu"]);
-                    }
-                }
+                return (['status'=>False, "message"=>"Sai mật khẩu"]);
             }
 
         }

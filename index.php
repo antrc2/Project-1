@@ -24,6 +24,8 @@
         $account->register();
     } elseif ($act == "login"){
         $account->login();
+    } elseif ($act == "logout"){
+        $account->logout();
     }
     else {
         $error->notFound();

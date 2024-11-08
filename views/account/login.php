@@ -13,9 +13,9 @@
                 <h1>Đăng nhập</h1>
                 <form action="" method="POST">
                     <div>
-                        <label for="">Tài khoản / Email</label>
-                        <input type="text" name="usernameOrEmail">
-                        <div id="usernameOrEmailError" class="error"></div>
+                        <label for="">Tài khoản</label>
+                        <input type="text" name="username">
+                        <div id="usernameError" class="error"></div>
                     </div>
                     <div>
                         <label for="">Mật khẩu</label>
