@@ -14,12 +14,16 @@
     require_once "models/categoryModel.php";
 
     $account = new accountController;
-    $product = new productController;
-    $category = new categoryController;
+    // $product = new productController;
+    // $category = new categoryController;
 
     $act = $_GET['act'] ?? "/";
     if ($act == "/"){
-        $home->home();
+        // $home->home();
+    } elseif ($act == "register"){
+        $account->register();
+    } elseif ($act == "login"){
+        $account->login();
     }
     else {
         $error->notFound();
