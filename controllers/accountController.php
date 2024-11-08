@@ -11,9 +11,8 @@
                 $password = $_POST['password'];
                 $result = $this->acc->login($usernameOrEmail,$password);
                 if ($result['status'] == True){
-                    // echo SweetAlert2("success",$result['message']);
                     require_once "views/account/login.php";
-                    headerAfterXSecondWithSweetAlert2("?act=/",1000, "success", $result['message']);
+                    headerAfterXSecondWithSweetAlert2("?act=/",1500, "success", $result['message']);
                 } else {
                     require_once "views/account/login.php";
                     echo SweetAlert2("error",$result['message']);
@@ -34,7 +33,7 @@
                 $result = $this->acc->register($username, $fullname, $email, $password, $address, $phone, $created_at);
                 if ($result['status'] == True){
                     require_once "views/account/register.php";
-                    headerAfterXSecondWithSweetAlert2("?act=/",1000, "success", $result['message']);
+                    headerAfterXSecondWithSweetAlert2("?act=/",1500, "success", $result['message']);
                 } else {
                     require_once "views/account/register.php";
                     echo SweetAlert2("error",$result['message']);
