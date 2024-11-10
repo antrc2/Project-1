@@ -6,7 +6,7 @@
             $this->error = new errorModel;
         }
         function notFound(){
-
+            
         }
         function forbidden(){
             
