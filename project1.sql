@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 08, 2024 at 08:38 AM
+-- Generation Time: Nov 10, 2024 at 12:07 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -72,7 +72,8 @@ CREATE TABLE `bill_detail` (
   `bill_id` int NOT NULL,
   `product_id` int NOT NULL,
   `amount` int NOT NULL,
-  `price` int NOT NULL
+  `price` int NOT NULL,
+  `was_review` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -121,29 +122,6 @@ CREATE TABLE `category` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `color`
---
-
-CREATE TABLE `color` (
-  `id` int NOT NULL,
-  `color` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `color_image`
---
-
-CREATE TABLE `color_image` (
-  `id` int NOT NULL,
-  `color_id` int NOT NULL,
-  `image` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `discount`
 --
 
@@ -181,9 +159,11 @@ CREATE TABLE `product` (
 CREATE TABLE `product_detail` (
   `id` int NOT NULL,
   `product_id` int NOT NULL,
+  `amount` int NOT NULL,
+  `image` varchar(255) NOT NULL,
   `ram` int NOT NULL,
   `cpu` int NOT NULL,
-  `color_id` int NOT NULL,
+  `color` varchar(255) NOT NULL,
   `price` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -270,19 +250,6 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `color`
---
-ALTER TABLE `color`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `color_image`
---
-ALTER TABLE `color_image`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_color_image_color` (`color_id`);
-
---
 -- Indexes for table `discount`
 --
 ALTER TABLE `discount`
@@ -301,8 +268,7 @@ ALTER TABLE `product`
 --
 ALTER TABLE `product_detail`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_product_detail_product` (`product_id`),
-  ADD KEY `fk_color_id_color` (`color_id`);
+  ADD KEY `fk_product_detail_product` (`product_id`);
 
 --
 -- Indexes for table `review`
@@ -356,18 +322,6 @@ ALTER TABLE `cart_detail`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `color`
---
-ALTER TABLE `color`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `color_image`
---
-ALTER TABLE `color_image`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
@@ -436,12 +390,6 @@ ALTER TABLE `cart_detail`
   ADD CONSTRAINT `fk_cart_detail_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
 
 --
--- Constraints for table `color_image`
---
-ALTER TABLE `color_image`
-  ADD CONSTRAINT `fk_color_image_color` FOREIGN KEY (`color_id`) REFERENCES `color` (`id`);
-
---
 -- Constraints for table `discount`
 --
 ALTER TABLE `discount`
@@ -457,7 +405,6 @@ ALTER TABLE `product`
 -- Constraints for table `product_detail`
 --
 ALTER TABLE `product_detail`
-  ADD CONSTRAINT `fk_color_id_color` FOREIGN KEY (`color_id`) REFERENCES `color` (`id`),
   ADD CONSTRAINT `fk_product_detail_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
 
 --

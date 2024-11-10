@@ -19,6 +19,7 @@
 
     $act = $_GET['act'] ?? "/";
     if ($act == "/"){
+        echo "Hi";
         // $home->home();
     } elseif ($act == "register"){
         $account->register();
