@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 10, 2024 at 12:07 PM
+-- Generation Time: Nov 10, 2024 at 06:08 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -119,6 +119,13 @@ CREATE TABLE `category` (
   `status` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `cate_name`, `status`) VALUES
+(1, 'ASUSS', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -144,6 +151,7 @@ CREATE TABLE `product` (
   `cate_id` int NOT NULL,
   `name` varchar(255) NOT NULL,
   `price` int NOT NULL,
+  `image` varchar(255) NOT NULL,
   `created_at` bigint NOT NULL,
   `updated_at` bigint NOT NULL,
   `status` int NOT NULL DEFAULT '1',
@@ -322,7 +330,7 @@ ALTER TABLE `cart_detail`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `discount`
