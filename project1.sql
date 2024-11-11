@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 11, 2024 at 02:48 AM
+-- Generation Time: Nov 11, 2024 at 03:06 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -57,8 +57,12 @@ INSERT INTO `account` (`id`, `fullname`, `username`, `email`, `password`, `addre
 CREATE TABLE `bill` (
   `id` int NOT NULL,
   `user_id` int NOT NULL,
+  `fullname_recieved` varchar(255) NOT NULL,
+  `address_recieved` varchar(255) NOT NULL,
+  `phone_reciedved` varchar(255) NOT NULL,
   `created_at` bigint NOT NULL,
-  `total` int NOT NULL
+  `total` int NOT NULL,
+  `status` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -73,7 +77,8 @@ CREATE TABLE `bill_detail` (
   `product_id` int NOT NULL,
   `amount` int NOT NULL,
   `price` int NOT NULL,
-  `was_review` int NOT NULL DEFAULT '0'
+  `was_review` int NOT NULL DEFAULT '0',
+  `ststus` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -294,7 +299,8 @@ ALTER TABLE `product_detail`
 -- Indexes for table `product_detail_image`
 --
 ALTER TABLE `product_detail_image`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_product` (`product_detail_id`);
 
 --
 -- Indexes for table `review`
@@ -438,6 +444,12 @@ ALTER TABLE `product`
 --
 ALTER TABLE `product_detail`
   ADD CONSTRAINT `fk_product_detail_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
+
+--
+-- Constraints for table `product_detail_image`
+--
+ALTER TABLE `product_detail_image`
+  ADD CONSTRAINT `fk_product` FOREIGN KEY (`product_detail_id`) REFERENCES `product` (`id`);
 
 --
 -- Constraints for table `review`
