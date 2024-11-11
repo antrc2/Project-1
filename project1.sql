@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 10, 2024 at 06:08 PM
+-- Generation Time: Nov 11, 2024 at 02:48 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -168,11 +168,23 @@ CREATE TABLE `product_detail` (
   `id` int NOT NULL,
   `product_id` int NOT NULL,
   `amount` int NOT NULL,
-  `image` varchar(255) NOT NULL,
   `ram` int NOT NULL,
   `cpu` int NOT NULL,
   `color` varchar(255) NOT NULL,
   `price` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_detail_image`
+--
+
+CREATE TABLE `product_detail_image` (
+  `id` int NOT NULL,
+  `product_detail_id` int NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `status` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -279,6 +291,12 @@ ALTER TABLE `product_detail`
   ADD KEY `fk_product_detail_product` (`product_id`);
 
 --
+-- Indexes for table `product_detail_image`
+--
+ALTER TABLE `product_detail_image`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `review`
 --
 ALTER TABLE `review`
@@ -348,6 +366,12 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `product_detail`
 --
 ALTER TABLE `product_detail`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product_detail_image`
+--
+ALTER TABLE `product_detail_image`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
