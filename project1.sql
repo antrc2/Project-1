@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 12, 2024 at 03:42 AM
+-- Generation Time: Nov 12, 2024 at 02:32 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -121,6 +121,8 @@ CREATE TABLE `cart_detail` (
 CREATE TABLE `category` (
   `id` int NOT NULL,
   `cate_name` varchar(255) NOT NULL,
+  `created_at` bigint NOT NULL,
+  `updated_at` bigint NOT NULL,
   `status` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -128,9 +130,9 @@ CREATE TABLE `category` (
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`id`, `cate_name`, `status`) VALUES
-(1, 'ASUSSh', 1),
-(2, 'TUF', 1);
+INSERT INTO `category` (`id`, `cate_name`, `created_at`, `updated_at`, `status`) VALUES
+(1, 'ASUS', 0, 0, 2),
+(2, 'TUF', 0, 0, 1);
 
 -- --------------------------------------------------------
 
