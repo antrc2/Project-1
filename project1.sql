@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 11, 2024 at 03:06 AM
+-- Generation Time: Nov 12, 2024 at 03:38 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -78,7 +78,7 @@ CREATE TABLE `bill_detail` (
   `amount` int NOT NULL,
   `price` int NOT NULL,
   `was_review` int NOT NULL DEFAULT '0',
-  `ststus` int NOT NULL
+  `status` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -129,7 +129,8 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `cate_name`, `status`) VALUES
-(1, 'ASUSS', 2);
+(1, 'ASUSSh', 1),
+(2, 'TUF', 1);
 
 -- --------------------------------------------------------
 
@@ -142,7 +143,9 @@ CREATE TABLE `discount` (
   `product_id` int NOT NULL,
   `discount_amount` int NOT NULL,
   `start_date` bigint NOT NULL,
-  `end_date` bigint NOT NULL
+  `end_date` bigint NOT NULL,
+  `start_price` int NOT NULL,
+  `end_price` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -354,7 +357,7 @@ ALTER TABLE `cart_detail`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `discount`
