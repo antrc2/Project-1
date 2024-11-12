@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 12, 2024 at 03:38 AM
+-- Generation Time: Nov 12, 2024 at 03:42 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -177,7 +177,6 @@ CREATE TABLE `product_detail` (
   `product_id` int NOT NULL,
   `amount` int NOT NULL,
   `ram` int NOT NULL,
-  `cpu` int NOT NULL,
   `color` varchar(255) NOT NULL,
   `price` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
