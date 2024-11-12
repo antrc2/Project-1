@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 10, 2024 at 06:08 PM
+
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -57,8 +57,12 @@ INSERT INTO `account` (`id`, `fullname`, `username`, `email`, `password`, `addre
 CREATE TABLE `bill` (
   `id` int NOT NULL,
   `user_id` int NOT NULL,
+  `fullname_recieved` varchar(255) NOT NULL,
+  `address_recieved` varchar(255) NOT NULL,
+  `phone_reciedved` varchar(255) NOT NULL,
   `created_at` bigint NOT NULL,
-  `total` int NOT NULL
+  `total` int NOT NULL,
+  `status` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -73,7 +77,8 @@ CREATE TABLE `bill_detail` (
   `product_id` int NOT NULL,
   `amount` int NOT NULL,
   `price` int NOT NULL,
-  `was_review` int NOT NULL DEFAULT '0'
+  `was_review` int NOT NULL DEFAULT '0',
+  `status` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -124,7 +129,9 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `cate_name`, `status`) VALUES
-(1, 'ASUSS', 2);
+
+(1, 'ASUSSh', 1),
+(2, 'TUF', 1);
 
 -- --------------------------------------------------------
 
@@ -137,7 +144,9 @@ CREATE TABLE `discount` (
   `product_id` int NOT NULL,
   `discount_amount` int NOT NULL,
   `start_date` bigint NOT NULL,
-  `end_date` bigint NOT NULL
+  `end_date` bigint NOT NULL,
+  `start_price` int NOT NULL,
+  `end_price` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -168,11 +177,23 @@ CREATE TABLE `product_detail` (
   `id` int NOT NULL,
   `product_id` int NOT NULL,
   `amount` int NOT NULL,
-  `image` varchar(255) NOT NULL,
   `ram` int NOT NULL,
   `cpu` int NOT NULL,
   `color` varchar(255) NOT NULL,
   `price` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_detail_image`
+--
+
+CREATE TABLE `product_detail_image` (
+  `id` int NOT NULL,
+  `product_detail_id` int NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `status` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -279,6 +300,13 @@ ALTER TABLE `product_detail`
   ADD KEY `fk_product_detail_product` (`product_id`);
 
 --
+-- Indexes for table `product_detail_image`
+--
+ALTER TABLE `product_detail_image`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_product` (`product_detail_id`);
+
+--
 -- Indexes for table `review`
 --
 ALTER TABLE `review`
@@ -330,7 +358,9 @@ ALTER TABLE `cart_detail`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 
 --
 -- AUTO_INCREMENT for table `discount`
@@ -348,6 +378,12 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `product_detail`
 --
 ALTER TABLE `product_detail`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product_detail_image`
+--
+ALTER TABLE `product_detail_image`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
@@ -414,6 +450,12 @@ ALTER TABLE `product`
 --
 ALTER TABLE `product_detail`
   ADD CONSTRAINT `fk_product_detail_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
+
+--
+-- Constraints for table `product_detail_image`
+--
+ALTER TABLE `product_detail_image`
+  ADD CONSTRAINT `fk_product` FOREIGN KEY (`product_detail_id`) REFERENCES `product` (`id`);
 
 --
 -- Constraints for table `review`
