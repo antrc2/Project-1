@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
-<<<<<<< HEAD
--- Generation Time: Nov 12, 2024 at 02:32 PM
-=======
 
->>>>>>> 607f3aac158a4cc42de07a3a810f25c6d1773e7a
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -134,16 +130,11 @@ CREATE TABLE `category` (
 -- Dumping data for table `category`
 --
 
-<<<<<<< HEAD
+
 INSERT INTO `category` (`id`, `cate_name`, `created_at`, `updated_at`, `status`) VALUES
 (1, 'ASUS', 0, 0, 2),
 (2, 'TUF', 0, 0, 1);
-=======
-INSERT INTO `category` (`id`, `cate_name`, `status`) VALUES
 
-(1, 'ASUSSh', 1),
-(2, 'TUF', 1);
->>>>>>> 607f3aac158a4cc42de07a3a810f25c6d1773e7a
 
 -- --------------------------------------------------------
 
