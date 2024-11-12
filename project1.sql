@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 12, 2024 at 03:38 AM
+
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -129,6 +129,7 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `cate_name`, `status`) VALUES
+
 (1, 'ASUSSh', 1),
 (2, 'TUF', 1);
 
@@ -357,7 +358,9 @@ ALTER TABLE `cart_detail`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
+
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 
 --
 -- AUTO_INCREMENT for table `discount`
