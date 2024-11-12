@@ -18,4 +18,8 @@
                 </script>";
         echo SweetAlert2($icon, $message);
     }
+    function epochTimeToDateTime($epochtime) {
+        // Sử dụng hàm date() để chuyển đổi epochtime thành định dạng timestamp
+        return date("H:i:s d-m-Y", $epochtime);
+    }
 ?>

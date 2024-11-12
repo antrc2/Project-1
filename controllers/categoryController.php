@@ -12,7 +12,8 @@
         function addCategory(){
             if (isset($_POST['btn_addCategory'])){
                 $cateName = $_POST['cate_name'];
-                $result = $this->category->addCategory($cateName);
+                $createdAt = time();
+                $result = $this->category->addCategory($cateName, $createdAt);
                 if($result){
                     header("Location: ?act=list-category");
                 } else {
@@ -25,7 +26,8 @@
             $category = $this->category->getOneCategoryById($id);
             if (isset($_POST['btn_updateCategory'])){
                 $cateName = $_POST['cate_name'];
-                $result = $this->category->updateCategory($id,$cateName);
+                $updatedAt = time();
+                $result = $this->category->updateCategory($id,$cateName, $updatedAt);
                 if ($result){
                     header("Location: ?act=list-category");
                 } else {

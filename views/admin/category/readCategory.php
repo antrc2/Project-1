@@ -12,6 +12,8 @@
                 <th>ID</th>
                 <th>Tên danh mục</th>
                 <th>Trạng thái</th>
+                <th>Ngày tạo</th>
+                <th>Ngày sửa</th>
                 <th>Sửa</th>
                 <th>Xóa / Bỏ xóa</th>
             </tr>
@@ -20,6 +22,8 @@
                 <td><?= $category['id']?></td>
                 <td><?= $category['cate_name']?></td>
                 <td><?= $category['status'] == 1 ? "Chưa xóa" : "Đã xóa"?></td>
+                <td><?= epochTimeToDateTime($category['created_at'])?></td>
+                <td><?= epochTimeToDateTime($category['updated_at'])?></td>
                 <td><a href="?act=update-category&id=<?= $category['id']?>"><button>Sửa</button></a></td>
                 <td>
                     <?php if ($category['status'] ==1): ?>
