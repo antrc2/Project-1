@@ -1,0 +1,339 @@
+* {
+  
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+html{
+  scroll-behavior: smooth;
+  
+}
+.container{
+    width: 100%;
+}
+
+
+.header, 
+.header-left ul, 
+.header-right ul{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
+}
+ul li {
+    padding-right: 32px;
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+ul li a{
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+}
+
+ul li img {
+    width: 78px;
+    height: 78px;
+}
+
+
+.header{
+    height: 100px;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    background-color: #fff;
+    width: 100%;
+}
+
+
+.content{
+    height: max-content;
+    margin-top: 100px;
+}
+
+.content .delivery-address {
+    background-color: #202124;
+    display: flex;
+    justify-content: center;
+}
+
+.content .delivery-address p{
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+    color: #fff;
+    padding: 16px;
+    width: 40%;
+    font-weight: bold;
+}
+
+.delivery-address p img {
+    width: 40px;
+}
+
+.delivery-address p button{
+    width: 170px;
+    background-color: #e4002b;
+    padding: 16px;
+    margin-left: 16px;
+    border-radius: 50px;
+}
+
+.delivery-address p a {
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+}
+.header-left ul li a{
+background-image: linear-gradient(#000, #000);
+  background-size: 0 1px, auto;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  transition: all .2s ease-out;
+}
+
+.header-left ul li a:hover {
+  /* The following line makes the underline only as wide as the text */
+  /* background-size: calc(100% - 2em) 5px, auto; */
+  background-size: 100% 1px, auto;
+}
+
+
+.swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .swiper-button-next, .swiper-button-prev {
+    color: #fff;
+  }
+
+  .category{
+    width: 80%;
+    padding: 16px;
+    text-align: center;
+    margin: 32px auto;
+  }
+
+  .title{
+    display: block;
+    height: 40px;
+    padding: 16px;
+  }
+
+  .title h1 {
+    width: 25%;
+    float: left;
+    text-align: left;
+  }
+
+  .title hr {
+    width: 75%;
+    float: left;  
+    line-height: 40px;
+    margin-top: 12px;
+  }
+
+  .category-list, .combo-list {
+    width: 100%;
+    margin-top: 24px;
+  }
+
+  .category-list .category-card {
+    margin: 12px;
+  }
+
+  .category-list, .category-card , .combo-list, .combo-card {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .category-card {
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 10px;width: 260px;
+  }
+
+  .category-card img {
+    width: 260px;
+    border-radius: 10px;
+    height: 230px;
+    transition: all .3s ease;
+  }
+  .category-card img:hover {
+    transform: scale(1.1);
+  }
+
+  .category-card .sub {
+    height: 32px;
+    line-height: 32px;
+    font-size: 16px;
+    font-weight: bold; 
+    
+  }
+ .category-card .sub i {
+    margin-left: 8px;
+ }
+
+ .combo-list {
+
+ }
+
+ .combo-card {
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+ }
+
+ .sub-combo {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+ }
+
+ .sub-combo .sub-title, .price {
+    font-size: 18px;
+    font-weight: bold;
+ }
+
+ .combo-card img {
+    width: 100%;
+    border-radius: 10px;
+    height: 250px;
+    transition: all .3s ease;
+
+  }
+
+  .combo-card img:hover {
+    transform: scale(1.1);
+  }
+
+  .combo-card .des{
+    padding: 16px;
+  }
+
+  .combo-card button {
+    width: 170px;
+    background-color: #cccccc;
+    padding: 16px;
+    margin:32px 0 16px 0;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .combo-card button a {
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .download {
+    position: absolute;
+    left: inherit;
+    right: 12%;
+    top: 42%;
+    z-index: 1;
+    display: flex;
+
+  }
+
+  .app {
+    position: relative;
+  }
+
+  .app>img {
+    display: block;
+    width: 100%;
+  }
+
+  .app .chplay {
+    width: 170px;
+    height: 50px;
+    /* background: url('https://kfcvn-static.cognizantorderserv.com/images/content/home/mobileappbanner/boton-google.png'); */
+  }
+
+  .app .appstore {
+    width: 170px;
+    height: 50px !important;
+    /* background: url('https://kfcvn-static.cognizantorderserv.com/images/content/home/mobileappbanner/boton-google.png'); */
+  }
+
+
+.footer {
+    background-color: #202124;
+}
+
+.footer-container{
+    width: 80%;
+    padding-top: 42px;
+    padding-bottom: 32px;
+    display: flex;
+}
+
+.footer-container hr {
+ color: #fff !important;
+}
+
+.footer-title a {
+    font-size: 16px;
+    font-weight: normal;
+    color: #ccc;
+}
+
+.footer-title h3 {
+    color: #fff;
+    margin-bottom: 16px;
+}
+
+.footer-title ul li{
+    margin-bottom: 8px;
+}
+
+.footer-col .app-logo {
+    display: flex;
+    gap: 12px;
+}
+
+.footer-social {
+    display: flex;
+    padding: 32px;
+}
+
+.footer-social .copyright {
+    color: #fff;
+    font-size: 16px;
+}
+
+.footer-social .social i {
+    color: #fff !important;
+    margin-left: 8px;
+}
+
