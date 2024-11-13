@@ -1,6 +1,6 @@
 <?php
     function database(){
-        return new PDO("mysql:host=localhost;dbname=project1","root","Sqrtfl0@t01");
+        return new PDO("mysql:host=localhost;dbname=project1","root","");
     }
     function SweetAlert2($icon,$message){
         echo "<script src='assets/sweetalert2/sweetalert2.js'></script>";
@@ -21,5 +21,10 @@
     function epochTimeToDateTime($epochtime) {
         // Sử dụng hàm date() để chuyển đổi epochtime thành định dạng timestamp
         return date("H:i:s d-m-Y", $epochtime);
+    }
+    function deleteSession(){
+        // Xóa tất cả các session
+        session_unset(); 
+        session_destroy();
     }
 ?>

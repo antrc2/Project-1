@@ -1,0 +1,75 @@
+
+.main-menu{
+    margin-top: 100px;
+}
+.option-menu ul{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid #d8d6d6;
+    margin-bottom: 30px;
+}
+.option-menu a{
+    color: #969696;
+}
+.option-menu ul li:nth-child(1) a{
+    color: #000;
+    border-bottom: 2px solid red;
+}
+.container{
+    width: 1200px;
+}
+.menu-sale{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 30px;
+    row-gap: 40px;
+    margin-top: 30px;
+}
+.new-menu,.combo-alone,.combo-chicken ,.combo-team,.combo-drink {
+    margin-top: 50px;
+}
+.combo-drink{
+    margin-bottom: 100px;
+}
+.item-menu{
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(170, 170, 170);
+    text-align: center;
+    overflow: hidden;
+}
+.item-menu img{
+    transition: .2s linear;
+    width: 100%;
+}
+.item-menu:hover img{
+    transform: scale(1.1);
+    transition: .2s linear;
+}
+.item-menu :nth-child(2){
+    color: #000;
+    font-weight: bold;
+    margin-top: 20px;
+}
+.item-menu :nth-child(3){
+    font-weight: bold;
+}
+.item-menu :nth-child(3) del{
+    color: #969696;
+    margin:0 15px ;
+}
+.item-menu :nth-child(4){
+    margin-top: 10px;
+    font-size: 13px;
+}
+.item-menu button{
+    width: 80%;
+    padding: 15px;
+    margin: 30px 0 20px;
+    border: none;
+    background-color: #9f1e1e;
+    color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px  rgb(88, 88, 88);
+}

@@ -1,0 +1,22 @@
+.cart{
+    margin: 150px auto 50px;
+    width: 1200px;
+}
+.cart h1{
+    margin: 50px 0;
+}
+table, th, td {
+    border: 1px solid rgb(252, 45, 45);
+    border-collapse: collapse;
+    padding: 10px 20px;
+   
+  }
+  table th {
+    background-color: rgb(252, 45, 45);
+    color: aliceblue;
+  }
+  .form-cart{
+    display: grid;
+    grid-template-columns: 10fr 1fr;
+
+  }
