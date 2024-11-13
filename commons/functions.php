@@ -27,8 +27,9 @@
         return $datetime->getTimestamp();
     }
     function deleteSession(){
+        unset($_SESSION['error']);
         // Xóa tất cả các session
-        session_unset(); 
-        session_destroy();
+        // session_unset(); 
+        // session_destroy();
     }
 ?>
