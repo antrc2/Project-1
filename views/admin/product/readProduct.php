@@ -72,10 +72,9 @@ include './views/admin/layouts/sidebar.php';
                                 <div class="form-group  col-md-6">
                                     <label>Abum ảnh</label>
                                     <input type="file" class="form-control" name="img_array[]" multiple>
-
                                 </div>
 
-                                <div class="form-group  col-md-6">
+                                <!-- <div class="form-group  col-md-6">
                                     <label>Ngày nhập</label>
                                     <input type="date" class="form-control" placeholder="ngày nhập sản phẩm "
                                         name="updated_at">
@@ -83,8 +82,8 @@ include './views/admin/layouts/sidebar.php';
                                     if (isset($_SESSION["error"]['updated_at'])) { ?>
                                         <p class="text-danger"><?= $_SESSION["error"]['updated_at'] ?></p>
                                     <?php } ?>
-                                </div>
-                                <div class="form-group  col-md-6">
+                                </div> -->
+                                <!-- <div class="form-group  col-md-6">
                                     <label>Ngày tạo</label>
                                     <input type="date" class="form-control" placeholder="ngày nhập sản phẩm "
                                         name="created_at">
@@ -92,7 +91,7 @@ include './views/admin/layouts/sidebar.php';
                                     if (isset($_SESSION["error"]['created_at'])) { ?>
                                         <p class="text-danger"><?= $_SESSION["error"]['created_at'] ?></p>
                                     <?php } ?>
-                                </div>
+                                </div> -->
                                 <div class="form-group  col-md-6">
                                     <label>Ram</label>
                                     <input type="number" class="form-control" placeholder="ram sản phẩm "
@@ -129,19 +128,18 @@ include './views/admin/layouts/sidebar.php';
                                         <p class="text-danger"><?= $_SESSION["error"]['cate_id'] ?></p>
                                     <?php } ?>
                                 </div>
-                                <div class="form-group  col-md-6">
+                                <!-- <div class="form-group  col-md-6">
                                     <label>Trạng thái</label>
                                     <select name="status" class="form-control">
                                         <option selected disabled>Chọn danh mục sản phẩm</option>
                                         <option value="1">Còn hàng</option>
                                         <option value="2">Hết hàng</option>
-
                                     </select>
                                     <?php
                                     if (isset($_SESSION["error"]['status'])) { ?>
                                         <p class="text-danger"><?= $_SESSION["error"]['status'] ?></p>
                                     <?php } ?>
-                                </div>
+                                </div> -->
                                 <div class="form-group col-md-12">
                                     <label>Mô tả</label>
                                     <textarea type="text" class="form-control" placeholder="Nhập mô tả"
