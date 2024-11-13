@@ -22,6 +22,7 @@ class productController
     public function themSanPham()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            var_dump($_POST);
             $tenSanPham = $_POST["name"] ?? "";
             $giaSanPham = $_POST["price"] ?? "";
             $soLuong = $_POST["amount"] ?? "";
@@ -33,13 +34,13 @@ class productController
             }
 
             $img_array = $_FILES['img_array'];
-            $ngayNhap = $_POST['updated_at'] ?? "";
-            $ngayTao = $_POST['created_at'] ?? "";
+            $ngayNhap = time();
+            $ngayTao = time();
             $ram = $_POST["ram"] ?? "";
             $mau = $_POST["color"] ?? "";
             $moTa = $_POST["detail"] ?? "";
-            $trangThai = isset($_POST['status']) ? $_POST['status'] : null;
-            $danhMucId = isset($_POST['cate_id']) ? $_POST['cate_id'] : null;
+            $trangThai = isset($_POST['status']) ? $_POST['status'] : 1;
+            $danhMucId = isset($_POST['cate_id']) ? $_POST['cate_id'] : 1;
             $errors = [];
             if (empty($tenSanPham)) {
                 $errors['name'] = "Tên sản phẩm không được để trống";
@@ -56,12 +57,9 @@ class productController
             if (empty($ngayTao)) {
                 $errors['created_at'] = "Ngày tạo sản phẩm không được để trống";
             }
-            if (!isset($trangThai)) {
-                $errors['status'] = "Trạng thái sản phẩm không được để trống";
-            }
-            // if (empty($danhMucId)) {
-            //     $errors['cate_id'] = "Danh mục sản phẩm không được để trống";
-            // } 
+            if (empty($danhMucId)) {
+                $errors['cate_id'] = "Danh mục sản phẩm không được để trống";
+            } 
             if (empty($ram)) {
                 $errors['ram'] = "ram sản phẩm không được để trống";
             }
@@ -78,6 +76,7 @@ class productController
                 $errors['hinh_anh'] = "Phải chọn hình ảnh";
             }
             $_SESSION["error"] = $errors;
+            var_dump($_SESSION['error']);
             if (empty($errors)) {
                 $product_id = $this->modelSanPham->insertSanPham($danhMucId, $tenSanPham, $giaSanPham, $ngayTao, $ngayNhap, $trangThai, $moTa, $img);
                 $chi_tiet_san_pham = $this->modelSanPham->insertChiTietSanPham($product_id, $soLuong, $ram, $mau);
@@ -88,6 +87,7 @@ class productController
                 header("Location: http://localhost/Project-1/index.php?act=form-them-san-pham");
                 exit();
             }
+            var_dump($_POST);
         }
     }
 }
