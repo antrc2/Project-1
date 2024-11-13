@@ -37,7 +37,7 @@
 
 
                 <li class="nav-item">
-                    <a href="<?= 'index.php?act=danhmuc' ?>" class="nav-link">
+                    <a href="<?= 'index.php?act=list-category' ?>" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Danh mục sản phẩm
@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= 'index.php?act=sanpham' ?>" class="nav-link">
+                    <a href="<?= 'index.php?act=danh-sach-admin-san-pham' ?>" class="nav-link">
                         <i class="nav-icon fas fa-dog"></i>
                         <p>
                             Sản Phẩm
