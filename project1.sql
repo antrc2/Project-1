@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
-
+-- Generation Time: Nov 13, 2024 at 01:18 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -130,11 +130,9 @@ CREATE TABLE `category` (
 -- Dumping data for table `category`
 --
 
-
 INSERT INTO `category` (`id`, `cate_name`, `created_at`, `updated_at`, `status`) VALUES
-(1, 'ASUS', 0, 0, 2),
-(2, 'TUF', 0, 0, 1);
-
+(1, 'ASUS', 0, 1731422283, 2),
+(2, 'TUF', 0, 1731422315, 1);
 
 -- --------------------------------------------------------
 
@@ -181,8 +179,7 @@ CREATE TABLE `product_detail` (
   `product_id` int NOT NULL,
   `amount` int NOT NULL,
   `ram` int NOT NULL,
-  `color` varchar(255) NOT NULL,
-  `price` int NOT NULL
+  `color` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -285,7 +282,7 @@ ALTER TABLE `category`
 --
 ALTER TABLE `discount`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_discount_product` (`product_id`);
+  ADD KEY `fk_discount_product_detail_id` (`product_id`);
 
 --
 -- Indexes for table `product`
@@ -360,9 +357,7 @@ ALTER TABLE `cart_detail`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 
 --
 -- AUTO_INCREMENT for table `discount`
@@ -439,7 +434,7 @@ ALTER TABLE `cart_detail`
 -- Constraints for table `discount`
 --
 ALTER TABLE `discount`
-  ADD CONSTRAINT `fk_discount_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
+  ADD CONSTRAINT `fk_discount_product_detail_id` FOREIGN KEY (`product_id`) REFERENCES `product_detail` (`id`);
 
 --
 -- Constraints for table `product`
