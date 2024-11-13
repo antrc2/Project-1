@@ -16,7 +16,7 @@ class SanPhamModel
     public function getAllSanPham()
     {
         try {
-            $sql = "SELECT*
+            $sql = "SELECT *, product_detail.id AS product_detail_id
                     FROM product
                     INNER JOIN product_detail ON product.id = product_detail.product_id 
                     INNER JOIN category ON product.cate_id = category.id";
