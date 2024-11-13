@@ -1,6 +1,6 @@
 <?php
     function database(){
-        return new PDO("mysql:host=localhost;dbname=project1","root","Sqrtfl0@t01");
+        return new PDO("mysql:host=localhost;dbname=project1","root","");
     }
     function SweetAlert2($icon,$message){
         echo "<script src='assets/sweetalert2/sweetalert2.js'></script>";

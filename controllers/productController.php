@@ -1,4 +1,4 @@
-<?php 
+<?php
 class productController
 {
     public $modelSanPham;
@@ -15,14 +15,14 @@ class productController
 
     public function formThemSanPham()
     {
-        $listDanhMuc= $this->modelSanPham->getAll();
+        $listDanhMuc = $this->modelSanPham->getAll();
         require_once "./views/admin/product/readProduct.php";
         deleteSession();
     }
     public function themSanPham()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            var_dump($_POST);
+          
             $tenSanPham = $_POST["name"] ?? "";
             $giaSanPham = $_POST["price"] ?? "";
             $soLuong = $_POST["amount"] ?? "";
@@ -31,8 +31,8 @@ class productController
             } else {
                 $img = $_FILES['image']['name'];
                 move_uploaded_file($_FILES['image']['tmp_name'], "assets/img/" . $img);
-            }
 
+            }
             $img_array = $_FILES['img_array'];
             $ngayNhap = time();
             $ngayTao = time();
@@ -59,7 +59,7 @@ class productController
             }
             if (empty($danhMucId)) {
                 $errors['cate_id'] = "Danh mục sản phẩm không được để trống";
-            } 
+            }
             if (empty($ram)) {
                 $errors['ram'] = "ram sản phẩm không được để trống";
             }
@@ -76,23 +76,36 @@ class productController
                 $errors['hinh_anh'] = "Phải chọn hình ảnh";
             }
             $_SESSION["error"] = $errors;
-            var_dump($_SESSION['error']);
             if (empty($errors)) {
                 $product_id = $this->modelSanPham->insertSanPham($danhMucId, $tenSanPham, $giaSanPham, $ngayTao, $ngayNhap, $trangThai, $moTa, $img);
                 $chi_tiet_san_pham = $this->modelSanPham->insertChiTietSanPham($product_id, $soLuong, $ram, $mau);
+                if(!empty($img_array)){
+                    foreach($img_array['name'] as $key => $value){
+                        $img_name = $img_array['name'][$key];
+                        $img_tmp_name = $img_array['tmp_name'][$key];
+                        $img_size = $img_array['size'][$key];
+                        $img_error = $img_array['error'][$key];
+                        $img_type = $img_array['type'][$key];
+                        $img_ext = explode('.', $img_name);
+                        $img_ext = strtolower(end($img_ext));
+                        $img_new_name = uniqid('', true) . '.' . $img_ext;
+                        $img_path = 'assets/img/' . $img_new_name;
+                        move_uploaded_file($img_tmp_name, $img_path);
+                       $s= $this->modelSanPham->insertHinhAnh($product_id, $img_new_name);
+                    }
+                    $_SESSION["flash"] = true;
+                    header("Location: http://localhost/Project-1/index.php?act=danh-sach-admin-san-pham");
+                    exit();
+                }
                 header("Location: http://localhost/Project-1/index.php?act=danh-sach-admin-san-pham");
                 exit();
-            } else {
-                $_SESSION["flash"] = true;
-                header("Location: http://localhost/Project-1/index.php?act=form-them-san-pham");
-                exit();
+                } else {
+                    $_SESSION["flash"] = true;
+                    header("Location: http://localhost/Project-1/index.php?act=form-them-san-pham");
+                    exit();
+                }
+                
             }
-            var_dump($_POST);
         }
-    }
-    
-
-
-
 
 }

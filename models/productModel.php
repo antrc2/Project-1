@@ -65,5 +65,16 @@ class SanPhamModel
             echo "Error: ". $e -> getMessage();
         }
     }
-
+    public function insertHinhAnh($product_id,$hinhAnh){
+        try {
+            $sql = "INSERT INTO `product_detail_image`( `product_detail_id`, `image`) 
+            VALUES ('$product_id','$hinhAnh')";
+            $stmt = $this -> conn -> prepare($sql);
+            $stmt -> execute();
+            //lấy id sản phẩm vừa thêm
+            return true;
+        } catch (Exception $e) {
+            echo "Error: ". $e -> getMessage();
+        }
+    }
 }
