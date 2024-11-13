@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 13, 2024 at 01:18 PM
+-- Generation Time: Nov 13, 2024 at 01:51 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -168,6 +168,14 @@ CREATE TABLE `product` (
   `detail` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id`, `cate_id`, `name`, `price`, `image`, `created_at`, `updated_at`, `status`, `detail`) VALUES
+(1, 1, 'laptop dell', 20000, '', 1731422283, 1731422283, 1, 'rất ok và chất lượng'),
+(2, 1, 'lap top mac', 30000, '', 1731422285, 1731422283, 1, 'như cứt ');
+
 -- --------------------------------------------------------
 
 --
@@ -181,6 +189,14 @@ CREATE TABLE `product_detail` (
   `ram` int NOT NULL,
   `color` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `product_detail`
+--
+
+INSERT INTO `product_detail` (`id`, `product_id`, `amount`, `ram`, `color`) VALUES
+(5, 2, 0, 128, 'xanh'),
+(6, 1, 20, 65, 'đỏ');
 
 -- --------------------------------------------------------
 
@@ -369,13 +385,13 @@ ALTER TABLE `discount`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product_detail`
 --
 ALTER TABLE `product_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `product_detail_image`
