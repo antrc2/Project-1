@@ -60,6 +60,7 @@ include './views/admin/layouts/sidebar.php';
                                         <th>Màu</th>
                                         <th>Ram</th>
                                         <th>Tên Danh mục</th>
+                                        <th>Tình trạng</th>
                                         <th>Trạng thái</th>
                                         <th>Mô tả</th>
                                         <th>Thao tác</th>
@@ -103,6 +104,12 @@ include './views/admin/layouts/sidebar.php';
                                             </td>
                                             <td>
                                                 <?= $sanpham["amount"] !=0  ? "Còn hàng" : "Hết hàng" ?>
+                                            </td>
+                                            <td>
+                                                <select name="" id="">
+                                                    <option value="<?=$sanpham['status'] ==1 ?>">Hiện sản phẩm</option>
+                                                    <option value="<?=$sanpham['status'] ==0 ?>">Ẩn sản phẩm</option>
+                                                </select>
                                             </td>
                                             <td>
                                                 <?= $sanpham["detail"] ?>
