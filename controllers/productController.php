@@ -77,8 +77,8 @@ class productController
             }
             $_SESSION["error"] = $errors;
             if (empty($errors)) {
-                $product_id = $this->modelSanPham->insertSanPham($danhMucId, $tenSanPham, $giaSanPham, $ngayTao, $ngayNhap, $trangThai, $moTa, $img);
-                $chi_tiet_san_pham = $this->modelSanPham->insertChiTietSanPham($product_id, $soLuong, $ram, $mau);
+                $product_id = $this->modelSanPham->insertSanPham($danhMucId, $tenSanPham, $ngayTao, $ngayNhap, $trangThai, $moTa, $img);
+                $chi_tiet_san_pham = $this->modelSanPham->insertChiTietSanPham($product_id, $soLuong, $ram, $mau,$giaSanPham);
                 if(!empty($img_array)){
                     foreach($img_array['name'] as $key => $value){
                         $img_name = $img_array['name'][$key];
