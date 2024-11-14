@@ -25,10 +25,13 @@ class discountController{
                 headerAfterXSecondWithSweetAlert2("?act=list-discount",1500,"success","Thêm giảm giá thành công");
             } else {
                 require_once  "views/admin/discount/createDiscount.php";
-                echo SweetAlert2("error","Đã xảy ra lỗi");
+                echo SweetAlert2("error","Đã xảy ra l#ỗi");
             }
         }
         require_once "views/admin/discount/createDiscount.php";
+    }
+    function updateDiscount($id){
+        $discount = $this->discount->getDiscountById($id);
     }
 }
 ?>
