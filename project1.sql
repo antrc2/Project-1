@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 14, 2024 at 02:51 AM
+-- Generation Time: Nov 14, 2024 at 01:10 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -147,7 +147,8 @@ CREATE TABLE `discount` (
   `start_date` bigint NOT NULL,
   `end_date` bigint NOT NULL,
   `start_price` int NOT NULL,
-  `end_price` int NOT NULL
+  `end_price` int NOT NULL,
+  `status` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -167,6 +168,14 @@ CREATE TABLE `product` (
   `detail` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id`, `cate_id`, `name`, `image`, `created_at`, `updated_at`, `status`, `detail`) VALUES
+(8, 1, 'Product A', 'image_a.jpg', 1672531199, 1672531199, 1, 'Product A detail'),
+(9, 2, 'Product B', 'image_b.jpg', 1672531199, 1672531199, 1, 'Product B detail');
+
 -- --------------------------------------------------------
 
 --
@@ -179,8 +188,20 @@ CREATE TABLE `product_detail` (
   `price` int NOT NULL,
   `amount` int NOT NULL,
   `ram` int NOT NULL,
-  `color` varchar(255) NOT NULL
+  `color` varchar(255) NOT NULL,
+  `status` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `product_detail`
+--
+
+INSERT INTO `product_detail` (`id`, `product_id`, `price`, `amount`, `ram`, `color`, `status`) VALUES
+(14, 8, 12000, 40, 8, 'Blue', 0),
+(15, 8, 15000, 20, 12, 'Red', 0),
+(16, 8, 18000, 25, 16, 'Gold', 0),
+(17, 9, 22000, 15, 16, 'Black', 0),
+(18, 9, 25000, 10, 32, 'Silver', 0);
 
 -- --------------------------------------------------------
 
@@ -362,19 +383,19 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `discount`
 --
 ALTER TABLE `discount`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `product_detail`
 --
 ALTER TABLE `product_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `product_detail_image`
@@ -445,13 +466,13 @@ ALTER TABLE `product`
 -- Constraints for table `product_detail`
 --
 ALTER TABLE `product_detail`
-  ADD CONSTRAINT `fk_product_detail_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
+  ADD CONSTRAINT `product_detail_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
 
 --
 -- Constraints for table `product_detail_image`
 --
 ALTER TABLE `product_detail_image`
-  ADD CONSTRAINT `fk_product` FOREIGN KEY (`product_detail_id`) REFERENCES `product` (`id`);
+  ADD CONSTRAINT `product_detail_image_ibfk_1` FOREIGN KEY (`product_detail_id`) REFERENCES `product_detail` (`id`);
 
 --
 -- Constraints for table `review`
