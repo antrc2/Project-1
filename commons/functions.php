@@ -22,6 +22,10 @@
         // Sử dụng hàm date() để chuyển đổi epochtime thành định dạng timestamp
         return date($format, $epochtime);
     }
+    function epochTimeToDateTimeLocal($epochtime) {
+        // Chuyển epochtime thành định dạng datetime-local: Y-m-d\TH:i
+        return date("Y-m-d\TH:i", $epochtime);
+    }
     function dateTimeToEpochTime($time){
         $datetime = new DateTime($time);
         return $datetime->getTimestamp();
