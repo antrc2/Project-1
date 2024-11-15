@@ -40,16 +40,6 @@
                 <input type="number" name="end_price" value="<?= $discount['end_price']?>">
                 <div id="endPriceError" class="error"></div>
             </div>
-            <div>
-                <label for="product_detail_id">Sản phẩm</label>
-                <select name="product_detail_id" id="productDetailId">
-                    <option value="">Chọn sản phẩm</option>
-                    <?php foreach ($allProduct as $product): ?>
-                        <option value="<?= $product['product_detail_id'] ?>"><?= $product['name'] ?></option>
-                    <?php endforeach ?>
-                </select>
-                <div id="productDetailIdError" class="error"></div>
-            </div>
             <button name="btn_addDiscount">Xác nhận</button>
         </form>
     </div>

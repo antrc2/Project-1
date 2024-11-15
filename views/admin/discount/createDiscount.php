@@ -44,7 +44,15 @@
             <select name="product_detail_id" id="productDetailId">
                 <option value="">Chọn sản phẩm</option>
                 <?php foreach ($allProduct as $product): ?>
-                <option value="<?= $product['product_detail_id']?>"><?= $product['name']?></option>
+                    <?php $count =0; ?>
+                    <?php foreach($allDiscount as $discount): ?>
+                        <?php if ($discount['product_detail_id'] == $product['product_detail_id']){
+                            $count++;
+                        } ?>
+                    <?php endforeach ?>
+                    <?php if ($count ==0): ?>
+                        <option value="<?= $product['product_detail_id'] ?>">RAM: <?= $product['ram'] ?> -  Màu: <?= $product['color']?> - Số lượng: <?= $product['amount']?> - Giá: <?= $product['price']?></option>
+                    <?php endif ?>
                 <?php endforeach ?>
             </select>
             <div id="productDetailIdError" class="error"></div>
