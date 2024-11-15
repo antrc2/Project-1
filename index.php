@@ -47,6 +47,12 @@ if ($act == "/") {
     $discount->listDiscount();
 } elseif ($act == "add-discount"){
     $discount->addDiscount();
+} elseif ($act == "update-discount"){
+    $discount->updateDiscount($_GET['id']);
+} elseif ($act == "delete-discount"){
+    $discount->deleteDiscount($_GET['id']);
+} elseif ($act == "undo-delete-discount"){
+    $discount->undoDeleteDiscount($_GET['id']);
 }
 //admin sản phẩm
 elseif ($act == "danh-sach-admin-san-pham") {

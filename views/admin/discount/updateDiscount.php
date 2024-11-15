@@ -19,13 +19,13 @@
 
             <div>
                 <label for="start_date">Ngày bắt đầu</label>
-                <input type="datetime-local" name="start_date" value="<?= epochTimeToDateTime($discount['start_date'])?>">
+                <input type="datetime-local" name="start_date" value="<?= epochTimeToDateTimeLocal($discount['start_date'])?>">
                 <div id="startDateError" class="error"></div>
             </div>
 
             <div>
                 <label for="end_date">Ngày kết thúc</label>
-                <input type="datetime-local" name="end_date" value="<?= epochTimeToDateTime($discount['end_date'])?>">
+                <input type="datetime-local" name="end_date" value="<?= epochTimeToDateTimeLocal($discount['end_date'])?>">
                 <div id="endDateError" class="error"></div>
             </div>
 
@@ -40,7 +40,7 @@
                 <input type="number" name="end_price" value="<?= $discount['end_price']?>">
                 <div id="endPriceError" class="error"></div>
             </div>
-            <button name="btn_addDiscount">Xác nhận</button>
+            <button name="btn_updateDiscount">Xác nhận</button>
         </form>
     </div>
 </body>
