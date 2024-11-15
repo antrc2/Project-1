@@ -10,7 +10,7 @@
             return $this->conn->query("SELECT * FROM discount JOIN product_detail ON discount.product_detail_id = product_detail.id JOIN product ON product.id = product_detail.product_id")->fetchAll();
         }
         function getDiscountById($id){
-            return $this->conn->query("SELECT * FROM discount JOIN product_detail ON discount.product_detail_id = product_detail.id JOIN product ON product.id = product_detail.product_id WHERE id=$id")->fetch();
+            return $this->conn->query("SELECT * FROM discount JOIN product_detail ON discount.product_detail_id = product_detail.id WHERE id=$id")->fetch();
         }
         function getAllProductDetail(){
             return $this->conn->query("SELECT * FROM product_detail")->fetchAll();
