@@ -88,10 +88,10 @@ include './views/admin/layouts/sidebar.php';
                                                     alt="" onerror="this.onerror=null;this.src='https://i5.walmartimages.com/asr/d92cca6d-cb6d-4e4c-b5c0-70d5b39ecdf8.43fbe65bc7884354b2c58c12beea36c8.jpeg';">
                                             </td>
                                             <td>
-                                                <?=epochTimeToDateTime($sanpham["updated_at"])  ?>
+                                                <?= epochTimeToDateTime($sanpham["updated_at"])  ?>
                                             </td>
                                             <td>
-                                                <?=epochTimeToDateTime($sanpham["created_at"])  ?>
+                                                <?= epochTimeToDateTime($sanpham["created_at"])  ?>
                                             </td>
                                             <td>
                                                 <?= $sanpham["color"] ?>
@@ -103,13 +103,10 @@ include './views/admin/layouts/sidebar.php';
                                                 <?= $sanpham["cate_name"] ?>
                                             </td>
                                             <td>
-                                                <?= $sanpham["amount"] !=0  ? "Còn hàng" : "Hết hàng" ?>
+                                                <?= $sanpham["amount"] != 0  ? "Còn hàng" : "Hết hàng" ?>
                                             </td>
                                             <td>
-                                                <select name="" id="">
-                                                    <option value="<?=$sanpham['status'] ==1 ?>">Hiện sản phẩm</option>
-                                                    <option value="<?=$sanpham['status'] ==0 ?>">Ẩn sản phẩm</option>
-                                                </select>
+                                            <?= $sanpham["status"] == 1 ? "Hiển thị" : "Không hiển thị" ?>
                                             </td>
                                             <td>
                                                 <?= $sanpham["detail"] ?>

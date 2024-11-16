@@ -2,9 +2,11 @@
 class productController
 {
     public $modelSanPham;
+    public $modelDanhMuc;
     function __construct()
     {
         $this->modelSanPham = new SanPhamModel();
+        $this->modelDanhMuc = new categoryModel();
     }
 
     public function danhSachSanPham()
@@ -31,7 +33,6 @@ class productController
             } else {
                 $img = $_FILES['image']['name'];
                 move_uploaded_file($_FILES['image']['tmp_name'], "assets/img/" . $img);
-
             }
             $img_array = $_FILES['img_array'];
             $ngayNhap = time();
@@ -39,8 +40,8 @@ class productController
             $ram = $_POST["ram"] ?? "";
             $mau = $_POST["color"] ?? "";
             $moTa = $_POST["detail"] ?? "";
-            $trangThai = isset($_POST['status']) ? $_POST['status'] : 1;
             $danhMucId = isset($_POST['cate_id']) ? $_POST['cate_id'] : 1;
+            $status =1;
             $errors = [];
             if (empty($tenSanPham)) {
                 $errors['name'] = "Tên sản phẩm không được để trống";
@@ -61,11 +62,11 @@ class productController
                 $errors['cate_id'] = "Danh mục sản phẩm không được để trống";
             }
             if (empty($ram)) {
-                $errors['ram'] = "ram sản phẩm không được để trống";
+                $errors['ram'] = "Ram sản phẩm không được để trống";
             }
             if (empty($mau)) {
-                $errors['color'] = "màu sản phẩm không được để trống";
-            }
+                $errors['color'] = "Màu sản phẩm không được để trống";
+            }          
             // Thay đoạn code này:
             // if ($hinhAnh["error"] !== 0) {
             //     $errors['hinh_anh'] = "Phải chọn hình ảnh";
@@ -73,12 +74,12 @@ class productController
 
             // Thành đoạn code này:
             if (!empty($_FILES['image']) && $_FILES['image']['error'] !== 0) {
-                $errors['hinh_anh'] = "Phải chọn hình ảnh";
+                $errors['image'] = "Phải chọn hình ảnh";
             }
             $_SESSION["error"] = $errors;
             if (empty($errors)) {
-                $product_id = $this->modelSanPham->insertSanPham($danhMucId, $tenSanPham, $ngayTao, $ngayNhap, $trangThai, $moTa, $img);
-                $chi_tiet_san_pham = $this->modelSanPham->insertChiTietSanPham($product_id, $soLuong, $ram, $mau,$giaSanPham);
+                $product_id = $this->modelSanPham->insertSanPham($danhMucId, $tenSanPham, $ngayTao, $ngayNhap, $moTa, $img);
+                $chi_tiet_san_pham = $this->modelSanPham->insertChiTietSanPham($product_id, $soLuong, $ram, $mau,$giaSanPham,$status);
                 if(!empty($img_array)){
                     foreach($img_array['name'] as $key => $value){
                         $img_name = $img_array['name'][$key];
@@ -108,4 +109,15 @@ class productController
             }
         }
 
+        public function chiTietSanPham(){
+            $id = $_GET['id_san_pham'];
+        
+            $product = $this->modelSanPham->getProductById($id);
+            $chiTietSanPham = $this->modelSanPham->getChiTietSanPham($id);
+            $anhChitiet = $this->modelSanPham->getAnhSanPham($id);
+            $danhmuc = $this ->modelDanhMuc->getOneCategoryById($id);
+            var_dump($product);
+            die();
+            require_once "./views/admin/product/chitietsanpham.php";
+        }
 }
