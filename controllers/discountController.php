@@ -23,6 +23,7 @@ class discountController{
             $endPrice = (int)$_POST['end_price'];
             $result = $this->discount->addDiscount($productDetailId,$discountAmount,$startDate,$endDate,$startPrice,$endPrice);
             if ($result){
+                require_once  "views/admin/discount/createDiscount.php";
                 headerAfterXSecondWithSweetAlert2("?act=list-discount",1500,"success","Thêm giảm giá thành công");
             } else {
                 require_once  "views/admin/discount/createDiscount.php";
@@ -41,6 +42,7 @@ class discountController{
             $endPrice = (int)$_POST['end_price'];
             $result = $this->discount->updateDiscount($id,$discountAmount, $startDate, $endDate, $startPrice, $endPrice);
             if ($result){
+                require_once  "views/admin/discount/updateDiscount.php";
                 headerAfterXSecondWithSweetAlert2("?act=list-discount",1500,"success","Sửa giảm giá thành công");
             } else {
                 require_once  "views/admin/discount/updateDiscount.php";
