@@ -94,8 +94,15 @@ include './views/admin/layouts/sidebar.php';
                                 </div> -->
                                 <div class="form-group  col-md-6">
                                     <label>Ram</label>
-                                    <input type="number" class="form-control" placeholder="ram sản phẩm "
-                                        name="ram">
+
+                                    <select name="ram" class="form-control">
+                                        <option selected disabled>Chọn ram của sản phẩm</option>
+                                        <option value="4">4GB</option>
+                                        <option value="8">8GB</option>
+                                        <option value="16">16GB</option>
+                                        <option value="32">32GB</option>
+                                        <option value="64">64GB</option>
+                                    </select>
                                     <?php
                                     if (isset($_SESSION["error"]['ram'])) { ?>
                                         <p class="text-danger"><?= $_SESSION["error"]['ram'] ?></p>
@@ -103,8 +110,14 @@ include './views/admin/layouts/sidebar.php';
                                 </div>
                                 <div class="form-group  col-md-6">
                                     <label>Màu</label>
-                                    <input type="text" class="form-control" placeholder="ngày nhập sản phẩm "
-                                        name="color">
+
+                                    <select name="color" class="form-control">
+                                        <option selected disabled>Chọn màu của sản phẩm</option>
+                                        <option value="Xanh">Xanh</option>
+                                        <option value="Đen">Đen</option>
+                                        <option value="Trắng">Trắng</option>
+                                        <option value="Xám">Xám</option>
+                                    </select>
                                     <?php
                                     if (isset($_SESSION["error"]['color'])) { ?>
                                         <p class="text-danger"><?= $_SESSION["error"]['color'] ?></p>

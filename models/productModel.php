@@ -16,11 +16,10 @@ class SanPhamModel
     public function getAllSanPham()
     {
         try {
-            $sql = "SELECT*
-                    FROM product
-                    INNER JOIN product_detail ON product.id = product_detail.product_id 
-                    INNER JOIN category ON product.cate_id = category.id";
-                    
+            $sql = "SELECT product.*, product_detail.status , product_detail.price, product_detail.amount, product_detail.ram, product_detail.color,category.cate_name
+            FROM product
+            INNER JOIN product_detail ON product.id = product_detail.product_id 
+            INNER JOIN category ON product.cate_id = category.id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetchAll();
@@ -29,31 +28,28 @@ class SanPhamModel
             echo "Error: " . $e->getMessage();
         }
     }
-    public function insertSanPham($danhMucId, $tenSanPham, $ngayTao, $ngayNhap, $trangThai, $moTa, $img) {
+    public function insertSanPham($danhMucId, $tenSanPham, $ngayTao, $ngayNhap, $moTa, $img) {
         try {
-            $sql = "INSERT INTO `product` (`cate_id`, `name`, `created_at`, `updated_at`, `status`, `detail`, `image`) 
-                    VALUES (:cate_id, :name, :created_at, :updated_at, :status, :detail, :image)";
+            $sql = "INSERT INTO `product` (`cate_id`, `name`, `created_at`, `updated_at`, `detail`, `image`) 
+                    VALUES (:cate_id, :name, :created_at, :updated_at, :detail, :image)";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':cate_id', $danhMucId, PDO::PARAM_INT);
             $stmt->bindParam(':name', $tenSanPham, PDO::PARAM_STR);
             $stmt->bindParam(':created_at', $ngayTao);
             $stmt->bindParam(':updated_at', $ngayNhap);
-            $stmt->bindParam(':status', $trangThai, PDO::PARAM_INT);
             $stmt->bindParam(':detail', $moTa, PDO::PARAM_STR);
             $stmt->bindParam(':image', $img, PDO::PARAM_STR);
-    
             $stmt->execute();
-            
             // Lấy id sản phẩm vừa thêm
             return $this->conn->lastInsertId();
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
-    public function insertChiTietSanPham($product_id,$soLuong,$ram,$mau, $giaSanPham){
+    public function insertChiTietSanPham($product_id,$soLuong,$ram,$mau, $giaSanPham,$status){
         try {
-            $sql = "INSERT INTO `product_detail`(`product_id`, `amount`, `ram`, `color`, `price`)
-                     VALUES ($product_id,$soLuong,$ram,'$mau','$giaSanPham')";
+            $sql = "INSERT INTO `product_detail`(`product_id`, `amount`, `ram`, `color`, `price`,`status`)
+                     VALUES ($product_id,$soLuong,$ram,'$mau','$giaSanPham','$status')";
             $stmt = $this -> conn -> prepare($sql);
             $stmt -> execute();
             
@@ -72,6 +68,38 @@ class SanPhamModel
             //lấy id sản phẩm vừa thêm
             return true;
         } catch (Exception $e) {
+            echo "Error: ". $e -> getMessage();
+        }
+    }
+
+    //lấy id từng sản phẩm
+
+    public function getProductById($id){
+            $sql = "SELECT * FROM `product` WHERE  id = $id";
+            $stml = $this -> conn->prepare($sql);
+            $stml->execute();
+            return $stml ->fetch();
+        
+    }
+    public function getChiTietSanPham($id){
+        try {
+            $sql = "SELECT * FROM `product_detail` WHERE  `product_id`= $id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $resutl =  $stmt->fetchAll();
+            return $resutl;
+        }catch (Exception $e) {
+            echo "Error: ". $e -> getMessage();
+        }
+    }
+    public function getAnhSanPham($id){
+        try {
+            $sql = "SELECT * FROM `product_detail_image` WHERE  `product_detail_id`= '$id'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $resutl =  $stmt->fetchAll();
+            return $resutl;
+        }  catch (Exception $e) {
             echo "Error: ". $e -> getMessage();
         }
     }

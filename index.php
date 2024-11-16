@@ -48,6 +48,8 @@ elseif ($act == "danh-sach-admin-san-pham") {
     $product->formThemSanPham();
 } elseif ($act == "them-san-pham") {
     $product->themSanPham();
+}elseif($act == "chi-tiet-san-pham"){
+    $product->chiTietSanPham();
 }
  else {
     $error->notFound();
