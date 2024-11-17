@@ -16,10 +16,15 @@ class SanPhamModel
     public function getAllSanPham()
     {
         try {
+
             $sql = "SELECT product.*, product_detail.status , product_detail.price, product_detail.amount, product_detail.ram, product_detail.color,category.cate_name
             FROM product
             INNER JOIN product_detail ON product.id = product_detail.product_id 
             INNER JOIN category ON product.cate_id = category.id";
+            // $sql = "SELECT product.*, product_detail.status , product_detail.price, product_detail.amount, product_detail.ram, product_detail.color,category.cate_name, product_detail.id AS product_detail_id
+            // FROM product
+            // INNER JOIN product_detail ON product.id = product_detail.product_id 
+            // INNER JOIN category ON product.cate_id = category.id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetchAll();
