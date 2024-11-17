@@ -115,9 +115,91 @@ class productController
             $product = $this->modelSanPham->getProductById($id);
             $chiTietSanPham = $this->modelSanPham->getChiTietSanPham($id);
             $anhChitiet = $this->modelSanPham->getAnhSanPham($id);
-            $danhmuc = $this ->modelDanhMuc->getOneCategoryById($id);
-            var_dump($product);
-            die();
+            $danhmuc = $this ->modelDanhMuc->getOneCategoryById($product['cate_id']);
             require_once "./views/admin/product/chitietsanpham.php";
+            deleteSession();
+        }
+        public function formSuaSanPham(){
+            $id = $_GET['id_san_pham'];
+            $product = $this->modelSanPham->getProductById($id);
+            $chiTietSanPham = $this->modelSanPham->getChiTietSanPham($id);
+            $listDanhMuc = $this->modelSanPham->getAll();
+            require_once "./views/admin/product/suasanpham.php";
+        }
+        public function suaSanPham(){
+            $id = $_POST['san_pham_id'];
+            $sanPham = $this->modelSanPham->getProductById($id);
+            $tenSanPham = $_POST['name'] ?? "";
+            $giaSanPham = $_POST['price'] ?? "";
+            $currentImage = $_POST['current_image'] ?? ''; // Giá trị ảnh hiện tại (nếu có)
+
+            if (!empty($_FILES['image']['name'])) {
+                // Người dùng tải ảnh mới lên
+                $img = $_FILES['image']['name'];
+                $targetPath = "assets/img/" . $img;
+            
+                // Di chuyển ảnh mới vào thư mục đích
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+                    // Ảnh mới được tải lên thành công
+                    if (!empty($currentImage) && file_exists("assets/img/" . $currentImage)) {
+                        // Xóa ảnh cũ nếu tồn tại
+                        unlink("assets/img/" . $currentImage);
+                    }
+                } else {
+                    // Nếu tải lên thất bại, giữ nguyên ảnh cũ
+                    $img = $currentImage;
+                }
+            } else {
+                // Không tải ảnh mới => giữ nguyên ảnh cũ
+                $img = $currentImage;
+            }
+            $soLuong = $_POST['amount'] ?? "";
+            $moTa = $_POST['detail'] ?? "";
+            $ram = isset($_POST['ram']) ? $_POST['ram'] : null;
+            $color = isset($_POST['color']) ? $_POST['color'] : null;
+            $danhMucId = isset($_POST['cate_name']) ? $_POST['cate_name'] : null;
+            $status = isset($_POST['status']) ? $_POST['status'] : null;
+            $ngayNhap = time();
+            $ngayTao = time();
+
+            $errors = [];
+            if (empty($tenSanPham)) {
+                $errors['name'] = "Tên sản phẩm không được để trống";
+            }
+            if (empty($giaSanPham)) {
+                $errors['price'] = "Giá sản phẩm không được để trống";
+            }
+            if (empty($soLuong)) {
+                $errors['amount'] = "Số lượng sản phẩm không được để trống";
+            }
+            if (empty($ram)) {
+                $errors['ram'] = "Bộ nhớ không được để trống";
+            }
+            if (empty($color)) {
+                $errors['color'] = "Màu sắc không được để trống";
+            }
+            if (empty($danhMucId)) {
+                $errors['cate_name'] = "Danh mục không được để trống";
+            }
+            if (empty($status)) {
+                $errors['status'] = "Trạng thái không được để trống";
+            }
+
+            $_SESSION["error"] = $errors;
+            if (empty($errors)) {
+
+                $san_pham_id = $this->modelSanPham->updateSanPham($id,$danhMucId,$tenSanPham,$img,$ngayNhap,$ngayTao,$moTa);
+                $chiTietSanPham = $this->modelSanPham->updateChiTietSanPham($id,$soLuong,$ram,$color,$status,$giaSanPham);
+                header("Location:index.php?act=danh-sach-admin-san-pham");
+                exit();
+            } else {
+                //nếu có lỗi thì hiển thị lại
+                $_SESSION["flash"] = true;
+                header("Location:index.php?act=form-sua-san-pham&id_san_pham=".$id);
+                exit();
+            }
+        }
+        public function suaAlbumAnhSanPham(){
+            
         }
 }

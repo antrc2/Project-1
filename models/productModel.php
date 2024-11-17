@@ -86,7 +86,7 @@ class SanPhamModel
             $sql = "SELECT * FROM `product_detail` WHERE  `product_id`= $id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
-            $resutl =  $stmt->fetchAll();
+            $resutl =  $stmt->fetch();
             return $resutl;
         }catch (Exception $e) {
             echo "Error: ". $e -> getMessage();
@@ -99,6 +99,29 @@ class SanPhamModel
             $stmt->execute();
             $resutl =  $stmt->fetchAll();
             return $resutl;
+        }  catch (Exception $e) {
+            echo "Error: ". $e -> getMessage();
+        }
+    }
+    public function updateSanPham($id,$danhMucId,$tenSanPham,$img,$ngayNhap,$ngayTao,$moTa){
+        try {
+            $sql = "UPDATE `product` SET `cate_id`='$danhMucId',`name`='$tenSanPham',`image`='$img',`created_at`='$ngayNhap',`updated_at`='$ngayTao',`detail`='$moTa' WHERE `id`='$id'";
+            $stmt = $this -> conn -> prepare($sql);
+            $stmt -> execute();
+            //lấy id sản phẩm vừa thêm
+            return true;
+        }  catch (Exception $e) {
+            echo "Error: ". $e -> getMessage();
+        }
+    }
+
+    public function updateChiTietSanPham($san_pham_id,$soLuong,$ram,$color,$status,$giaSanPham){
+        try {
+            $sql = "UPDATE `product_detail` SET `price`='$giaSanPham',`amount`='$soLuong',`ram`='$ram',`color`='$color',`status`='$status' WHERE `product_id`='$san_pham_id'";
+            $stmt = $this -> conn -> prepare($sql);
+            $stmt -> execute();
+            //lấy id sản phẩm vừa thêm
+            return true;
         }  catch (Exception $e) {
             echo "Error: ". $e -> getMessage();
         }

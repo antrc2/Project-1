@@ -135,21 +135,6 @@ include './views/admin/layouts/sidebar.php';
                                         </tr>
                                     <?php } ?>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Giá Sản phẩm</th>
-                                        <th>Số lượng</th>
-                                        <th>Hình ảnh</th>
-                                        <th>Ngày nhập</th>
-                                        <th>Màu</th>
-                                        <th>Ram</th>
-                                        <th>Tên Danh mục</th>
-                                        <th>Trạng thái</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                         <!-- /.card-body -->
