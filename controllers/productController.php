@@ -93,6 +93,8 @@ class productController
                         $img_path = 'assets/img/' . $img_new_name;
                         move_uploaded_file($img_tmp_name, $img_path);
                         $s = $this->modelSanPham->insertHinhAnh($product_id, $img_new_name);
+                        // var_dump($s);
+                        // die();
                     }
                     $_SESSION["flash"] = true;
                     header("Location: http://localhost/Project-1/index.php?act=danh-sach-admin-san-pham");
@@ -107,7 +109,6 @@ class productController
             }
         }
     }
-
     public function chiTietSanPham()
     {
         $id = $_GET['id_san_pham'];
