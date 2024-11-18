@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= 'index.php?act=don-hang' ?>" class="nav-link">
+                    <a href="<?= 'index.php?act=danh-sach-don-hang' ?>" class="nav-link">
                     <i class="fas fa-folder"></i>
                         <p>
                             Đơn hàng

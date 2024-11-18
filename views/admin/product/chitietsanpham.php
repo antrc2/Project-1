@@ -32,23 +32,25 @@ include './views/admin/layouts/sidebar.php';
     <div class="row">
       <div class="col-12 col-sm-6">
         <div class="col-12">
-          <img src="<?= var_dump($product["image"]) ?>" alt="">
+          <img style="width: 500px;" src=" ./assets/img/<?= ($product['image']) ?>" alt="">
         </div>
         <div class="col-12 product-image-thumbs">
-          <div class="product-image-thumb active"><img src="../../dist/img/prod-1.jpg" alt="Product Image"></div>
-          <div class="product-image-thumb"><img src="../../dist/img/prod-2.jpg" alt="Product Image"></div>
-          <div class="product-image-thumb"><img src="../../dist/img/prod-3.jpg" alt="Product Image"></div>
-          <div class="product-image-thumb"><img src="../../dist/img/prod-4.jpg" alt="Product Image"></div>
-          <div class="product-image-thumb"><img src="../../dist/img/prod-5.jpg" alt="Product Image"></div>
+          <!-- <div class="product-image-thumb active"><img src="../../dist/img/prod-1.jpg" alt="Product Image"></div> -->
+           <?php foreach($anhChitiet as $anh) { ?>
+          <div class="product-image-thumb"><img  src="./assets/img/<?=$anh['image'] ?>" alt="Product Image"></div>
+          <?php } ?>
         </div>
       </div>
       <div class="col-12 col-sm-6">
-        <h3 class="my-3">Chi tiết của sản phẩm : <?=$product['name'] ?></h3>
+        <h1 class="my-3">Chi tiết của sản phẩm : <?=$product['name'] ?></h1>
         <hr>
-        <h4>Màu</h4>
-      
-
-       
+        <h5><b>Tên sản phẩm :</b> <?=$product['name'] ?></h5>
+        <h5><b>Màu : </b><?=$chiTietSanPham['color'] ?></h5>
+        <h5><b>Giá :</b><?=$chiTietSanPham['price'] ?></h5>
+        <h5><b>Danh mục :</b><?=$danhmuc['cate_name'] ?></h5>
+        <h5><b>Số lượng :</b><?=$chiTietSanPham['amount'] ?></h5>
+        <h5><b>RAM: </b><?=$chiTietSanPham['ram'] ?>GB</h5>
+        <h5><b>Mô tả::</b> <p><?= $product['detail'] ?></p> </h5>
     <div class="row mt-4">
     <ul class="nav nav-tabs row mt-4" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
