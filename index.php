@@ -69,6 +69,8 @@ elseif ($act == "danh-sach-admin-san-pham") {
     $product->suaSanPham();
 }elseif($act == "sua-album-anh-san-pham"){
     $product->suaAlbumAnhSanPham();
+}elseif($act == "xoa-san-pham"){
+    $product->xoaSanPham();
 }
  else {
     $error->notFound();

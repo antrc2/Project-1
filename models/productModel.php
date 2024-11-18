@@ -16,7 +16,6 @@ class SanPhamModel
     public function getAllSanPham()
     {
         try {
-
             $sql = "SELECT product.*, product_detail.status , product_detail.price, product_detail.amount, product_detail.ram, product_detail.color,category.cate_name
             FROM product
             INNER JOIN product_detail ON product.id = product_detail.product_id 
@@ -131,4 +130,62 @@ class SanPhamModel
             echo "Error: ". $e -> getMessage();
         }
     }
+    public function deleteAnhSanPham($id){
+        try {
+            $sql = "DELETE FROM `product_detail_image` WHERE `id`='$id'";
+            $stmt = $this -> conn -> prepare($sql);
+            $stmt -> execute();
+            //lấy id sản phẩm vừa thêm
+            return true;
+        }  catch (Exception $e) {
+            echo "Error: ". $e -> getMessage();
+        }
+    }
+    public function getImagePathById($id) {
+        try {
+            $sql = "SELECT image FROM product_detail_image WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            $result = $stmt->fetch();
+            return './assets/img/' . $result['image'];
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    
+    public function addAnhSanPham($product_id, $image) {
+        try {
+            $sql = "INSERT INTO product_detail_image (product_detail_id, image) 
+                    VALUES (:product_id, :image)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':product_id', $product_id);
+            $stmt->bindParam(':image', $image);
+            return $stmt->execute();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    public function deleteSanPham($id){
+        try {
+            $sql = "DELETE FROM `product` WHERE `id`='$id'";
+            $stmt = $this -> conn -> prepare($sql);
+            $stmt -> execute();
+            //lấy id sản phẩm vừa thêm
+            return true;
+        }  catch (Exception $e) {
+            echo "Error: ". $e -> getMessage();
+        }
+    }
+    public function deleteChiTietSanPham($id) {
+        try {
+            $sql = "DELETE FROM `product_detail` WHERE `product_id`='$id'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return true;
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    
 }
