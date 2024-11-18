@@ -17,6 +17,7 @@
                     $_SESSION['username'] = $username;
                     require_once "views/account/login.php";
                     headerAfterXSecondWithSweetAlert2("?act=/",1500, "success", $result['message']);
+                    $_SESSION['messages'] = "Đăng nhập thành công";
                 } else {
                     require_once "views/account/login.php";
                     echo SweetAlert2("error",$result['message']);
@@ -42,6 +43,7 @@
                     $_SESSION['username'] = $username;
                     require_once "views/account/register.php";
                     headerAfterXSecondWithSweetAlert2("?act=/",1500, "success", $result['message']);
+                    $_SESSION['messages'] = "Đăng kí thành công";
                 } else {
                     require_once "views/account/register.php";
                     echo SweetAlert2("error",$result['message']);
