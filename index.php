@@ -63,6 +63,12 @@ elseif ($act == "danh-sach-admin-san-pham") {
     $product->themSanPham();
 }elseif($act == "chi-tiet-san-pham"){
     $product->chiTietSanPham();
+}elseif($act == "form-sua-san-pham"){
+    $product->formSuaSanPham();
+}elseif($act == "sua-san-pham"){
+    $product->suaSanPham();
+}elseif($act == "sua-album-anh-san-pham"){
+    $product->suaAlbumAnhSanPham();
 }
  else {
     $error->notFound();
