@@ -118,7 +118,6 @@ include './views/admin/layouts/sidebar.php';
                         <div class="form-group col-md-6 ">
                             <label>Trạng thái</label>
                             <select name="status" class="form-control">
-                                <option selected disabled>Chọn danh mục sản phẩm</option>
                                 <option <?= $chiTietSanPham["status"] == 1 ? 'selected' : '' ?> value="1">Hiện thị
                                 </option>
                                 <option <?= $chiTietSanPham["status"] == 0 ? 'selected' : '' ?> value="0">Không hiện thị

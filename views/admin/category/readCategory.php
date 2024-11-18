@@ -33,7 +33,7 @@ include './views/admin/layouts/sidebar.php';
 
                     <div class="card">
                         <div class="card-header">
-                            <a href="index.php?act=form-them-san-pham">
+                            <a href="#">
                                 <button class="btn btn-success">Thêm sản phẩm</button>
                             </a>
                         </div>

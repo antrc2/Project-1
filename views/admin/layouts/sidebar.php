@@ -30,7 +30,7 @@
                     <a href="../widgets.html" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Dashboard
+                            Thống kê
                         </p>
                     </a>
                 </li>

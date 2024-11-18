@@ -118,7 +118,7 @@ class productController
         $anhChitiet = $this->modelSanPham->getAnhSanPham($id);
         $danhmuc = $this->modelDanhMuc->getOneCategoryById($product['cate_id']);
         require_once "./views/admin/product/chitietsanpham.php";
-        deleteSession();
+        
     }
     public function formSuaSanPham()
     {
@@ -128,6 +128,7 @@ class productController
         $listDanhMuc = $this->modelSanPham->getAll();
         $listAnhSanPham = $this->modelSanPham->getAnhSanPham($id); 
         require_once "./views/admin/product/suasanpham.php";
+        deleteSession();
     }
     public function suaSanPham()
     {
@@ -185,9 +186,11 @@ class productController
         if (empty($danhMucId)) {
             $errors['cate_name'] = "Danh mục không được để trống";
         }
-        if (empty($status)) {
+        if ($status === null) {
             $errors['status'] = "Trạng thái không được để trống";
         }
+        
+        
 
         $_SESSION["error"] = $errors;
         if (empty($errors)) {
