@@ -177,13 +177,13 @@ include './views/admin/layouts/sidebar.php';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <input type="hidden" name="san_pham_id" value="<?= $sanpham['id'] ?>">
+                                    <input type="hidden" name="san_pham_id" value="<?= $product['id'] ?>">
                                     <input type="hidden" name="img_delete" id="img_delete">
                                     <?php
                                     foreach ($listAnhSanPham as $key => $value) { ?>
                                         <tr id="faqs-row-<?= $key ?>">
                                             <input type="hidden" name="current_img_ids[]" value="<?= $value['id'] ?>">
-                                            <td><img src="./assets/img/<?= $value['link_hinh_anh'] ?>"
+                                            <td><img src="./assets/img/<?= $value['image'] ?>"
                                                     style="width: 100px; height:100px " alt="">
                                             </td>
                                             <td><input type="file" name="img_array[]" class=" form-control">

@@ -10,18 +10,21 @@ require_once "controllers/productController.php";
 require_once "controllers/categoryController.php";
 require_once "controllers/errorController.php";
 require_once "controllers/discountController.php";
+require_once "controllers/donhangController.php";
 
 require_once "models/accountModel.php";
 require_once "models/productModel.php";
 require_once "models/categoryModel.php";
 require_once "models/errorModel.php";
 require_once "models/discountModel.php";
+require_once "models/donHangModel.php";
 
 $account = new accountController;
 $product = new productController;
 $category = new categoryController;
 $error = new errorController;
 $discount = new discountController;
+$order = new DonHangController;
 
 $act = $_GET['act'] ?? "/";
 if ($act == "/") {
@@ -69,6 +72,12 @@ elseif ($act == "danh-sach-admin-san-pham") {
     $product->suaSanPham();
 }elseif($act == "sua-album-anh-san-pham"){
     $product->suaAlbumAnhSanPham();
+}elseif($act == "xoa-san-pham"){
+    $product->xoaSanPham();
+}
+//dơn hàng
+elseif ($act == "danh-sach-don-hang") {
+    $order->danhSachDonHang();
 }
  else {
     $error->notFound();
