@@ -82,3 +82,8 @@ elseif ($act == "danh-sach-don-hang") {
  else {
     $error->notFound();
 }
+
+if (isset($_SESSION['messages'])){
+    echo SweetAlert2("success", $_SESSION['messages']);
+    unset($_SESSION['messages']);
+}
