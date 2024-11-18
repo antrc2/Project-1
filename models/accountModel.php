@@ -65,5 +65,9 @@
                 return (['status'=>False, "message"=>"Đã có lỗi xảy ra"]);
             }
         }
+        function getAll($status){
+            $sql = "SELECT * FROM account WHERE status=$status";
+            return $this->conn->query($sql)->fetchAll();
+        }
     }
 ?>

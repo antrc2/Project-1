@@ -60,6 +60,36 @@
                         </p>
                     </a>
                 </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                    <i class="fas fa-user"></i>
+                        <p>
+                          Quản lí tài khoản
+                        </p>
+                        <i class="fas fa-angle-left right"></i>
+                    </a>
+                    <ul class="nav nav-treeview" >
+                        <li class="nav-item">
+                            <a href="<?= 'index.php?act=danh-sach-quan-tri' ?>" class="nav-link">
+                            <i class="far fa-user"></i>
+                            <p>tài khoản quản trị</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                            <i class="far fa-user"></i>
+                            <p>tài khoản khách hàng</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                            <i class="far fa-user"></i>
+                            <p>tài khoản cá nhân</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

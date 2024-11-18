@@ -57,6 +57,11 @@
                 header("Location: ?act=login");
             }
         }
+
+        function danhSachQuanTri(){
+            $listAccount = $this->acc->getAll(1);
+            require_once "views/admin/quanLiTaiKhoan/quanTri/listAccount.php";
+        }
         
     }
 ?>

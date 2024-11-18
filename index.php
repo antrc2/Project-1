@@ -79,6 +79,11 @@ elseif ($act == "danh-sach-admin-san-pham") {
 elseif ($act == "danh-sach-don-hang") {
     $order->danhSachDonHang();
 }
+
+//quản lí tài khoản
+elseif($act == "danh-sach-quan-tri"){
+    $account->danhSachQuanTri();
+}
  else {
     $error->notFound();
 }
