@@ -207,6 +207,9 @@ class productController
         }
     }
 
+
+    
+
     public function suaAlbumAnhSanPham()
     {
         $id = $_POST['san_pham_id'];
@@ -225,7 +228,6 @@ class productController
                 }
             }
         }
-
         // 3. Xử lý ảnh mới
         if (!empty($img_array['name'][0])) { 
             $uploadDir = './assets/img/';
@@ -244,6 +246,10 @@ class productController
         header("Location: index.php?act=danh-sach-admin-san-pham");
         exit;
     }
+
+
+
+
     public function xoaSanPham() {
         $id = $_GET["id_san_pham"];
         

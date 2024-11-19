@@ -206,6 +206,11 @@ class SanPhamModel
             echo "Error: " . $e->getMessage();
         }
     }
+
+
+
+
+    
     public function deleteSanPham($id){
         try {
             $sql = "DELETE FROM `product` WHERE `id`='$id'";

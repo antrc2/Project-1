@@ -2,7 +2,6 @@
 <!-- Navbar -->
 
 <!-- /.navbar -->
-
 <!-- Main Sidebar Container -->
 <?php
 include './views/admin/layouts/header.php';
@@ -17,9 +16,9 @@ include './views/admin/layouts/sidebar.php';
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Quản lí sản phẩm</h1>
+                    <h1>Quản lí danh mục</h1>
                 </div>
-                <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
+                <label>Search:<i class="fas fa-search"></i><input type="search" class="form-control form-control-sm" placeholder="Tìm kiếm từ khoá " aria-controls="example1"></label>
             </div>
         </div><!-- /.container-fluid -->
     </section>
