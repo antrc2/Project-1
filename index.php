@@ -91,6 +91,15 @@ elseif($act == "danh-sach-quan-tri"){
     $account->formsuaTaiKhoanQuanTri();
 }elseif($act == "sua-tai-khoan-quan-tri"){
     $account->suaTaiKhoanQuanTri();
+}elseif($act == "reset-tai-khoan"){
+    $account->resetTaiKhoan();
+}//quản lí tài khoản khách hàng
+elseif($act == "danh-sach-khach-hang"){
+    $account->danhSachKhachHang();
+}elseif($act == "form-sua-tai-khoan-khach-hang"){
+    $account->formSuaTaiKhoanKhachHang();
+}elseif($act =="sua-tai-khoan-khach-hang"){
+    $account->suaTaiKhoanKhachHang();
 }
  else {
     $error->notFound();
