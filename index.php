@@ -11,6 +11,7 @@ require_once "controllers/categoryController.php";
 require_once "controllers/errorController.php";
 require_once "controllers/discountController.php";
 require_once "controllers/donhangController.php";
+require_once "controllers/homeController.php";
 
 require_once "models/accountModel.php";
 require_once "models/productModel.php";
@@ -18,6 +19,7 @@ require_once "models/categoryModel.php";
 require_once "models/errorModel.php";
 require_once "models/discountModel.php";
 require_once "models/donHangModel.php";
+require_once "models/homeModel.php";
 
 $account = new accountController;
 $product = new productController;
@@ -25,11 +27,12 @@ $category = new categoryController;
 $error = new errorController;
 $discount = new discountController;
 $order = new DonHangController;
+$home = new homeController;
 
 $act = $_GET['act'] ?? "/";
 if ($act == "/") {
-    echo "Hi";
-    // $home->home();
+    $home->home();
+    
 } elseif ($act == "register") {
     $account->register();
 } elseif ($act == "login") {
