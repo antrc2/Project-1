@@ -33,7 +33,7 @@ include './views/admin/layouts/sidebar.php';
 
                     <div class="card">
                         <div class="card-header">
-                            <a href="#">
+                            <a href="index.php?act=form-them-tai-khoan-quan-tri">
                                 <button class="btn btn-success">Thêm sản phẩm</button>
                             </a>
                         </div>
@@ -58,8 +58,9 @@ include './views/admin/layouts/sidebar.php';
                                         <th>Địa chỉ</th>
                                         <th>Số điện thoại</th>
                                         <th>Ngày tạo</th>
+                                        <th>Trạng thái</th>
+                                        <th>Chức vụ</th>
                                         <th>Sửa</th>
-                                        <th>Xóa / Bỏ xóa</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -72,14 +73,15 @@ include './views/admin/layouts/sidebar.php';
                                             <td><?= $taiKhoan['address'] ?></td>
                                             <td><?= $taiKhoan['phone'] ?></td>
                                             <td><?= epochTimeToDateTime($taiKhoan['created_at']) ?></td>
-                                            <td><a href="?act=update-category&id=<?= $taiKhoan['id'] ?>"><button class="btn btn-warning">Sửa</button></a></td>
+                                            <td><?= $taiKhoan["status"] ==1 ? "Hoạt động" : "Bị khoá" ?></td>
+                                            <td><?=$taiKhoan['role_name']?></td>
                                             <td>
-                                                <?php if ($taiKhoan['status'] == 1): ?>
-                                                    <a onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="?act=delete-category&id=<?= $taiKhoan['id'] ?>"><button  class="btn btn-danger">Xóa</button></a>
-                                                <?php else: ?>
-                                                    <a onclick="return confirm('Bạn có chắc chắn muốn bỏ xóa không?')" href="?act=undo-delete-category&id=<?= $taiKhoan['id'] ?>"><button  class="btn btn-danger">Bỏ xóa</button></a>
-                                                <?php endif ?>
-                                            </td>
+                                                <div class="btn-group">
+                                                <a href="?act=form-sua-tai-khoan-quan-tri&id=<?=$taiKhoan['id'] ?>"><button class="btn btn-warning">Sửa</button></a>
+                                                <a href="?act=reset-tai-khoan-quan-tri&id=<?=$taiKhoan['id'] ?>"><button class="btn btn-primary">Reset</button></a>
+                                                </div>
+
+                                        </td>
                                         </tr>
                                     <?php endforeach ?>
                                 </tbody>
