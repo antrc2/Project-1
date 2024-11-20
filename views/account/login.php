@@ -11,15 +11,16 @@
             <?php  ?>
             <div>
                 <h1>Đăng nhập</h1>
-                <form action="" method="POST">
+                <script src="assets/js/validateLogin.js"></script>
+                <form action="" onsubmit="return valFormLogin()" method="POST">
                     <div>
                         <label for="">Tài khoản</label>
-                        <input type="text" name="username">
+                        <input type="text" name="username" id="username">
                         <div id="usernameError" class="error"></div>
                     </div>
                     <div>
                         <label for="">Mật khẩu</label>
-                        <input type="password" name="password">
+                        <input type="password" name="password" id="password">
                         <div id="passwordError" class="error"></div>
                     </div>
                     <div>
