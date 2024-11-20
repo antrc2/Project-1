@@ -32,12 +32,6 @@ include './views/admin/layouts/sidebar.php';
                     <!-- /.card -->
 
                     <div class="card">
-                        <div class="card-header">
-                            <a href="index.php?act=form-them-tai-khoan-quan-tri">
-                                <button class="btn btn-success">Thêm sản phẩm</button>
-                            </a>
-                        </div>
-
                         <!-- /.card-header -->
                         <div class="card-body">
                             <?php
@@ -77,7 +71,7 @@ include './views/admin/layouts/sidebar.php';
                                             <td><?=$taiKhoan['role_name']?></td>
                                             <td>
                                                 <div class="btn-group">
-                                                <a href="?act=form-sua-tai-khoan-quan-tri&id=<?=$taiKhoan['id'] ?>"><button class="btn btn-warning">Sửa</button></a>
+                                                <a href="?act=form-sua-tai-khoan-khach-hang&id=<?=$taiKhoan['id'] ?>"><button class="btn btn-warning">Sửa</button></a>
                                                 <a href="?act=reset-tai-khoan&id=<?=$taiKhoan['id'] ?>"
                                                     onclick="return confirm('bạn có muốn reset mật khẩu không?')">
                                                     <button class="btn btn-danger">reset</button></a>

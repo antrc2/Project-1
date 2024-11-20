@@ -172,7 +172,6 @@ include './views/admin/layouts/sidebar.php';
                                                     class="badge badge-success"><i class="fa fa-plus"></i> thêm
                                                 </button></div>
                                         </th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -222,20 +221,32 @@ include './views/admin/layouts/footer.php'; ?>
     var faqs_row = <?= count($listAnhSanPham) ?>;
 
 
+    // function addfaqs() {
+    //     html = '<tr id="faqs-row-' + faqs_row + '">';
+    //     html += '<td><img src="./uploads/th.jpg"  style="width: 100px; height:100px " alt=""></td>';
+    //     html += '<td><input type="file" name="img_array[]"  class="form-control"></td>';
+    //     html +=
+    //         '<td class="mt-10"><button type="button" class="badge badge-danger" onclick="removeRow(' +
+    //         faqs_row + ', null);"><i class="fa fa-trash"></i> Delete</button></td>';
+
+    //     html += '</tr>';
+
+    //     $('#faqs tbody').append(html);
+
+    //     faqs_row++;
+    // }
+
+
     function addfaqs() {
-        html = '<tr id="faqs-row-' + faqs_row + '">';
-        html += '<td><img src="./uploads/th.jpg"  style="width: 100px; height:100px " alt=""></td>';
-        html += '<td><input type="file" name="img_array[]"  class="form-control"></td>';
-        html +=
-            '<td class="mt-10"><button type="button" class="badge badge-danger" onclick="removeRow(' +
-            faqs_row + ', null);"><i class="fa fa-trash"></i> Delete</button></td>';
+    html = '<tr id="faqs-row-' + faqs_row + '">';
+    html += '<td><img src="./uploads/th.jpg"  style="width: 100px; height:100px " alt=""></td>';
+    html += '<td><input type="file" name="img_array[]"  class="form-control"></td>';
+    html += '<td class="mt-10"><button type="button" class="badge badge-danger" onclick="removeRow(' + faqs_row + ', null);"><i class="fa fa-trash"></i> Delete</button></td>';
+    html += '</tr>';
 
-        html += '</tr>';
-
-        $('#faqs tbody').append(html);
-
-        faqs_row++;
-    }
+    $('#faqs tbody').append(html);
+    faqs_row++;
+}
 
     function removeRow(rowId, imgId) {
         $('#faqs-row-' + rowId).remove();

@@ -61,7 +61,7 @@
         }
 
         function danhSachQuanTri(){
-            $listAccount = $this->acc->getAll(1);
+            $listAccount = $this->acc->getAll(2);
             require_once "views/admin/quanLiTaiKhoan/quanTri/listAccount.php";
         }
         function formThemTaiKhoanQuanTri(){
@@ -160,6 +160,71 @@
                   exit();
               }
                 
+        }
+
+        function resetTaiKhoan(){
+            $id = $_GET['id'];
+            $tai_khoan_id =$this->acc->getAccountById($id);
+            $pass = password_hash("123456", PASSWORD_BCRYPT);
+            $this->acc->resetTaiKhoan($id, $pass);
+            header("Location: index.php?act=danh-sach-quan-tri");
+            if($tai_khoan_id['role'] == 1){
+                header("Location: index.php?act=danh-sach-quan-tri");
+            }else{
+                header("Location: index.php?act=danh-sach-khach-hang");
+            }
+            exit();
+        }
+
+
+        function danhSachKhachHang(){
+            $listAccount = $this->acc->getAll(1);
+            require_once "views/admin/quanLiTaiKhoan/khachHang/listAccount.php";
+        }
+        function formSuaTaiKhoanKhachHang(){
+            
+            $id = $_GET['id'];
+            $account = $this->acc->getAccountById($id);
+            require_once "views/admin/quanLiTaiKhoan/khachHang/editKhachHang.php";
+            unset($_SESSION['errors']);
+            deleteSession();
+        }
+        function suaTaiKhoanKhachHang(){
+            $id = $_POST['tai_khoan_id'];
+            $username = $_POST['username'];
+            $fullname = $_POST['fullname'];
+            $email = $_POST['email'];
+            $address = $_POST['address'];
+            $phone = $_POST['phone'];
+            $created_at = time();
+            $update_at = time();
+            $status = isset($_POST['status']) ? $_POST['status'] : null;
+            $role = 1;
+            $errors = [];
+
+            if (empty($username)) {
+              $errors['username'] = "Tên tài khoản không được để trống";
+          }
+          if (empty($email)) {
+              $errors['email'] = "Tên email tài khoản không được để trống";
+          }
+          if (empty($fullname)) {
+              $errors['fullname'] = "Họ và Tên tài khoản không được để trống";
+          }
+          if (empty($address)) {
+              $errors['address'] = "Địa chỉ không được để trống";
+          }
+          if (empty($phone)) {
+              $errors['phone'] = "Số điện thoại tài khoản không được để trống";
+          }
+          $_SESSION['errors'] = $errors;
+          if (empty($errors)){
+             
+              $result = $this->acc->suaTaiKhoanKhachHang($id, $username, $fullname, $email, $address, $phone, $created_at,$status,$update_at,$role);
+              unset($_SESSION['errors']); 
+              header("Location: index.php?act=danh-sach-khach-hang");
+              exit();
+          }
         }
     }
 ?>

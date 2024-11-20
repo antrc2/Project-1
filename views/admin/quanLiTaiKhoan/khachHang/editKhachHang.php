@@ -30,7 +30,7 @@ include './views/admin/layouts/sidebar.php';
                     <div class="card-header">
                         <h3 class="card-title">Sửa tài khoản quản trị </h3>
                     </div>
-                    <form action="index.php?act=sua-tai-khoan-quan-tri" method="post"
+                    <form action="index.php?act=sua-tai-khoan-khach-hang" method="post"
                         enctype="multipart/form-data">
                         <div class="card-body row">
                             <div class="form-group col-md-6">

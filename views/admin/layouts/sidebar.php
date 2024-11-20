@@ -77,7 +77,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="index.php?act=danh-sach-khach-hang" class="nav-link">
                             <i class="far fa-user"></i>
                             <p>tài khoản khách hàng</p>
                             </a>

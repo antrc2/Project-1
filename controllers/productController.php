@@ -207,49 +207,100 @@ class productController
         }
     }
 
-
+    //xoá  được sửa ảnh thành thêm
+    // public function suaAlbumAnhSanPham() {
+    //     $id = $_POST['san_pham_id'];
+    //     $img_delete = $_POST['img_delete'] ?? null;
+    //     $img_array = $_FILES['img_array'];
+        
+    //     // Handle deletions
+    //     if (!empty($img_delete)) {
+    //         $idsToDelete = explode(',', $img_delete);
+    //         foreach ($idsToDelete as $imgId) {
+    //             // Get image path before deleting record
+    //             $imagePath = $this->modelSanPham->getImagePathById($imgId);
+    //             if (file_exists($imagePath)) {
+    //                 unlink($imagePath);
+    //             }
+    //             $this->modelSanPham->deleteAnhSanPham($imgId);
+    //         }
+    //     }
+    
+    //     // Handle new uploads
+    //     if (!empty($img_array['name'][0])) {
+    //         $uploadDir = 'assets/img/';
+    //         foreach ($img_array['name'] as $key => $fileName) {
+    //             if ($img_array['error'][$key] === 0) {
+    //                 $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+    //                 $newFileName = uniqid() . '.' . $extension;
+    //                 $uploadPath = $uploadDir . $newFileName;
+    
+    //                 if (move_uploaded_file($img_array['tmp_name'][$key], $uploadPath)) {
+    //                     $this->modelSanPham->insertHinhAnh($id, $newFileName);
+    //                 }
+    //             }
+    //         }
+    //     }
+    
+    //     header("Location: index.php?act=danh-sach-admin-san-pham");
+    //     exit;
+    // }
     
 
-    public function suaAlbumAnhSanPham()
-    {
+
+    //sửa ảnh liệt nút thêm
+    public function suaAlbumAnhSanPham() {
         $id = $_POST['san_pham_id'];
         $img_delete = $_POST['img_delete'] ?? null;
         $img_array = $_FILES['img_array'];
-        $listAnhSanPham = $this->modelSanPham->getAnhSanPham($id);
-
-        // 2. Xóa ảnh cũ (nếu có)
-        if (!empty($img_delete)) {
-            $idsToDelete = explode(',', $img_delete);
-            foreach ($idsToDelete as $imgId) {
-                $this->modelSanPham->deleteAnhSanPham($imgId);
-                $oldImage = $this->modelSanPham->getImagePathById($imgId);
-                if (file_exists($oldImage)) {
-                    unlink($oldImage);
-                }
+        $current_img_ids = $_POST['current_img_ids'] ?? [];
+    
+        //xoá ảnh
+    if (!empty($img_delete)) {
+        $idsToDelete = explode(',', $img_delete);
+        foreach ($idsToDelete as $imgId) {
+            // Get image path before deleting record
+            $imagePath = $this->modelSanPham->getImagePathById($imgId);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
             }
+            $this->modelSanPham->deleteAnhSanPham($imgId);
         }
-        // 3. Xử lý ảnh mới
-        if (!empty($img_array['name'][0])) { 
-            $uploadDir = './assets/img/';
-            foreach ($img_array['name'] as $key => $fileName) {
-                if ($img_array['error'][$key] == 0) { 
-                    $tmpName = $img_array['tmp_name'][$key];
-                    $newFileName = uniqid() . '_' . basename($fileName);
-                    $uploadPath = $uploadDir . $newFileName;
+    }
 
-                    if (move_uploaded_file($tmpName, $uploadPath)) {
-                        $this->modelSanPham->addAnhSanPham($id, $newFileName);
+        if (!empty($img_array['name'][0])) {
+            foreach ($img_array['name'] as $key => $fileName) {
+                if ($img_array['error'][$key] === 0) {
+                    // Tạo tên file mới
+                    $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+                    $newFileName = uniqid() . '.' . $extension;
+                    
+                    // Upload file mới
+                    if (move_uploaded_file($img_array['tmp_name'][$key], 'assets/img/' . $newFileName)) {
+                        // Nếu có ID ảnh cũ tương ứng, xóa ảnh cũ và cập nhật record
+                        if (isset($current_img_ids[$key])) {
+                            $oldImage = $this->modelSanPham->getImagePathById($current_img_ids[$key]);
+                            if (file_exists($oldImage)) {
+                                unlink($oldImage);
+                            }
+                            // Cập nhật record với ảnh mới
+                           $s= $this->modelSanPham->updateProductImage($current_img_ids[$key], $newFileName);
+                          
+                        } else{
+                            // Thêm ảnh mới nếu không có ảnh cũ
+                          $d=  $this->modelSanPham->insertHinhAnh($id, $newFileName);
+                          var_dump($d);
+                          die();
+                        }
                     }
                 }
             }
         }
+    
         header("Location: index.php?act=danh-sach-admin-san-pham");
         exit;
     }
-
-
-
-
+    
     public function xoaSanPham() {
         $id = $_GET["id_san_pham"];
         
