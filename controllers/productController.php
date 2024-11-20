@@ -93,6 +93,8 @@ class productController
                         $img_path = 'assets/img/' . $img_new_name;
                         move_uploaded_file($img_tmp_name, $img_path);
                         $s = $this->modelSanPham->insertHinhAnh($product_id, $img_new_name);
+                        // var_dump($s);
+                        // die();
                     }
                     $_SESSION["flash"] = true;
                     header("Location: http://localhost/Project-1/index.php?act=danh-sach-admin-san-pham");
@@ -107,7 +109,6 @@ class productController
             }
         }
     }
-
     public function chiTietSanPham()
     {
         $id = $_GET['id_san_pham'];
@@ -117,7 +118,7 @@ class productController
         $anhChitiet = $this->modelSanPham->getAnhSanPham($id);
         $danhmuc = $this->modelDanhMuc->getOneCategoryById($product['cate_id']);
         require_once "./views/admin/product/chitietsanpham.php";
-        deleteSession();
+        
     }
     public function formSuaSanPham()
     {
@@ -127,6 +128,7 @@ class productController
         $listDanhMuc = $this->modelSanPham->getAll();
         $listAnhSanPham = $this->modelSanPham->getAnhSanPham($id); 
         require_once "./views/admin/product/suasanpham.php";
+        deleteSession();
     }
     public function suaSanPham()
     {
@@ -184,9 +186,11 @@ class productController
         if (empty($danhMucId)) {
             $errors['cate_name'] = "Danh mục không được để trống";
         }
-        if (empty($status)) {
+        if ($status === null) {
             $errors['status'] = "Trạng thái không được để trống";
         }
+        
+        
 
         $_SESSION["error"] = $errors;
         if (empty($errors)) {
@@ -202,6 +206,9 @@ class productController
             exit();
         }
     }
+
+
+    
 
     public function suaAlbumAnhSanPham()
     {
@@ -221,7 +228,6 @@ class productController
                 }
             }
         }
-
         // 3. Xử lý ảnh mới
         if (!empty($img_array['name'][0])) { 
             $uploadDir = './assets/img/';
@@ -240,6 +246,10 @@ class productController
         header("Location: index.php?act=danh-sach-admin-san-pham");
         exit;
     }
+
+
+
+
     public function xoaSanPham() {
         $id = $_GET["id_san_pham"];
         

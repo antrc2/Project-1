@@ -62,20 +62,40 @@ class SanPhamModel
         } catch (Exception $e) {
             echo "Error: ". $e -> getMessage();
         }
-    }
-    public function insertHinhAnh($product_id,$hinhAnh){
+    } 
+    // public function insertHinhAnh($product_id,$hinhAnh){
+    //     try {
+    //         $sql = "INSERT INTO `product_detail_image`( `product_detail_id`, `image`) 
+    //         VALUES ('$product_id','$hinhAnh')";
+    //         $stmt = $this -> conn -> prepare($sql);
+    //         $stmt -> execute();
+    //         //lấy id sản phẩm vừa thêm
+    //         return true;
+    //     } catch (Exception $e) {
+    //         echo "Error: ". $e -> getMessage();
+    //     }
+    // }
+    public function insertHinhAnh($product_id, $hinhAnh){
         try {
-            $sql = "INSERT INTO `product_detail_image`( `product_detail_id`, `image`) 
-            VALUES ('$product_id','$hinhAnh')";
-            $stmt = $this -> conn -> prepare($sql);
-            $stmt -> execute();
-            //lấy id sản phẩm vừa thêm
-            return true;
+            // Lấy id của product_detail dựa vào product_id
+            $sql = "SELECT id FROM product_detail WHERE product_id = :product_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':product_id', $product_id);
+            $stmt->execute();
+            $product_detail_id = $stmt->fetchColumn();
+    
+            // Insert vào bảng product_detail_image
+            $sql = "INSERT INTO product_detail_image (product_detail_id, image) 
+                    VALUES (:product_detail_id, :image)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':product_detail_id', $product_detail_id);
+            $stmt->bindParam(':image', $hinhAnh);
+            return $stmt->execute();
         } catch (Exception $e) {
-            echo "Error: ". $e -> getMessage();
+            echo "Error: " . $e->getMessage();
         }
     }
-
+    
     //lấy id từng sản phẩm
 
     public function getProductById($id){
@@ -96,17 +116,37 @@ class SanPhamModel
             echo "Error: ". $e -> getMessage();
         }
     }
+    // public function getAnhSanPham($id){
+    //     try {
+    //         $sql = "SELECT * FROM `product_detail_image` WHERE  `product_detail_id`= '$id'";
+    //         $stmt = $this->conn->prepare($sql);
+    //         $stmt->execute();
+    //         $resutl =  $stmt->fetchAll();
+    //         return $resutl;
+    //     }  catch (Exception $e) {
+    //         echo "Error: ". $e -> getMessage();
+    //     }
+    // }
     public function getAnhSanPham($id){
         try {
-            $sql = "SELECT * FROM `product_detail_image` WHERE  `product_detail_id`= '$id'";
+            // Lấy product_detail_id từ product_id trước
+            $sql = "SELECT id FROM product_detail WHERE product_id = :product_id";
             $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':product_id', $id);
             $stmt->execute();
-            $resutl =  $stmt->fetchAll();
-            return $resutl;
-        }  catch (Exception $e) {
-            echo "Error: ". $e -> getMessage();
+            $product_detail_id = $stmt->fetchColumn();
+    
+            // Sau đó lấy ảnh chi tiết
+            $sql = "SELECT * FROM product_detail_image WHERE product_detail_id = :product_detail_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':product_detail_id', $product_detail_id);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
         }
     }
+    
     public function updateSanPham($id,$danhMucId,$tenSanPham,$img,$ngayNhap,$ngayTao,$moTa){
         try {
             $sql = "UPDATE `product` SET `cate_id`='$danhMucId',`name`='$tenSanPham',`image`='$img',`created_at`='$ngayNhap',`updated_at`='$ngayTao',`detail`='$moTa' WHERE `id`='$id'";
@@ -166,6 +206,11 @@ class SanPhamModel
             echo "Error: " . $e->getMessage();
         }
     }
+
+
+
+
+    
     public function deleteSanPham($id){
         try {
             $sql = "DELETE FROM `product` WHERE `id`='$id'";

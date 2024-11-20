@@ -79,6 +79,19 @@ elseif ($act == "danh-sach-admin-san-pham") {
 elseif ($act == "danh-sach-don-hang") {
     $order->danhSachDonHang();
 }
+
+//quản lí tài khoản quản trị
+elseif($act == "danh-sach-quan-tri"){
+    $account->danhSachQuanTri();
+}elseif($act == "form-them-tai-khoan-quan-tri"){
+    $account->formThemTaiKhoanQuanTri();
+}elseif($act == "them-tai-khoan-quan-tri"){
+    $account->themTaiKhoanQuanTri();
+}elseif($act == "form-sua-tai-khoan-quan-tri"){
+    $account->formsuaTaiKhoanQuanTri();
+}elseif($act == "sua-tai-khoan-quan-tri"){
+    $account->suaTaiKhoanQuanTri();
+}
  else {
     $error->notFound();
 }

@@ -65,5 +65,43 @@
                 return (['status'=>False, "message"=>"Đã có lỗi xảy ra"]);
             }
         }
+        function getAll($status) {
+            $sql = "SELECT account.*, role.role_name FROM account 
+                    JOIN role ON account.role_id = role.id
+                    WHERE account.status = :status";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':status', $status, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
+       
+        
+        function themTaiKhoanQuanTri($username, $password, $fullname, $email, $address, $phone, $created_at,$role,$status,$update_at){
+            $sql = "INSERT INTO `account`(`fullname`, `username`, `email`, `password`, `address`, `phone`, `created_at`, `updated_at`, `status`, `role_id`) 
+                    VALUES ('$fullname','$username','$email','$password','$address','$phone','$created_at','$update_at','$status','$role')";
+                   $stmt= $this->conn->prepare($sql);
+                   $stmt->execute();
+                   return true;
+
+        }
+        function getAccountById($id){
+            $sql = "SELECT *  FROM account WHERE id=$id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetch();
+        }
+        function getRole($id){
+            $sql = "SELECT * FROM role WHERE id=$id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetch();
+        }
+        function suaTaiKhoanQuanTri($id, $username, $fullname, $email, $address, $phone, $created_at,$status,$update_at,$role){
+            $sql = "UPDATE `account` SET `fullname`='$fullname', `username`='$username', `email`='$email', `address`='$address', `phone`='$phone', `created_at`='$created_at', `updated_at`='$update_at', `status`='$status', `role_id`='$role' WHERE id=$id";
+            $stmt= $this->conn->prepare($sql);
+            $stmt->execute();
+            return true;
+        }
     }
 ?>

@@ -2,6 +2,7 @@
 <!-- Navbar -->
 
 <!-- /.navbar -->
+
 <!-- Main Sidebar Container -->
 <?php
 include './views/admin/layouts/header.php';
@@ -16,7 +17,7 @@ include './views/admin/layouts/sidebar.php';
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Quản lí danh mục</h1>
+                    <h1>Quản lí tài khoản</h1>
                 </div>
                 <label>Search:<i class="fas fa-search"></i><input type="search" class="form-control form-control-sm" placeholder="Tìm kiếm từ khoá " aria-controls="example1"></label>
             </div>
@@ -32,7 +33,7 @@ include './views/admin/layouts/sidebar.php';
 
                     <div class="card">
                         <div class="card-header">
-                            <a href="#">
+                            <a href="index.php?act=form-them-tai-khoan-quan-tri">
                                 <button class="btn btn-success">Thêm sản phẩm</button>
                             </a>
                         </div>
@@ -50,45 +51,40 @@ include './views/admin/layouts/sidebar.php';
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Tên danh mục</th>
-                                        <th>Trạng thái</th>
+                                        <th>Stt</th>
+                                        <th>Họ và tên</th>
+                                        <th>Tên tài khoản</th>
+                                        <th>Email</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Số điện thoại</th>
                                         <th>Ngày tạo</th>
-                                        <th>Ngày sửa</th>
+                                        <th>Trạng thái</th>
+                                        <th>Chức vụ</th>
                                         <th>Sửa</th>
-                                        <th>Xóa / Bỏ xóa</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($categories as $category): ?>
+                                    <?php foreach ($listAccount as $key => $taiKhoan): ?>
                                         <tr>
-                                            <td><?= $category['id'] ?></td>
-                                            <td><?= $category['cate_name'] ?></td>
-                                            <td><?= $category['status'] == 1 ? "Chưa xóa" : "Đã xóa" ?></td>
-                                            <td><?= epochTimeToDateTime($category['created_at']) ?></td>
-                                            <td><?= epochTimeToDateTime($category['updated_at']) ?></td>
-                                            <td><a href="?act=update-category&id=<?= $category['id'] ?>"><button class="btn btn-warning">Sửa</button></a></td>
+                                            <td><?= $key +1 ?></td>
+                                            <td><?= $taiKhoan['fullname'] ?></td>
+                                            <td><?= $taiKhoan['username'] ?></td>
+                                            <td><?= $taiKhoan['email'] ?></td>
+                                            <td><?= $taiKhoan['address'] ?></td>
+                                            <td><?= $taiKhoan['phone'] ?></td>
+                                            <td><?= epochTimeToDateTime($taiKhoan['created_at']) ?></td>
+                                            <td><?= $taiKhoan["status"] ==1 ? "Hoạt động" : "Bị khoá" ?></td>
+                                            <td><?=$taiKhoan['role_name']?></td>
                                             <td>
-                                                <?php if ($category['status'] == 1): ?>
-                                                    <a onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" href="?act=delete-category&id=<?= $category['id'] ?>"><button  class="btn btn-danger">Xóa</button></a>
-                                                <?php else: ?>
-                                                    <a onclick="return confirm('Bạn có chắc chắn muốn bỏ xóa không?')" href="?act=undo-delete-category&id=<?= $category['id'] ?>"><button  class="btn btn-danger">Bỏ xóa</button></a>
-                                                <?php endif ?>
-                                            </td>
+                                                <div class="btn-group">
+                                                <a href="?act=form-sua-tai-khoan-quan-tri&id=<?=$taiKhoan['id'] ?>"><button class="btn btn-warning">Sửa</button></a>
+                                                <a href="?act=reset-tai-khoan-quan-tri&id=<?=$taiKhoan['id'] ?>"><button class="btn btn-primary">Reset</button></a>
+                                                </div>
+
+                                        </td>
                                         </tr>
                                     <?php endforeach ?>
                                 </tbody>
-                                <tfoot>
-                                <tr>
-                                        <th>ID</th>
-                                        <th>Tên danh mục</th>
-                                        <th>Trạng thái</th>
-                                        <th>Ngày tạo</th>
-                                        <th>Ngày sửa</th>
-                                        <th>Sửa</th>
-                                        <th>Xóa / Bỏ xóa</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                         <!-- /.card-body -->
