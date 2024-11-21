@@ -267,7 +267,7 @@ class productController
             $this->modelSanPham->deleteAnhSanPham($imgId);
         }
     }
-
+    
         if (!empty($img_array['name'][0])) {
             foreach ($img_array['name'] as $key => $fileName) {
                 if ($img_array['error'][$key] === 0) {

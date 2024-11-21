@@ -236,7 +236,6 @@ include './views/admin/layouts/footer.php'; ?>
     //     faqs_row++;
     // }
 
-
     function addfaqs() {
     html = '<tr id="faqs-row-' + faqs_row + '">';
     html += '<td><img src="./uploads/th.jpg"  style="width: 100px; height:100px " alt=""></td>';

@@ -30,9 +30,23 @@ $order = new DonHangController;
 $home = new homeController;
 
 $act = $_GET['act'] ?? "/";
+
+//view người dùng
 if ($act == "/") {
     $home->home();
-} elseif ($act == "register") {
+}elseif ($act == "chi-tiet-san-pham") {
+    $home->productDetail();
+}elseif($act == "gio-hang") {
+    $home->gioHang();
+}elseif($act=="thanh-toan"){
+    $home->thanhToan();
+}
+
+
+
+
+
+elseif ($act == "register") {
     $account->register();
 } elseif ($act == "login") {
     $account->login();
