@@ -32,7 +32,6 @@ $home = new homeController;
 $act = $_GET['act'] ?? "/";
 if ($act == "/") {
     $home->home();
-    
 } elseif ($act == "register") {
     $account->register();
 } elseif ($act == "login") {
@@ -49,16 +48,18 @@ if ($act == "/") {
     $category->deleteCategory($_GET["id"]);
 } elseif ($act == "undo-delete-category") {
     $category->undoDeleteCategory($_GET['id']);
-} elseif ($act == "list-discount"){
+} elseif ($act == "list-discount") {
     $discount->listDiscount();
-} elseif ($act == "add-discount"){
+} elseif ($act == "add-discount") {
     $discount->addDiscount();
-} elseif ($act == "update-discount"){
+} elseif ($act == "update-discount") {
     $discount->updateDiscount($_GET['id']);
-} elseif ($act == "delete-discount"){
+} elseif ($act == "delete-discount") {
     $discount->deleteDiscount($_GET['id']);
-} elseif ($act == "undo-delete-discount"){
+} elseif ($act == "undo-delete-discount") {
     $discount->undoDeleteDiscount($_GET['id']);
+} elseif ($act == "logout") {
+    $account->logout();
 }
 //admin sản phẩm
 elseif ($act == "danh-sach-admin-san-pham") {
@@ -67,15 +68,15 @@ elseif ($act == "danh-sach-admin-san-pham") {
     $product->formThemSanPham();
 } elseif ($act == "them-san-pham") {
     $product->themSanPham();
-}elseif($act == "chi-tiet-san-pham"){
+} elseif ($act == "chi-tiet-san-pham") {
     $product->chiTietSanPham();
-}elseif($act == "form-sua-san-pham"){
+} elseif ($act == "form-sua-san-pham") {
     $product->formSuaSanPham();
-}elseif($act == "sua-san-pham"){
+} elseif ($act == "sua-san-pham") {
     $product->suaSanPham();
-}elseif($act == "sua-album-anh-san-pham"){
+} elseif ($act == "sua-album-anh-san-pham") {
     $product->suaAlbumAnhSanPham();
-}elseif($act == "xoa-san-pham"){
+} elseif ($act == "xoa-san-pham") {
     $product->xoaSanPham();
 }
 //dơn hàng
@@ -84,31 +85,30 @@ elseif ($act == "danh-sach-don-hang") {
 }
 
 //quản lí tài khoản quản trị
-elseif($act == "danh-sach-quan-tri"){
+elseif ($act == "danh-sach-quan-tri") {
     $account->danhSachQuanTri();
-}elseif($act == "form-them-tai-khoan-quan-tri"){
+} elseif ($act == "form-them-tai-khoan-quan-tri") {
     $account->formThemTaiKhoanQuanTri();
-}elseif($act == "them-tai-khoan-quan-tri"){
+} elseif ($act == "them-tai-khoan-quan-tri") {
     $account->themTaiKhoanQuanTri();
-}elseif($act == "form-sua-tai-khoan-quan-tri"){
+} elseif ($act == "form-sua-tai-khoan-quan-tri") {
     $account->formsuaTaiKhoanQuanTri();
-}elseif($act == "sua-tai-khoan-quan-tri"){
+} elseif ($act == "sua-tai-khoan-quan-tri") {
     $account->suaTaiKhoanQuanTri();
-}elseif($act == "reset-tai-khoan"){
+} elseif ($act == "reset-tai-khoan") {
     $account->resetTaiKhoan();
-}//quản lí tài khoản khách hàng
-elseif($act == "danh-sach-khach-hang"){
+} //quản lí tài khoản khách hàng
+elseif ($act == "danh-sach-khach-hang") {
     $account->danhSachKhachHang();
-}elseif($act == "form-sua-tai-khoan-khach-hang"){
+} elseif ($act == "form-sua-tai-khoan-khach-hang") {
     $account->formSuaTaiKhoanKhachHang();
-}elseif($act =="sua-tai-khoan-khach-hang"){
+} elseif ($act == "sua-tai-khoan-khach-hang") {
     $account->suaTaiKhoanKhachHang();
-}
- else {
+} else {
     $error->notFound();
 }
 
-if (isset($_SESSION['messages'])){
+if (isset($_SESSION['messages'])) {
     echo SweetAlert2("success", $_SESSION['messages']);
     unset($_SESSION['messages']);
 }
