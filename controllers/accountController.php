@@ -15,14 +15,14 @@
                 $result = $this->acc->login($username,$password);
                 if ($result['status'] == True){
                     $_SESSION['username'] = $username;
-                    require_once "views/account/login.php";
+                    require_once "views/account/login1.php";
                     headerAfterXSecondWithSweetAlert2("?act=/",1500, "success", $result['message']);
                 } else {
-                    require_once "views/account/login.php";
+                    require_once "views/account/login1.php";
                     echo SweetAlert2("error",$result['message']);
                 }
             }
-            require_once "views/account/login.php";
+            require_once "views/account/login1.php";
         }
         function register(){
             if (isset($_SESSION['username'])){
@@ -40,14 +40,14 @@
                 $result = $this->acc->register($username, $fullname, $email, $password, $address, $phone, $created_at);
                 if ($result['status'] == True){
                     $_SESSION['username'] = $username;
-                    require_once "views/account/register.php";
+                    require_once "views/account/login1.php";
                     headerAfterXSecondWithSweetAlert2("?act=/",1500, "success", $result['message']);
                 } else {
-                    require_once "views/account/register.php";
+                    require_once "views/account/login1.php";
                     echo SweetAlert2("error",$result['message']);
                 }
             }
-            require_once "views/account/register.php";
+            require_once "views/account/login1.php";
         }
         function logout(){
             if (isset($_SESSION['username'])){
