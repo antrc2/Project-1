@@ -1,28 +1,28 @@
-function valFormLogin(){
+function valFormLogin() {
     var allowedNicknameCharacters = /^[a-zA-Z0-9_]*$/;
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
-    var usernameError = document.getElementById("usernameError");
-    var passwordError = document.getElementById("passwordError");
-    var error =0;
-    if (username == "" ){
+    var username = document.getElementById("usernamee").value;
+    var password = document.getElementById("passwordd").value;
+    var usernameError = document.getElementById("usernameeError");
+    var passwordError = document.getElementById("passworddError");
+    var error = 0;
+    if (username == "") {
         usernameError.innerText = "Bạn phải nhập tài khoản";
-        error ++;
+        error++;
     } else {
-        if (!allowedNicknameCharacters.test(username)){
+        if (!allowedNicknameCharacters.test(username)) {
             usernameError.innerText = "Tài khoản không xác định";
             error++;
         } else {
             usernameError.innerText = '';
         }
     }
-    if (password == ""){
+    if (password == "") {
         passwordError.innerText = "Bạn phải nhập mật khẩu";
-        error ++;
+        error++;
     } else {
         passwordError.innerText = '';
     }
-    if (error ===0){
+    if (error === 0) {
         return true;
     } else {
         return false;
