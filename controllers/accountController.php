@@ -30,7 +30,6 @@
                 header("Location: ?act=/");
             }
             if (isset($_POST['btn_register'])){
-                var_dump($_POST);
                 $username = $_POST['username'];
                 $fullname = $_POST['fullname'];
                 $email = $_POST['email'];
