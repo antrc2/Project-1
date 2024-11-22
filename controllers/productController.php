@@ -281,6 +281,7 @@ class productController
                         $oldImage = $this->modelSanPham->getImagePathById($current_img_ids[$key]);
                         if (file_exists($oldImage)) {
                             unlink($oldImage);
+
                         }
                         // Cập nhật record với ảnh mới
                         $s = $this->modelSanPham->updateProductImage($current_img_ids[$key], $newFileName);

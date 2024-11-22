@@ -23,12 +23,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Libraries Stylesheet -->
     <!-- <link href="lib/animate/animate.min.css" rel="stylesheet">/ -->
-    <link rel="stylesheet" href="views/client/lib/animate/animate.min.css">
-    <link href="views/clientlib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/web/lib/animate/animate.min.css">
+    <link href="assets/web/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <!-- <link href="/views/client/css/admin.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="views/client/css/admin.css">
+    <!-- <link href="/assets/web/css/admin.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="assets/web/css/admin.css">
     <!-- Template Stylesheet -->
     <style>
         .error {
