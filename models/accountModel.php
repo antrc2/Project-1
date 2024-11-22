@@ -72,7 +72,8 @@ class accountModel
             return (["status" => False, "message" => "Số điện thoại đã tồn tại"]);
         }
         $hashedPassword = $this->hashPassword($password);
-        $check = $this->conn->prepare("INSERT INTO account(username,fullname,password,email,address,phone,created_at,updated_at) VALUES('$username', '$fullname','$hashedPassword', '$email', '$address','$phone',$created_at, $created_at)")->execute();
+        $check = $this->conn->prepare("INSERT INTO account(username,fullname,password,email,address,phone,created_at,updated_at) 
+                                        VALUES('$username', '$fullname','$hashedPassword', '$email', '$address','$phone',$created_at, $created_at)")->execute();
         if ($check) {
             return (['status' => True, "message" => "Đăng kí tài khoản thành công"]);
         } else {
@@ -80,7 +81,7 @@ class accountModel
         }
     }
     // function getAll($status) {
-    //     $sql = "SELECT account.*, role.role_name FROM account 
+    //     $sql = "SELECT * FROM account 
     //             JOIN role ON account.role_id = role.id
     //             WHERE account.status = :status";
     //     $stmt = $this->conn->prepare($sql);
