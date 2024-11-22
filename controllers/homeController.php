@@ -18,5 +18,8 @@
         function thanhToan(){
             require_once "views/user/home/thanhtoan.php";
         }
+        function sanPham(){
+            require_once "views/user/home/sanpham.php";
+        }
     }
 ?>

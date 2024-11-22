@@ -21,10 +21,9 @@ include './views/user/components/sideshow.php'
     <div class="tab-content">
       <div id="tab-1" class="tab-pane fade show p-0 active">
         <div class="row g-4">
-          <!-- vòng lặp forech ở đây -->
 
 
-
+          <!-- vòng lặp forech ở đây  lấy 6 sản phẩm mới nhất-->
           <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
             <div class="product-item">
               <div class="position-relative bg-light overflow-hidden">
@@ -54,6 +53,8 @@ include './views/user/components/sideshow.php'
               </div>
             </div>
           </div>
+
+
 
 
 

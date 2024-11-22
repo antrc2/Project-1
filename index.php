@@ -40,6 +40,8 @@ if ($act == "/") {
     $home->gioHang();
 }elseif($act=="thanh-toan"){
     $home->thanhToan();
+}elseif($act =="san-pham"){
+    $home->sanPham();
 }
 
 

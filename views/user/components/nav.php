@@ -37,41 +37,12 @@
               <a href="product.html">Products<span>&#11167</span></a>
               <div class="sub-menu">
                 <ul>
-                  <li>
-                    <img class="logo-submenu" src="assets/web/img/submenu.webp" alt="Image" />
-                  </li>
-                </ul>
-                <ul>
-                  <li>
-                    <h4 class="submenu-h4">Trang điểm</h4>
-                  </li>
-                  <li><a href="#">Kem nền</a> </li>
-                  <li><a href="#">Phấn phủ</a> </li>
-                  <li><a href="#">Phấn mắt</a> </li>
-                  <li><a href="#">Eyeliner</a> </li>
-                  <li><a href="#">Son môi</a> </li>
-                </ul>
-                <ul>
-                  <li>
-                    <h4 class="submenu-h4">Dưỡng da</h4>
-                  </li>
-                  <li><a href="#">Mặt nạ</a> </li>
-                  <li><a href="#">Serum</a> </li>
-                  <li><a href="#">Phấn mắt</a> </li>
-                  <li><a href="#">Eyeliner</a> </li>
-                  <li><a href="#">Tẩy trang</a> </li>
-                </ul>
-                <ul>
-                  <li>
-                    <h4 class="submenu-h4">Sản phẩm khác</h4>
-                  </li>
-                  <li><a href="#">Kem nền</a> </li>
-                  <li><a href="#">Phấn phủ</a> </li>
-                  <li><a href="#">Phấn mắt</a> </li>
-                  <li><a href="#">Eyeliner</a> </li>
-                  <li><a href="#">Son môi</a> </li>
-                </ul>
 
+
+                  <li><a href="index.php?act=san-pham">dell</a> </li>
+
+
+                </ul>
               </div>
             </li>
             <li class="drop-two">
@@ -92,7 +63,6 @@
           <input type="text" id="search-text" placeholder="Bạn muốn tìm gì?" required>
           <button id="search-btn"><small class="fa fa-search text-body"></small></button>
         </form>
-
         </a>
         <a class="btn-sm-square bg-white rounded-circle ms-3" href="index.php?act=login">
           <small class="fa fa-user text-body"></small>
