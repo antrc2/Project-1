@@ -13,6 +13,14 @@ class SanPhamModel
         $result = $stmt->fetchAll();
         return $result;
     }
+    public function getAllProductByIdCate($id_cate){
+        return $this->conn->query("SELECT product.*, product_detail.status , product_detail.price, product_detail.amount, product_detail.ram, product_detail.color
+            FROM product
+            JOIN product_detail ON product.id = product_detail.product_id WHERE product.cate_id=$id_cate")->fetchAll();
+    }
+    function getNewestProductButLimit($limit){
+        return $this->conn->query("SELECT * FROM product ORDER BY id DESC LIMIT $limit")->fetchAll();
+    }
     public function getAllSanPham()
     {
         try {
