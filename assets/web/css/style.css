@@ -36,7 +36,7 @@ a {
 }
 .menu a {
   padding: 20px 10px;
-  color: white;
+  color: rgb(13, 12, 12);
   font-weight: 500;
 }
 
@@ -44,6 +44,9 @@ a {
     display: flex;
   }*/
 .menu a:hover {
+  color: #111111;
+}
+.menu ul li a {
   color: #111111;
 }
 /*.menu ul li a {
