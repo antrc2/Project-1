@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <!-- Favicon -->
-    <link rel="icon" href="assets/img/th (2).jpg">
+    <link rel="icon" href="assets/web/img/1.jpg">
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

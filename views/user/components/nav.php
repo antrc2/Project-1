@@ -1,3 +1,7 @@
+<?php
+$cate = new categoryModel;
+$categories = $cate->getListCategory();
+?>
 <div
   id="spinner"
   class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -12,7 +16,7 @@
   <nav
     class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn"
     data-wow-delay="0.1s">
-    <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
+    <a href="?act=/" class="navbar-brand ms-4 ms-lg-0">
       <h1 class="fw-bold text-primary m-0">
         <span class="text-secondary">
           <img class="logo" src="assets/web/img/1.jpg" alt="Image" style="width: 100px; margin-top: 10px;" />
@@ -36,10 +40,12 @@
             <li class="drop-menu">
               <a href="product.html">Products<span>&#11167</span></a>
               <div class="sub-menu">
+                
                 <ul>
 
-
-                  <li><a href="index.php?act=san-pham">dell</a> </li>
+                  <?php foreach ($categories as $category): ?>
+                    <li><a href="?act=san-pham&id_cate=<?= $category['id']?>"><button class="btn w-100"><?= $category['cate_name']?></button></a></li>
+                  <?php endforeach ?>
 
 
                 </ul>
@@ -59,10 +65,6 @@
         </div>
       </div>
       <div class="d-none d-lg-flex ms-2">
-        <form action="" id="search-box">
-          <input type="text" id="search-text" placeholder="Bạn muốn tìm gì?" required>
-          <button id="search-btn"><small class="fa fa-search text-body"></small></button>
-        </form>
         </a>
         <a class="btn-sm-square bg-white rounded-circle ms-3" href="index.php?act=login">
           <small class="fa fa-user text-body"></small>
