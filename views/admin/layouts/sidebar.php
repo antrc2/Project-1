@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-primary elevation-4" style="background-color: #ccc;">
     <!-- Brand Logo -->
     <a href="../../index3.html" class="brand-link">
         <i class="fas fa-user-tie"></i>
@@ -46,7 +46,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="<?= 'index.php?act=danh-sach-admin-san-pham' ?>" class="nav-link">
-                        <i class="nav-icon fas fa-dog"></i>
+                    <i class="fas fa-tv"></i>
                         <p>
                             Sản Phẩm
                         </p>
