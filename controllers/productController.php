@@ -285,13 +285,9 @@ class productController
                         }
                         // Cập nhật record với ảnh mới
                         $s = $this->modelSanPham->updateProductImage($current_img_ids[$key], $newFileName);
-                        echo "Thêm sản phẩm $key thành công";
-                        var_dump($s);
                     } else {
                         // Thêm ảnh mới nếu không có ảnh cũ
                         $d =  $this->modelSanPham->insertHinhAnh($id, $newFileName);
-                        echo "Thêm sản phẩm $id thành công";
-                        var_dump($d);
                         // die();
                     }
                 }
