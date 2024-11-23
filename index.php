@@ -113,6 +113,10 @@ elseif ($act == "danh-sach-quan-tri") {
     $account->suaTaiKhoanQuanTri();
 } elseif ($act == "reset-tai-khoan") {
     $account->resetTaiKhoan();
+
+
+
+    
 } //quản lí tài khoản khách hàng
 elseif ($act == "danh-sach-khach-hang") {
     $account->danhSachKhachHang();
