@@ -19,7 +19,7 @@ class SanPhamModel
             JOIN product_detail ON product.id = product_detail.product_id WHERE product.cate_id=$id_cate")->fetchAll();
     }
     function getNewestProductButLimit($limit){
-        return $this->conn->query("SELECT * FROM product WHERE status = 1 ORDER BY id DESC LIMIT $limit")->fetchAll();
+        return $this->conn->query("SELECT * FROM product ORDER BY id DESC LIMIT $limit")->fetchAll();
     }
     public function getAllSanPham()
     {
