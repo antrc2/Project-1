@@ -43,3 +43,6 @@ function deleteSession()
     // session_unset(); 
     // session_destroy();
 }
+function calculatorPriceAfterDiscount($price, $discount =0){
+    return  $price - ($price * $discount / 100);
+}

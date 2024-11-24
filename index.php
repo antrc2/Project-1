@@ -35,10 +35,10 @@ $home = new homeController;
 $act = $_GET['act'] ?? "/";
 
 //view người dùng
-if ($act == "/") {
+if ($act == "/" || $act == "") {
     $home->home();
 }elseif ($act == "chi-tiet-san-pham") {
-    $home->productDetail();
+    $home->productDetail($_GET['id']);
 }elseif($act == "gio-hang") {
     $home->gioHang();
 }elseif($act=="thanh-toan"){

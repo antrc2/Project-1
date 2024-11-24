@@ -41,14 +41,14 @@ include './views/user/components/sideshow.php'
                 <a class="d-block h5 mb-2" href=""><?= $product['name']?></a>
               </div>
               <div class="d-flex border-top">
-                <small class="w-50 text-center border-end py-2">
-                  <a class="text-body" href="index.php?act=chi-tiet-san-pham"><i class="fa fa-eye text-red me-2"></i>View
+                <small class="w-100 text-center border-end py-2">
+                  <a class="text-body" href="index.php?act=chi-tiet-san-pham&id=<?= $product['id']?>"><i class="fa fa-eye text-red me-2"></i>View
                     detail</a>
                 </small>
-                <small class="w-50 text-center py-2">
+                <!-- <small class="w-50 text-center py-2">
                   <a class="text-body" href=""><i class="fa fa-shopping-bag text-red me-2"></i>Add
                     to cart</a>
-                </small>
+                </small> -->
               </div>
             </div>
           </div>

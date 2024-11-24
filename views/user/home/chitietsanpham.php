@@ -17,8 +17,7 @@ include './views/user/components/sideshow.php'
 
         <div class="card">
             <div class="container-fliud">
-                <form name="frmsanphamchitiet" id="frmsanphamchitiet" method="post"
-                    action="/php/twig/frontend/giohang/themvaogiohang">
+                <div>
                     <input type="hidden" name="sp_ma" id="sp_ma" value="5">
                     <input type="hidden" name="sp_ten" id="sp_ten" value="Samsung Galaxy Tab 10.1 3G 16G">
                     <input type="hidden" name="sp_gia" id="sp_gia" value="10990000.00">
@@ -50,29 +49,32 @@ include './views/user/components/sideshow.php'
                                 </li>
                                 <li class="">
                                     <a data-target="#pic-3 " data-toggle="tab" class="active">
-                                        <img src="assets/web/img/t3sp9.webp">
+                                        <img src="<?= $oneProduct['image']?>">
                                     </a>
                                 </li>
                             </ul>
                         </div>
                         <div class="details col-md-6">
-                            <h3 class="product-title"> Son Dưỡng Có Màu Glow Tint Lip Balm 3.5g</h3>
-                            <div class="rating">
-                                <div class="stars">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </div>
-                                <span class="review-no">999 reviews</span>
-                            </div>
-                            <small class="text-muted">Giá cũ: <s><span>950.000 ₫</span></s></small>
-                            <h4 class="price">Giá hiện tại: <span>180.000 ₫</span></h4>
+                            <h3 class="product-title"><?= $oneProduct['name']?></h3>
+                            <!-- <small class="text-muted">Giá cũ: <s><span>950.000 ₫</span></s></small>
+                            <h4 class="price">Giá hiện tại: <span>180.000 ₫</span></h4> -->
                             <p class="vote"><strong>100%</strong> hàng <strong>Chất lượng</strong>, đảm bảo
                                 <strong>Uy tín</strong>!
                             </p>
-                            <h5 class="colors">colors:
+                            <div class="variants">
+                                <div class="variant">
+                                    <?php foreach($detailProducts as $product): ?>
+                                    <form action="" method="POST">
+                                        <input type="hidden" name="id" value="<?= $product['id']?>">
+                                        <input type="hidden" name="ram" value="<?= $product['ram']?>">
+                                        <input type="hidden" name="color" value="<?= $product['color']?>">
+                                        <button name="btn_detailProduct">RAM: <?= $product['ram']?> - Màu: <?= $product['color']?></button>
+                                    </form>
+                                    <?php endforeach ?>
+                                </div>
+
+                            </div>
+                            <!-- <h5 class="colors">colors:
                                 <span class="color orange not-available" data-toggle="tooltip"
                                     title="Hết hàng"></span>
                                 <button class="color">#1</button>
@@ -80,36 +82,27 @@ include './views/user/components/sideshow.php'
                                 <button class="color">#3</button>
                                 <button class="color">#4</button>
                                 <button class="color">#5</button>
-                            </h5>
+                            </h5> -->
+                            <?php if ($isPost): ?>
+                            <div class="detail">
+                                <?php if ($check) :?>
+                                <small class="text-muted">Giá cũ: <s><span><?= number_format($variant['price'])?>đ</span></s></small>
+                                <?php endif ?>
+                                <h4 class="price">Giá hiện tại: <span><?= number_format($discountAmount)?>đ</span></h4>
+                                <h5>Số lượng: <?= $variant['amount']?></h5>
+                            </div>
+                            <?php endif ?>
                             <div class="form-group">
                                 <label for="soluong">Số lượng đặt mua:</label>
                                 <input type="number" class="form-control" id="soluong" name="soluong">
                             </div>
                             <div class="action">
-                                <a class="add-to-cart btn btn-outline-red border-2 py-2 px-4 mt-2" id="btnThemVaoGioHang" href="index.php?act=gio-hang">Thêm vào giỏ hàng</a>
+                                <a class="add-to-cart btn btn-outline-red border-2 py-2 px-4 mt-2" id="btnThemVaoGioHang" href="?act=add-cart&id=<?= $variant['product_detail_id']?>">Thêm vào giỏ hàng</a>
                                 <a class="add-to-cart btn btn-outline-red border-2 py-2 px-4 mt-2" id="btnMuaNgay" href="">Mua ngay</a>
-                                <a class="like btn  border-2 py-2 px-4 mt-2 rounded-pill" href="#"><span class="fa fa-heart"></span></a>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="container-fluid">
-                <h3>Thông tin chi tiết về Sản phẩm</h3>
-                <div class="row">
-                    <div class="col">
-                        LƯU Ý: màu son mỗi người dùng sẽ có mỗi khác mọi người nha.
-                        <br>🌺Là 1 thỏi son với hiệu ứng 2 trong 1:
-                        <br>➖Lên màu vivid tint cực đẹp lấy cảm hứng từ màu sắc của từng cánh hoa.
-                        <br>➖Lần đầu tiên 1 thỏi son tint chứa đựng thành phần dưỡng môi đáng kinh ngạc. Bao gồm rosehip oil, rose water và acacia collagen phục hồi làn môi thâm, nứt nẻ một cách hoàn hảo.
-                        <br>🌺Rosehip Oil chính là tinh dầu Tầm Xuân – đây là một loại tinh dầu thích hợp dùng cho làn môi nứt nẻ, hằn sâu, nhiều vết thâm và thường xuyên mất nước.
-                        <br>🌺Omega 3, Omega 6 và các a-xít béo thiết yếu: Các hợp chất lipid (chất béo) trong các chất này là nhân tố quan trọng trong quá trình dưỡng ẩm đối với làn môi khô và cải thiện độ mềm mại và độ đàn hồi của môi. Các axit béo thiết yếu rất quan trọng đối với sức khỏe của da của chúng ta, tuy nhiên cơ thể của chúng ta lại không thể tạo ra chúng – vì vậy dưỡng chất này giống như bổ sung những gì còn thiếu cho làn da, làm thỏa mãn “cơn khát”
-                        <br>🌺Acacia Collagen : là một kết hợp giữa collagen và Phyto, có tính chất làm se, kích thích các tế bào da sản xuất thêm collagen. Giúp làn da môi phục hồi nhanh chóng và giữ suốt 24h.
                     </div>
-                </div>
             </div>
         </div>
     </div>
