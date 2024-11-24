@@ -39,6 +39,7 @@ if ($act == "/" || $act == "") {
     $home->home();
 }elseif ($act == "chi-tiet-san-pham") {
     $home->productDetail($_GET['id']);
+
 }elseif($act == "gio-hang") {
     $home->gioHang();
 }elseif($act=="thanh-toan"){
@@ -114,18 +115,24 @@ elseif ($act == "danh-sach-quan-tri") {
     $account->suaTaiKhoanQuanTri();
 } elseif ($act == "reset-tai-khoan") {
     $account->resetTaiKhoan();
+}
 
+//bình luận
+elseif($act =="update-trang-thai-binh-luan"){
+    $product->updateTrangThaiBinhLuan();
+}
 
-
-    
-} //quản lí tài khoản khách hàng
+//quản lí tài khoản khách hàng
 elseif ($act == "danh-sach-khach-hang") {
     $account->danhSachKhachHang();
 } elseif ($act == "form-sua-tai-khoan-khach-hang") {
     $account->formSuaTaiKhoanKhachHang();
 } elseif ($act == "sua-tai-khoan-khach-hang") {
     $account->suaTaiKhoanKhachHang();
-} else {
+}elseif($act == "chi-tiet-khach-hang"){
+    // $account->chiTietKhachHang();
+}
+else {
     $error->notFound();
 }
 

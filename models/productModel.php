@@ -6,7 +6,8 @@ class SanPhamModel
     {
         $this->conn = database();
     }
-    public function getAll(){
+    public function getAll()
+    {
         $sql = "SELECT * FROM category";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
@@ -40,7 +41,8 @@ class SanPhamModel
             echo "Error: " . $e->getMessage();
         }
     }
-    public function insertSanPham($danhMucId, $tenSanPham, $ngayTao, $ngayNhap, $moTa, $img) {
+    public function insertSanPham($danhMucId, $tenSanPham, $ngayTao, $ngayNhap, $moTa, $img)
+    {
         try {
             $sql = "INSERT INTO `product` (`cate_id`, `name`, `created_at`, `updated_at`, `detail`, `image`) 
                     VALUES (:cate_id, :name, :created_at, :updated_at, :detail, :image)";
@@ -58,20 +60,22 @@ class SanPhamModel
             echo "Error: " . $e->getMessage();
         }
     }
-    public function insertChiTietSanPham($product_id,$soLuong,$ram,$mau, $giaSanPham,$status){
+    public function insertChiTietSanPham($product_id, $soLuong, $ram, $mau, $giaSanPham, $status)
+    {
         try {
             $sql = "INSERT INTO `product_detail`(`product_id`, `amount`, `ram`, `color`, `price`,`status`)
                      VALUES ($product_id,$soLuong,$ram,'$mau','$giaSanPham','$status')";
-            $stmt = $this -> conn -> prepare($sql);
-            $stmt -> execute();
-            
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+
             //lấy id sản phẩm vừa thêm
             return true;
         } catch (Exception $e) {
-            echo "Error: ". $e -> getMessage();
+            echo "Error: " . $e->getMessage();
         }
-    } 
-    public function insertHinhAnh($product_id, $hinhAnh){
+    }
+    public function insertHinhAnh($product_id, $hinhAnh)
+    {
         try {
             // Lấy id của product_detail dựa vào product_id
             $sql = "SELECT id FROM product_detail WHERE product_id = :product_id";
@@ -79,7 +83,7 @@ class SanPhamModel
             $stmt->bindParam(':product_id', $product_id);
             $stmt->execute();
             $product_detail_id = $stmt->fetchColumn();
-    
+
             // Insert vào bảng product_detail_image
             $sql = "INSERT INTO product_detail_image (product_detail_id, image) 
                     VALUES (:product_detail_id, :image)";
@@ -94,8 +98,9 @@ class SanPhamModel
 
 
 
-    
-    public function updateProductImage($imageId, $newFileName) {
+
+    public function updateProductImage($imageId, $newFileName)
+    {
         try {
             $sql = "UPDATE product_detail_image SET image = :image WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
@@ -106,17 +111,18 @@ class SanPhamModel
             echo "Error: " . $e->getMessage();
         }
     }
-    
-    
+
+
     //lấy id từng sản phẩm
 
-    public function getProductById($id){
-            $sql = "SELECT * FROM `product` WHERE  id = $id";
-            $stml = $this -> conn->prepare($sql);
-            $stml->execute();
-            return $stml ->fetch();
-        
+    public function getProductById($id)
+    {
+        $sql = "SELECT * FROM `product` WHERE  id = $id";
+        $stml = $this->conn->prepare($sql);
+        $stml->execute();
+        return $stml->fetch();
     }
+
     function getAllDetailProduct($id){
         try {
             $sql = "SELECT * FROM `product_detail` WHERE  `product_id`= $id";
@@ -136,14 +142,15 @@ class SanPhamModel
     
     }
     public function getChiTietSanPham($id){
+
         try {
             $sql = "SELECT * FROM `product_detail` WHERE  `product_id`= $id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $resutl =  $stmt->fetch();
             return $resutl;
-        }catch (Exception $e) {
-            echo "Error: ". $e -> getMessage();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
         }
     }
     // public function getAnhSanPham($id){
@@ -157,7 +164,8 @@ class SanPhamModel
     //         echo "Error: ". $e -> getMessage();
     //     }
     // }
-    public function getAnhSanPham($id){
+    public function getAnhSanPham($id)
+    {
         try {
             // Lấy product_detail_id từ product_id trước
             $sql = "SELECT id FROM product_detail WHERE product_id = :product_id";
@@ -165,7 +173,7 @@ class SanPhamModel
             $stmt->bindParam(':product_id', $id);
             $stmt->execute();
             $product_detail_id = $stmt->fetchColumn();
-    
+
             // Sau đó lấy ảnh chi tiết
             $sql = "SELECT * FROM product_detail_image WHERE product_detail_id = :product_detail_id";
             $stmt = $this->conn->prepare($sql);
@@ -176,42 +184,46 @@ class SanPhamModel
             echo "Error: " . $e->getMessage();
         }
     }
-    
-    public function updateSanPham($id,$danhMucId,$tenSanPham,$img,$ngayNhap,$ngayTao,$moTa){
+
+    public function updateSanPham($id, $danhMucId, $tenSanPham, $img, $ngayNhap, $ngayTao, $moTa)
+    {
         try {
             $sql = "UPDATE `product` SET `cate_id`='$danhMucId',`name`='$tenSanPham',`image`='$img',`created_at`='$ngayNhap',`updated_at`='$ngayTao',`detail`='$moTa' WHERE `id`='$id'";
-            $stmt = $this -> conn -> prepare($sql);
-            $stmt -> execute();
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
             //lấy id sản phẩm vừa thêm
             return true;
-        }  catch (Exception $e) {
-            echo "Error: ". $e -> getMessage();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
         }
     }
 
-    public function updateChiTietSanPham($san_pham_id,$soLuong,$ram,$color,$status,$giaSanPham){
+    public function updateChiTietSanPham($san_pham_id, $soLuong, $ram, $color, $status, $giaSanPham)
+    {
         try {
             $sql = "UPDATE `product_detail` SET `price`='$giaSanPham',`amount`='$soLuong',`ram`='$ram',`color`='$color',`status`='$status' WHERE `product_id`='$san_pham_id'";
-            $stmt = $this -> conn -> prepare($sql);
-            $stmt -> execute();
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
             //lấy id sản phẩm vừa thêm
             return true;
-        }  catch (Exception $e) {
-            echo "Error: ". $e -> getMessage();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
         }
     }
-    public function deleteAnhSanPham($id){
+    public function deleteAnhSanPham($id)
+    {
         try {
             $sql = "DELETE FROM `product_detail_image` WHERE `id`='$id'";
-            $stmt = $this -> conn -> prepare($sql);
-            $stmt -> execute();
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
             //lấy id sản phẩm vừa thêm
             return true;
-        }  catch (Exception $e) {
-            echo "Error: ". $e -> getMessage();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
         }
     }
-    public function getImagePathById($id) {
+    public function getImagePathById($id)
+    {
         try {
             $sql = "SELECT image FROM product_detail_image WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
@@ -223,8 +235,9 @@ class SanPhamModel
             echo "Error: " . $e->getMessage();
         }
     }
-    
-    public function addAnhSanPham($product_id, $image) {
+
+    public function addAnhSanPham($product_id, $image)
+    {
         try {
             $sql = "INSERT INTO product_detail_image (product_detail_id, image) 
                     VALUES (:product_id, :image)";
@@ -240,19 +253,21 @@ class SanPhamModel
 
 
 
-    
-    public function deleteSanPham($id){
+
+    public function deleteSanPham($id)
+    {
         try {
             $sql = "DELETE FROM `product` WHERE `id`='$id'";
-            $stmt = $this -> conn -> prepare($sql);
-            $stmt -> execute();
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
             //lấy id sản phẩm vừa thêm
             return true;
-        }  catch (Exception $e) {
-            echo "Error: ". $e -> getMessage();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
         }
     }
-    public function deleteChiTietSanPham($id) {
+    public function deleteChiTietSanPham($id)
+    {
         try {
             $sql = "DELETE FROM `product_detail` WHERE `product_id`='$id'";
             $stmt = $this->conn->prepare($sql);
@@ -262,5 +277,40 @@ class SanPhamModel
             echo "Error: " . $e->getMessage();
         }
     }
-    
+    public function getBinhLuan($id)
+    {
+        try {
+            $sql = "SELECT review.*, account.username
+            from review
+            join account on review.user_id = account.id
+            where review.product_id = '$id'";
+
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $resutl =  $stmt->fetchAll();
+            return $resutl;
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    public function getDetailBinhLuan($id) {
+
+         $spl = "select * from review where id = '$id'";
+         $stmt = $this -> conn -> prepare($spl);
+         $stmt ->execute();
+         $resutl =  $stmt->fetchAll();
+         return $resutl;
+    }
+
+    public function updateTrangThaiBinhLuan($id_binh_luan, $trang_thai_update){
+        try {
+            $sql = "UPDATE `review` SET `star`='$trang_thai_update' WHERE id = '$id_binh_luan'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return true;
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
 }
