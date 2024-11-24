@@ -12,6 +12,7 @@ require_once "controllers/errorController.php";
 require_once "controllers/discountController.php";
 require_once "controllers/donhangController.php";
 require_once "controllers/homeController.php";
+require_once "controllers/cartController.php";
 
 require_once "models/accountModel.php";
 require_once "models/productModel.php";
@@ -20,6 +21,7 @@ require_once "models/errorModel.php";
 require_once "models/discountModel.php";
 require_once "models/donHangModel.php";
 require_once "models/homeModel.php";
+require_once "models/cartModel.php";
 
 $account = new accountController;
 $product = new productController;
@@ -27,15 +29,17 @@ $category = new categoryController;
 $error = new errorController;
 $discount = new discountController;
 $order = new DonHangController;
+$cart = new cartController;
 $home = new homeController;
 
 $act = $_GET['act'] ?? "/";
 
 //view người dùng
-if ($act == "/") {
+if ($act == "/" || $act == "") {
     $home->home();
-}elseif ($act == "chi-tiet-san-pham-nguoi-dung") {
-    $home->productDetail();
+}elseif ($act == "chi-tiet-san-pham") {
+    $home->productDetail($_GET['id']);
+
 }elseif($act == "gio-hang") {
     $home->gioHang();
 }elseif($act=="thanh-toan"){
@@ -74,9 +78,7 @@ elseif ($act == "register") {
     $discount->deleteDiscount($_GET['id']);
 } elseif ($act == "undo-delete-discount") {
     $discount->undoDeleteDiscount($_GET['id']);
-} elseif ($act == "logout") {
-    $account->logout();
-}
+} 
 //admin sản phẩm
 elseif ($act == "danh-sach-admin-san-pham") {
     $product->danhSachSanPham();

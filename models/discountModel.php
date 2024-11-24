@@ -9,6 +9,9 @@
         function getAllDiscount(){
             return $this->conn->query("SELECT *, discount.id AS discount_id, discount.status AS status FROM discount JOIN product_detail ON discount.product_detail_id = product_detail.id JOIN product ON product.id = product_detail.product_id")->fetchAll();
         }
+        function getDiscountProductDetailId($id){
+            return $this->conn->query("SELECT * FROM discount WHERE product_detail_id=$id")->fetch();
+        }
         function getDiscountById($id){
             return $this->conn->query("SELECT *, discount.id AS discount_id FROM discount JOIN product_detail ON discount.product_detail_id = product_detail.id WHERE discount.id=$id")->fetch();
         }

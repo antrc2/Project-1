@@ -14,10 +14,18 @@ class SanPhamModel
         $result = $stmt->fetchAll();
         return $result;
     }
+    public function getAllProductByIdCate($id_cate){
+        return $this->conn->query("SELECT product.*, product_detail.status , product_detail.price, product_detail.amount, product_detail.ram, product_detail.color
+            FROM product
+            JOIN product_detail ON product.id = product_detail.product_id WHERE product.cate_id=$id_cate")->fetchAll();
+    }
+    function getNewestProductButLimit($limit){
+        return $this->conn->query("SELECT * FROM product ORDER BY id DESC LIMIT $limit")->fetchAll();
+    }
     public function getAllSanPham()
     {
         try {
-            $sql = "SELECT product.*, product_detail.status , product_detail.price, product_detail.amount, product_detail.ram, product_detail.color,category.cate_name
+            $sql = "SELECT product.*, product_detail.status , product_detail.price, product_detail.amount, product_detail.ram, product_detail.color,category.cate_name, product_detail.id as product_detail_id
             FROM product
             INNER JOIN product_detail ON product.id = product_detail.product_id 
             INNER JOIN category ON product.cate_id = category.id";
@@ -114,8 +122,27 @@ class SanPhamModel
         $stml->execute();
         return $stml->fetch();
     }
-    public function getChiTietSanPham($id)
-    {
+
+    function getAllDetailProduct($id){
+        try {
+            $sql = "SELECT * FROM `product_detail` WHERE  `product_id`= $id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $resutl =  $stmt->fetchAll();
+            return $resutl;
+        }catch (Exception $e) {
+            echo "Error: ". $e -> getMessage();
+        }
+    }
+    function getDetailProductById($id){
+        return $this->conn->query("SELECT *, product_detail.id as product_detail_id, discount.product_detail_id as discount_product_detail_id FROM product_detail JOIN discount ON product_detail.id = discount.product_detail_id JOIN product ON product.id = product_detail.product_id WHERE product_detail.id=$id")->fetch();
+    }
+    function getDetailProductByIdButWithoutDiscount($id){
+        return $this->conn->query("SELECT *, product_detail.id as product_detail_id FROM product_detail JOIN product ON product.id = product_detail.product_id WHERE product_detail.id=$id")->fetch();
+    
+    }
+    public function getChiTietSanPham($id){
+
         try {
             $sql = "SELECT * FROM `product_detail` WHERE  `product_id`= $id";
             $stmt = $this->conn->prepare($sql);

@@ -67,28 +67,31 @@ a {
   }*/
 /*.................................SUB MENU..............................*/
 .sub-menu {
+
+  left: 10px;
   position: absolute;
-  width: 60%;
+  width: 10%;
 
   background: #fff;
   display: none;
-  justify-content: center;
+  /* justify-content: left; */
   /* align-items: center; */
   box-shadow: 0 0 2px #000;
 }
 .drop-menu:hover > .sub-menu {
   left: 0;
   /* right: 0; */
-  top: 60px;
+  top: 80px;
   display: flex;
-  margin-left: 250px;
+  justify-content: left;
+  margin-left: 1350px;
 }
 .drop-menu ul li {
-  padding: 5px 0;
+  padding: 0px;
 }
 .drop-menu span {
   display: inline-block;
-  margin-left: 5px;
+  /* margin-left: 5px; */
   transition: 0.3s;
   cursor: pointer;
 }
