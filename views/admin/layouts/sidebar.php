@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-primary elevation-4" style="background-color: #ccc;">
+<aside class="main-sidebar sidebar-primary elevation-4" style="background-color: #663265;">
     <!-- Brand Logo -->
     <a href="../../index3.html" class="brand-link">
         <i class="fas fa-user-tie"></i>
@@ -96,3 +96,8 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+<style>
+    .nav-item a p{
+        color: azure;
+    }
+</style>

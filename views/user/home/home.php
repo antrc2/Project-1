@@ -43,7 +43,7 @@ include './views/user/components/sideshow.php'
               </div>
               <div class="d-flex border-top">
                 <small class="w-50 text-center border-end py-2">
-                  <a class="text-body" href="index.php?act=chi-tiet-san-pham"><i class="fa fa-eye text-red me-2"></i>View
+                  <a class="text-body" href="index.php?act=chi-tiet-san-pham-nguoi-dung"><i class="fa fa-eye text-red me-2"></i>View
                     detail</a>
                 </small>
                 <small class="w-50 text-center py-2">
