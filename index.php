@@ -37,7 +37,7 @@ $act = $_GET['act'] ?? "/";
 //view người dùng
 if ($act == "/" || $act == "") {
     $home->home();
-}elseif ($act == "chi-tiet-san-pham") {
+}elseif ($act == "chi-tiet-san-pham-khach-hang") {
     $home->productDetail($_GET['id']);
 
 }elseif($act == "gio-hang") {
@@ -101,7 +101,12 @@ elseif ($act == "danh-sach-admin-san-pham") {
 elseif ($act == "danh-sach-don-hang") {
     $order->danhSachDonHang();
 }
-
+elseif($act == "chi-tiet-don-hang"){
+    $order->chiTietDonHang();
+}
+elseif($act == "sua-don-hang"){
+    $order->fromsuaDonHang();
+}
 //quản lí tài khoản quản trị
 elseif ($act == "danh-sach-quan-tri") {
     $account->danhSachQuanTri();

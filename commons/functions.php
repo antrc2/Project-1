@@ -21,7 +21,7 @@ function headerAfterXSecondWithSweetAlert2($location, $time, $icon, $message)
                 </script>";
     echo SweetAlert2($icon, $message);
 }
-function epochTimeToDateTime($epochtime, $format = "H:i:s d-m-Y")
+function epochTimeToDateTime($epochtime, $format = "d-m-Y")
 {
     // Sử dụng hàm date() để chuyển đổi epochtime thành định dạng timestamp
     return date($format, $epochtime);

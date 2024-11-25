@@ -31,102 +31,58 @@ include './views/admin/layouts/sidebar.php';
                     <!-- /.card -->
 
                     <div class="card">
-                        <div class="card-header">
-                            <a href="index.php?act=form-them-san-pham">
-                                <button class="btn btn-success">Thêm sản phẩm</button>
-                            </a>
-                        </div>
 
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <?php
-                            if (isset($_SESSION['success'])) {
-                                echo "<div class='alert alert-success'>{$_SESSION['success']}</div>";
-                                unset($_SESSION['success']);
-                            }
-
-                            // ... other code
-                            ?>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Giá Sản phẩm</th>
-                                        <th>Số lượng</th>
-                                        <th>Hình ảnh</th>
-                                        <th>Ngày nhập</th>
-                                        <th>Ngày sửa</th>
-                                        <th>Màu</th>
-                                        <th>Ram</th>
-                                        <th>Tên Danh mục</th>
-                                        <th>Tình trạng</th>
+                                        <th>Mã đơn hàng</th>
+                                        <th>Tên người nhận</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Ngày đặt</th>
+                                        <th>Tổng tiền</th>
                                         <th>Trạng thái</th>
-                                        <th>Mô tả</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    foreach ($listSanPham as $key => $sanpham) {
+                                    foreach ($listDonHang as $key => $donHang) {
                                     ?>
                                         <tr>
                                             <td>
                                                 <?= $key + 1 ?>
                                             </td>
                                             <td>
-                                                <?= $sanpham["name"] ?>
+                                                <?= $donHang["ma_don_hang"] ?>
                                             </td>
                                             <td>
-                                                <?= $sanpham["price"] ?>
+                                                <?= $donHang["fullname_recieved"] ?>
                                             </td>
                                             <td>
-                                                <?= $sanpham["amount"] ?>
+                                                <?= $donHang["address_recieved"] ?>
                                             </td>
                                             <td>
-                                                <img style="width: 100px;" src="./assets/img/<?= $sanpham["image"] ?>"
-                                                    alt="" onerror="this.onerror=null;this.src='https://i5.walmartimages.com/asr/d92cca6d-cb6d-4e4c-b5c0-70d5b39ecdf8.43fbe65bc7884354b2c58c12beea36c8.jpeg';">
+                                                <?= $donHang["phone_reciedved"] ?>
                                             </td>
                                             <td>
-                                                <?= epochTimeToDateTime($sanpham["updated_at"])  ?>
+                                                <?=epochTimeToDateTime($donHang["created_at"])  ?>
+                                            </td> 
+                                             <td>
+                                                <?= $donHang["total"] ?>
                                             </td>
                                             <td>
-                                                <?= epochTimeToDateTime($sanpham["created_at"])  ?>
-                                            </td>
-                                            <td>
-                                                <?= $sanpham["color"] ?>
-                                            </td>
-                                            <td>
-                                                <?= $sanpham["ram"] ?>
-                                            </td>
-                                            <td>
-                                                <?= $sanpham["cate_name"] ?>
-                                            </td>
-                                            <td>
-                                                <?= $sanpham["amount"] != 0  ? "Còn hàng" : "Hết hàng" ?>
-                                            </td>
-                                            <td>
-                                            <?= $sanpham["status"] == 1 ? "Hiển thị" : "Không hiển thị" ?>
-                                            </td>
-                                            <td>
-                                                <?= $sanpham["detail"] ?>
+                                                <?= $donHang["ten_trang_thai"] ?>
                                             </td>
                                             <td>
                                                 <div class="btn-group">
                                                     <a
-                                                        href="index.php?act=form-sua-san-pham&id_san_pham=<?= $sanpham["id"] ?>">
-                                                        <button class="btn btn-warning"><i
-                                                                class="fas fa-cog"></i></button></a>
-
-                                                    <a
-                                                        href="index.php?act=chi-tiet-san-pham&id_san_pham=<?= $sanpham["id"] ?>">
+                                                        href="index.php?act=chi-tiet-don-hang&id_don_hang=<?= $donHang["id"] ?>">
                                                         <button class="btn btn-primary"><i
                                                                 class="fas fa-eye"></i></button></a>
-
-                                                    <a href="index.php?act=xoa-san-pham&id_san_pham=<?= $sanpham["id"] ?>"
-                                                        onclick="return confirm('bạn có chắc chắn xoá không?')">
-                                                        <button class="btn btn-danger"><i
-                                                                class="fas fa-trash"></i></button></a>
                                                 </div>
 
 
