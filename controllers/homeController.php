@@ -18,7 +18,6 @@ class homeController
 
     function productDetail($id)
     {
-
         $oneProduct = $this->product->getProductById($id);
         if ($oneProduct) {
             // var_dump($oneProduct);
@@ -48,12 +47,12 @@ class homeController
                     $amount = $variant['price'];
                     $discount = 0;
                 }
+                var_dump($amount);
                 $discountAmount = calculatorPriceAfterDiscount($amount, $discount);
             } else {
                 $isPost = false;
             }
         }
-
         require_once "views/user/home/chitietsanpham.php";
     }
     function gioHang()
