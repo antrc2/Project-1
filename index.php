@@ -48,7 +48,9 @@ if ($act == "/" || $act == "") {
     $home->sanPham();
 }
 
-
+elseif ($act == "add-cart"){
+    $cart->addCart();
+}
 
 
 
@@ -137,11 +139,17 @@ elseif ($act == "danh-sach-khach-hang") {
 }elseif($act == "chi-tiet-khach-hang"){
     // $account->chiTietKhachHang();
 }
+elseif ($act == "forbidden"){
+    $error->forbidden();
+} elseif ($act == "method-not-allow"){
+    $error->methodNotAllow();
+}
 else {
     $error->notFound();
 }
 
+$icon = isset($_SESSION['icon']) ? $_SESSION['icon'] : "success";
 if (isset($_SESSION['messages'])) {
-    echo SweetAlert2("success", $_SESSION['messages']);
+    echo SweetAlert2($icon, $_SESSION['messages']);
     unset($_SESSION['messages']);
 }
