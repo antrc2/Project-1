@@ -15,5 +15,18 @@
         function getCartByUserId($userId){
             return $this->checkIssetCartByUserId($userId);
         }
+        function checkIssetProductDetailIdInCartOfUser($userId, $productDetailId){
+            return $this->conn->query("SELECT * FROM cart_detail WHERE user_id = $userId AND product_detail_id=$productDetailId")->fetch();
+        }
+        function getInformationOfCartDetailByUserIdAndProductDetailId($userId,$productDetailId){
+            return $this->checkIssetProductDetailIdInCartOfUser($userId,$productDetailId);
+        }
+        function addAmountProductDetailToCartDetail($id,$amount){
+            $time= time();
+            return $this->conn->prepare("UPDATE cart_detail SET amount=$amount, updated_at= $time WHERE id=$id")->execute();
+        }
+        function addCartDetail(){
+            
+        }
     }
 ?>
