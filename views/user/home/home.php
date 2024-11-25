@@ -38,7 +38,7 @@ include './views/user/components/sideshow.php'
                 </div>
               </div>
               <div class="text-center p-4">
-                <a class="d-block h5 mb-2" href=""><?= $product['name']?></a>
+                <a class="d-block h5 mb-2" href="index.php?act=chi-tiet-san-pham&id=<?= $product['id']?>"><?= $product['name']?></a>
               </div>
               <div class="d-flex border-top">
                 <small class="w-100 text-center border-end py-2">

@@ -89,7 +89,7 @@ include './views/user/components/sideshow.php'
                                     <?php if ($check) : ?>
                                         <small class="text-muted">Giá cũ: <s><span><?= number_format($variant['price']) ?>đ</span></s></small>
                                     <?php endif ?>
-                                    <h4 class="price">Giá hiện tại: <span><?= number_format($discountAmount) ?>đ</span></h4>
+                                    <h4 class="price">Giá hiện tại: <span><?= number_format($variant['price'] - $discountAmount) ?>đ</span></h4>
                                     <h5>Số lượng: <?= $variant['amount'] ?></h5>
                                 </div>
                             <?php endif ?>
