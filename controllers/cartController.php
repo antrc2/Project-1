@@ -14,10 +14,11 @@
                 header("Location: ?act=login");
             } else {
                 var_dump($_POST);
+                $productDetailId = $_POST['product_detail_id'];
                 if ($_POST['soluong'] > $_POST['amount']){
                     $_SESSION['messages'] = "Không đủ số lượng sản phẩm";
                     $_SESSION['icon'] = "error";
-                    $productDetailId = $_POST['product_detail_id'];
+                    
                     $productId=$_POST['product_id'];
                     header("Location: ?act=chi-tiet-san-pham-khach-hang&id=$productId");
                 } else {
@@ -30,7 +31,11 @@
                     } else {
                         // I dont know to do anything in here :((( 
                     }
-                    
+                    if ($this->cart->checkIssetProductDetailIdInCartOfUser($userId, $productDetailId)){
+                        $cartDetailInfo = $this->cart->getInformationOfCartDetailByUserIdAndProductDetailId($userId,$productDetailId);
+                    } else {
+                        $this->cart->addCartDetail();
+                    }
                 }   
             }
             } else {
