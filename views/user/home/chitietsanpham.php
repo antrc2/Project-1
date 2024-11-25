@@ -95,7 +95,7 @@ include './views/user/components/sideshow.php'
                             <?php endif ?>
                             <div class="form-group">
                                 <label for="soluong">Số lượng đặt mua:</label>
-                                <input type="number" class="form-control" id="soluong" name="soluong">
+                                <input type="number" class="form-control" value="1" id="soluong" name="soluong">
                             </div>
                             <div class="action">
                                 <a class="add-to-cart btn btn-outline-red border-2 py-2 px-4 mt-2" id="btnThemVaoGioHang" href="?act=add-cart&id=<?= isset($_POST['btn_detailProduct']) ? $variant['product_detail_id'] : $detailProducts[0]['id'] ?>">Thêm vào giỏ hàng</a>
