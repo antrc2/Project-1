@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 24, 2024 at 06:08 PM
+-- Generation Time: Nov 25, 2024 at 06:09 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -65,8 +65,17 @@ CREATE TABLE `bill` (
   `phone_reciedved` varchar(255) NOT NULL,
   `created_at` bigint NOT NULL,
   `total` int NOT NULL,
-  `status` int NOT NULL
+  `status` int NOT NULL,
+  `ma_don_hang` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `bill`
+--
+
+INSERT INTO `bill` (`id`, `user_id`, `fullname_recieved`, `address_recieved`, `phone_reciedved`, `created_at`, `total`, `status`, `ma_don_hang`) VALUES
+(1, 18, 'Trương Anh Tuấn', 'Nông Cống - Thanh Hoá', '0454548454', 1731422283, 0, 1, 'DH_123'),
+(2, 18, 'Trần Văn Thiện', 'Tứ Kì - Hải Dương', '0455432218', 1731422285, 34546677, 2, 'DH_456');
 
 -- --------------------------------------------------------
 
@@ -78,11 +87,20 @@ CREATE TABLE `bill_detail` (
   `id` int NOT NULL,
   `bill_id` int NOT NULL,
   `product_id` int NOT NULL,
-  `amount` int NOT NULL,
-  `price` int NOT NULL,
+  `so_luong` int NOT NULL,
+  `thanh_tien` int NOT NULL,
   `was_review` int NOT NULL DEFAULT '0',
-  `status` int NOT NULL
+  `trang_thai` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `bill_detail`
+--
+
+INSERT INTO `bill_detail` (`id`, `bill_id`, `product_id`, `so_luong`, `thanh_tien`, `was_review`, `trang_thai`) VALUES
+(1, 1, 28, 2, 20000, 0, 1),
+(2, 2, 28, 20, 30000, 0, 1),
+(3, 2, 30, 10, 343454, 0, 4);
 
 -- --------------------------------------------------------
 
@@ -107,7 +125,7 @@ CREATE TABLE `cart` (
 CREATE TABLE `cart_detail` (
   `id` int NOT NULL,
   `cart_id` int NOT NULL,
-  `product_id` int NOT NULL,
+  `product_detail_id` int NOT NULL,
   `amount` int NOT NULL,
   `price` int NOT NULL,
   `created_at` bigint NOT NULL,
@@ -134,7 +152,7 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `cate_name`, `created_at`, `updated_at`, `status`) VALUES
-(1, 'ASUf', 0, 1731985149, 1),
+(1, 'ASUy', 0, 1732520405, 1),
 (2, 'TUF', 0, 1731422315, 1);
 
 -- --------------------------------------------------------
@@ -200,7 +218,7 @@ CREATE TABLE `product_detail` (
 --
 
 INSERT INTO `product_detail` (`id`, `product_id`, `price`, `amount`, `ram`, `color`, `status`) VALUES
-(37, 28, 12, 12, 64, 'Xám', 1),
+(37, 28, 30, 12, 64, 'Xám', 1),
 (39, 30, 12, 12, 64, 'Xanh', 1),
 (40, 31, 120000, 10, 8, 'Đen', 1);
 
@@ -270,6 +288,34 @@ INSERT INTO `role` (`id`, `role_name`) VALUES
 (1, 'user'),
 (2, 'admin');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `trang_thai_don_hang`
+--
+
+CREATE TABLE `trang_thai_don_hang` (
+  `id` int NOT NULL,
+  `ten_trang_thai` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `trang_thai_don_hang`
+--
+
+INSERT INTO `trang_thai_don_hang` (`id`, `ten_trang_thai`) VALUES
+(1, 'Chưa xác nhận'),
+(2, 'Đã Xác nhận'),
+(3, 'Đang chuẩn bị hàng'),
+(4, 'Chưa thanh toán'),
+(5, 'Đã thanh toán'),
+(6, 'Đang giao'),
+(7, 'Đã giao'),
+(8, 'Đã nhận'),
+(9, 'Thành công'),
+(10, 'Hoàn hàng'),
+(11, 'Huỷ đơn');
+
 --
 -- Indexes for dumped tables
 --
@@ -308,7 +354,7 @@ ALTER TABLE `cart`
 ALTER TABLE `cart_detail`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_cart_detail_cart` (`cart_id`),
-  ADD KEY `fk_cart_detail_product` (`product_id`);
+  ADD KEY `fk_cart_detail_product` (`product_detail_id`);
 
 --
 -- Indexes for table `category`
@@ -359,6 +405,12 @@ ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `trang_thai_don_hang`
+--
+ALTER TABLE `trang_thai_don_hang`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -372,13 +424,13 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -435,6 +487,12 @@ ALTER TABLE `role`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `trang_thai_don_hang`
+--
+ALTER TABLE `trang_thai_don_hang`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -466,8 +524,9 @@ ALTER TABLE `cart`
 -- Constraints for table `cart_detail`
 --
 ALTER TABLE `cart_detail`
+  ADD CONSTRAINT `cart_detail_ibfk_1` FOREIGN KEY (`product_detail_id`) REFERENCES `product_detail` (`id`),
   ADD CONSTRAINT `fk_cart_detail_cart` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`),
-  ADD CONSTRAINT `fk_cart_detail_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
+  ADD CONSTRAINT `fk_product_detail` FOREIGN KEY (`product_detail_id`) REFERENCES `product_detail` (`id`);
 
 --
 -- Constraints for table `discount`
