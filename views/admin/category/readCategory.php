@@ -28,15 +28,12 @@ include './views/admin/layouts/sidebar.php';
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <!-- /.card -->
-
                     <div class="card">
                         <div class="card-header">
-                            <a href="#">
-                                <button class="btn btn-success">Thêm sản phẩm</button>
+                            <a href="index.php?act=add-category">
+                                <button class="btn btn-success">Thêm danh mục</button>
                             </a>
                         </div>
-
                         <!-- /.card-header -->
                         <div class="card-body">
                             <?php
