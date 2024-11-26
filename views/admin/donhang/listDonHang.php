@@ -84,8 +84,6 @@ include './views/admin/layouts/sidebar.php';
                                                         <button class="btn btn-primary"><i
                                                                 class="fas fa-eye"></i></button></a>
                                                 </div>
-
-
                                             </td>
 
                                         </tr>

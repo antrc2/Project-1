@@ -126,8 +126,6 @@ class productController
         $name_view = $_POST['name_view'];
         $id_khach_hang = $_POST['id_khach_hang'];
         $binhLuan = $this->modelSanPham->getDetailBinhLuan($id_binh_luan);
-        // var_dump($binhLuan);
-        // die();
         if ($binhLuan) {
             $trang_thai_update = '';
             if ($binhLuan[0]['star'] == 1) {
@@ -138,7 +136,7 @@ class productController
             $status =  $this->modelSanPham->updateTrangThaiBinhLuan($id_binh_luan, $trang_thai_update);
             if ($status) {
                 if ($name_view == 'detail_khach'){
-                    header("Location: index.php?act=chi-tiet-khach-hang&id_khach_hang=".$id_khach_hang);
+                    header("Location: index.php?act=chi-tiet-khach-hang&id=".$id_khach_hang);
                 } else {
                     header("Location: index.php?act=chi-tiet-san-pham&id_san_pham= ".$binhLuan[0]['product_id']);
                 }
