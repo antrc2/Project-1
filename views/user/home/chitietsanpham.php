@@ -91,7 +91,7 @@ include './views/user/components/sideshow.php'
                                     <?php endif ?>
                                     <div class="form-group">
                                         <label for="soluong">Số lượng đặt mua:</label>
-                                        <input type="number" class="form-control" value="1" id="soluong" name="soluong">
+                                        <input type="number" class="form-control" min="1" value="1" id="soluong" name="soluong">
                                     </div>
                                     <div class="action">
                                         <button class="add-to-cart btn btn-outline-red border-2 py-2 px-4 mt-2" name="btn_addCart">Thêm vào giỏ hàng</button>
