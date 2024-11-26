@@ -16,7 +16,7 @@
             return $this->checkIssetCartByUserId($userId);
         }
         function checkIssetProductDetailIdInCartOfUser($userId, $productDetailId){
-            return $this->conn->query("SELECT * FROM cart_detail WHERE user_id = $userId AND product_detail_id=$productDetailId")->fetch();
+            return $this->conn->query("SELECT * FROM cart_detail JOIN cart ON cart_detail.id = cart_detail.id WHERE user_id = $userId AND product_detail_id=$productDetailId")->fetch();
         }
         function getInformationOfCartDetailByUserIdAndProductDetailId($userId,$productDetailId){
             return $this->checkIssetProductDetailIdInCartOfUser($userId,$productDetailId);
