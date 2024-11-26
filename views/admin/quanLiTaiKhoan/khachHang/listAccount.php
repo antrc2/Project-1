@@ -1,4 +1,3 @@
-
 <!-- Navbar -->
 
 <!-- /.navbar -->
@@ -60,23 +59,27 @@ include './views/admin/layouts/sidebar.php';
                                 <tbody>
                                     <?php foreach ($listAccount as $key => $taiKhoan): ?>
                                         <tr>
-                                            <td><?= $key +1 ?></td>
+                                            <td><?= $key + 1 ?></td>
                                             <td><?= $taiKhoan['fullname'] ?></td>
                                             <td><?= $taiKhoan['username'] ?></td>
                                             <td><?= $taiKhoan['email'] ?></td>
                                             <td><?= $taiKhoan['address'] ?></td>
                                             <td><?= $taiKhoan['phone'] ?></td>
                                             <td><?= epochTimeToDateTime($taiKhoan['created_at']) ?></td>
-                                            <td><?= $taiKhoan["status"] ==1 ? "Hoạt động" : "Bị khoá" ?></td>
-                                            <td><?=$taiKhoan['role_name']?></td>
+                                            <td><?= $taiKhoan["status"] == 1 ? "Hoạt động" : "Bị khoá" ?></td>
+                                            <td><?= $taiKhoan['role_name'] ?></td>
                                             <td>
                                                 <div class="btn-group">
-                                                <a href="?act=form-sua-tai-khoan-khach-hang&id=<?=$taiKhoan['id'] ?>"><button class="btn btn-warning">Sửa</button></a>
-                                                <a href="?act=reset-tai-khoan&id=<?=$taiKhoan['id'] ?>"
-                                                    onclick="return confirm('bạn có muốn reset mật khẩu không?')">
-                                                    <button class="btn btn-danger">reset</button></a>
+                                                    <a href="?act=form-sua-tai-khoan-khach-hang&id=<?= $taiKhoan['id'] ?>"><button class="btn btn-warning">Sửa</button></a>
+                                                    <a href="?act=reset-tai-khoan&id=<?= $taiKhoan['id'] ?>"
+                                                        onclick="return confirm('bạn có muốn reset mật khẩu không?')">
+                                                        <button class="btn btn-danger">reset</button></a>
+                                                    <a
+                                                        href="index.php?act=chi-tiet-khach-hang&id=<?= $taiKhoan["id"] ?>">
+                                                        <button class="btn btn-primary"><i
+                                                                class="fas fa-eye"></i></button></a>
                                                 </div>
-                                        </td>
+                                            </td>
                                         </tr>
                                     <?php endforeach ?>
                                 </tbody>

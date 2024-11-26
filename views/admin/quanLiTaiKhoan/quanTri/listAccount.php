@@ -32,11 +32,6 @@ include './views/admin/layouts/sidebar.php';
                     <!-- /.card -->
 
                     <div class="card">
-                        <div class="card-header">
-                            <a href="index.php?act=form-them-tai-khoan-quan-tri">
-                                <button class="btn btn-success">Thêm sản phẩm</button>
-                            </a>
-                        </div>
 
                         <!-- /.card-header -->
                         <div class="card-body">

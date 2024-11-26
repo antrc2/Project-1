@@ -284,8 +284,6 @@ class SanPhamModel
             from review
             join account on review.user_id = account.id
             where review.product_id = '$id'";
-
-
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $resutl =  $stmt->fetchAll();
@@ -309,6 +307,21 @@ class SanPhamModel
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             return true;
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    public function getBinhLuanFromKhachHang($id)
+    {
+        try {
+        $sql = "SELECT review.*, product.name
+        from review 
+        join product on review.product_id = product.id
+        where review.user_id = '$id'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $resutl =  $stmt->fetchAll();
+            return $resutl;
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }

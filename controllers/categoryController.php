@@ -13,7 +13,8 @@
             if (isset($_POST['btn_addCategory'])){
                 $cateName = $_POST['cate_name'];
                 $createdAt = time();
-                $result = $this->category->addCategory($cateName, $createdAt);
+                $update_at = time();
+                $result = $this->category->addCategory($cateName, $createdAt ,$update_at);
                 if($result){
                     header("Location: ?act=list-category");
                 } else {

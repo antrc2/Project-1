@@ -71,5 +71,16 @@ class DonHangModel{
         $stmt->execute();
         return true;
     }
+    public function getDonHangFromKhachHang($id){
+        $sql = "SELECT bill.*, trang_thai_don_hang.ten_trang_thai,product.name FROM bill
+      join bill_detail on bill.id = bill_detail.bill_id
+      join trang_thai_don_hang on bill.status = trang_thai_don_hang.id
+      join product on bill_detail.product_id = product.id
+      where bill.user_id = $id";
+      $stmt = $this->conn->prepare($sql);
+      $stmt->execute();
+      $result = $stmt->fetchAll();
+      return $result;
+    }
 }
 ?>

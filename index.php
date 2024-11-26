@@ -137,7 +137,7 @@ elseif ($act == "danh-sach-khach-hang") {
 } elseif ($act == "sua-tai-khoan-khach-hang") {
     $account->suaTaiKhoanKhachHang();
 }elseif($act == "chi-tiet-khach-hang"){
-    // $account->chiTietKhachHang();
+    $account->chiTietKhachHang();
 }
 elseif ($act == "forbidden"){
     $error->forbidden();

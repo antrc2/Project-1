@@ -2,9 +2,14 @@
 class accountController
 {
     public $acc;
+    public $donHangModel;
+    public $modelSanPham;
     function __construct()
     {
         $this->acc = new accountModel;
+        $this->donHangModel = new donHangModel;
+        $this->modelSanPham = new SanPhamModel;
+
     }
     function login()
     {
@@ -238,5 +243,13 @@ class accountController
             header("Location: index.php?act=danh-sach-khach-hang");
             exit();
         }
+    }
+    public function chiTietKhachHang(){
+        $id = $_GET['id'];
+        $account = $this->acc->getAccountById($id);
+        $listDonHang = $this->donHangModel-> getDonHangFromKhachHang($id);
+        $listBinhLuan = $this->modelSanPham->getBinhLuanFromKhachHang($id);
+        require_once "views/admin/quanLiTaiKhoan/khachHang/chiTietKhachHang.php";
+
     }
 }

@@ -14,8 +14,8 @@
         function deleteCategoryById($id){
             return $this->conn->prepare("UPDATE category SET status=2 WHERE id=$id")->execute();
         }
-        function addCategory($cateName, $createdAt){
-            return $this->conn->prepare("INSERT INTO category(cate_name, created_at) VALUES ('$cateName',$createdAt)")->execute();
+        function addCategory($cateName, $createdAt, $update_at){
+            return $this->conn->prepare("INSERT INTO category(cate_name, created_at, updated_at) VALUES ('$cateName','$createdAt' ,'$update_at')")->execute();
         }
         function updateCategory($id,$cateName, $updatedAt){
             return $this->conn->prepare("UPDATE category SET cate_name = '$cateName', updated_at=$updatedAt WHERE id=$id")->execute();
