@@ -14,6 +14,7 @@ include './views/user/components/sideshow.php'
             <div class="row">
                 <div class="col-md-12">
                     <div class="cart-list">
+                        
                         <table class="table">
                             <thead class="thead-primary">
                                 <tr class="text-center">
@@ -26,6 +27,7 @@ include './views/user/components/sideshow.php'
                                     <th>Xoá</th>
                                 </tr>
                             </thead>
+                            <?php if (boolval($cartDetailByCartId)): ?>
                             <tbody>
                                 <?php $total = 0?>
                                 <?php foreach ($cartDetailByCartId as $cart): ?>
@@ -74,8 +76,11 @@ include './views/user/components/sideshow.php'
                                 <th colspan="4"><a href="index.php?act=thanh-toan"><button type="button" class="btn btn-danger">Đặt Hàng</button></a></th>
                             </tr>
                             </tbody>
+                            <?php else: ?>
+                        <h1>Không tìm thấy sản phẩm trong giỏ hàng</h1>
+                        <?php endif ?>
                         </table>
-
+                        
                     </div>
 
                 </div>
