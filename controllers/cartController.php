@@ -13,14 +13,12 @@
                 $_SESSION['icon'] = "error";
                 header("Location: ?act=login");
             } else {
-                var_dump($_POST);
                 $productDetailId = $_POST['product_detail_id'];
                 if ($_POST['soluong'] > $_POST['amount']){
                     $_SESSION['messages'] = "Không đủ số lượng sản phẩm";
                     $_SESSION['icon'] = "error";
                     
                     $productId=$_POST['product_id'];
-                    header("Location: ?act=chi-tiet-san-pham-khach-hang&id=$productId");
                 } else {
                     $username = $_SESSION['username'];
                     $userInfo = $this->acc->getInformationUserByUsername($username);
@@ -31,12 +29,19 @@
                     } else {
                         // I dont know to do anything in here :((( 
                     }
+                    $cartInfo = $this->cart->getCartByUserId($userId);
+                    $price = $_POST['price'];
+                    $amount = $_POST['soluong'];
+                    $cartId = $cartInfo['id'];
                     if ($this->cart->checkIssetProductDetailIdInCartOfUser($userId, $productDetailId)){
                         $cartDetailInfo = $this->cart->getInformationOfCartDetailByUserIdAndProductDetailId($userId,$productDetailId);
+                        $this->cart->addAmountProductDetailToCartDetail($cartId, $productDetailId, $amount, $price, $cartDetailInfo);
+                        
                     } else {
-                        $this->cart->addCartDetail();
+                        $this->cart->addCartDetail($cartId, $productDetailId, $amount, $price);
                     }
-                }   
+                }
+                header("Location: ?act=chi-tiet-san-pham-khach-hang&id=$productId");   
             }
             } else {
                 header("Location: ?act=method-not-allow");    
