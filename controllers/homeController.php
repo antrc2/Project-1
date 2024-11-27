@@ -12,10 +12,9 @@ class homeController
     }
     function home()
     {
-        $limitProduct = $this->product->getNewestProductButLimit(6);
+        $limitProduct = $this->product->getNewestProductButLimit(12);
         require_once "views/user/home/home.php";
     }
-
     function productDetail($id)
     {
         $oneProduct = $this->product->getProductById($id);

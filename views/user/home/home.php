@@ -30,8 +30,8 @@ include './views/user/components/sideshow.php'
               <div class="position-relative bg-light overflow-hidden">
                 <img
                   class="img-fluid w-100"
-                  src="<?= $product['image']?>"
-                  alt="" />
+                  src="./assets/img/<?= $product['image']?>"
+                  alt="" style="width: 150px; height: 150px;"  />
                 <div
                   class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
                   New
