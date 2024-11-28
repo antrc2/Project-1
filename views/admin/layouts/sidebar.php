@@ -46,7 +46,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="<?= 'index.php?act=danh-sach-admin-san-pham' ?>" class="nav-link">
-                    <i class="fas fa-tv"></i>
+                        <i class="fas fa-tv"></i>
                         <p>
                             Sản Phẩm
                         </p>
@@ -54,38 +54,40 @@
                 </li>
                 <li class="nav-item">
                     <a href="<?= 'index.php?act=danh-sach-don-hang' ?>" class="nav-link">
-                    <i class="fas fa-folder"></i>
+                        <i class="fas fa-folder"></i>
                         <p>
                             Đơn hàng
                         </p>
                     </a>
                 </li>
-                
+                <li class="nav-item">
+                    <a href="<?= 'index.php?act=list-discount' ?>" class="nav-link">
+                    <i class="fas fa-percent"></i>
+                        <p>
+                            Khuyến mãi
+                        </p>
+                    </a>
+                </li>
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                    <i class="fas fa-user"></i>
+                        <i class="fas fa-user"></i>
                         <p>
-                          Quản lí tài khoản
+                            Quản lí tài khoản
                         </p>
                         <i class="fas fa-angle-left right"></i>
                     </a>
-                    <ul class="nav nav-treeview" >
+                    <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="<?= 'index.php?act=danh-sach-quan-tri' ?>" class="nav-link">
-                            <i class="far fa-user"></i>
-                            <p>tài khoản quản trị</p>
+                                <i class="far fa-user"></i>
+                                <p>tài khoản quản trị</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="index.php?act=danh-sach-khach-hang" class="nav-link">
-                            <i class="far fa-user"></i>
-                            <p>tài khoản khách hàng</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                            <i class="far fa-user"></i>
-                            <p>tài khoản cá nhân</p>
+                                <i class="far fa-user"></i>
+                                <p>tài khoản khách hàng</p>
                             </a>
                         </li>
                     </ul>
@@ -97,7 +99,7 @@
     <!-- /.sidebar -->
 </aside>
 <style>
-    .nav-item a p{
+    .nav-item a p {
         color: azure;
     }
 </style>
