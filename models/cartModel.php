@@ -28,7 +28,7 @@ class cartModel
     }
     function checkIssetProductDetailIdInCartOfUser($userId, $productDetailId)
     {
-        return $this->conn->query("SELECT * FROM cart_detail JOIN cart ON cart_detail.id = cart_detail.id WHERE user_id = $userId AND product_detail_id=$productDetailId")->fetch();
+        return $this->conn->query("SELECT *, cart_detail.id as cart_detail_id FROM cart_detail JOIN cart ON cart_detail.id = cart_detail.id WHERE user_id = $userId AND product_detail_id=$productDetailId")->fetch();
     }
     function getInformationOfCartDetailByUserIdAndProductDetailId($userId, $productDetailId)
     {
@@ -36,14 +36,16 @@ class cartModel
     }
     function addAmountProductDetailToCartDetail($cartId, $productDetailId, $amount, $price, $cartDetailInfo)
     {
-        $id= $cartDetailInfo['id'];
+        // var_dump($cartDetailInfo);
+        $id= $cartDetailInfo['cart_detail_id'];
         $time = time();
         $cartDetail  = $this->getInformationOfCartDetailById($id);
-        var_dump($cartDetail);
+        // var_dump($cartDetail);
+        // var_dump($price);
         if ($cartDetail['price'] != $price) {
             return $this->conn->prepare("INSERT INTO cart_detail (cart_id, product_detail_id, amount, price, created_at, updated_at) VALUES ($cartId, $productDetailId, $amount, $price, $time, $time) ")->execute();
         } else {
-            return $this->conn->prepare("UPDATE cart_detail SET amount=amount + $amount, updated_at= $time WHERE id=$id")->execute();
+            return $this->conn->prepare("UPDATE cart_detail SET amount= amount + $amount, updated_at= $time WHERE id=$id")->execute();
         }
     }
     function addCartDetail($cartId, $productDetailId, $amount, $price)

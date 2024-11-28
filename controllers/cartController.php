@@ -13,12 +13,13 @@
                 $_SESSION['icon'] = "error";
                 header("Location: ?act=login");
             } else {
+                $productId=$_POST['product_id'];
                 $productDetailId = $_POST['product_detail_id'];
                 if ($_POST['soluong'] > $_POST['amount']){
                     $_SESSION['messages'] = "Không đủ số lượng sản phẩm";
                     $_SESSION['icon'] = "error";
                     
-                    $productId=$_POST['product_id'];
+                    
                 } else {
                     $username = $_SESSION['username'];
                     $userInfo = $this->acc->getInformationUserByUsername($username);
@@ -35,6 +36,7 @@
                     $cartId = $cartInfo['id'];
                     if ($this->cart->checkIssetProductDetailIdInCartOfUser($userId, $productDetailId)){
                         $cartDetailInfo = $this->cart->getInformationOfCartDetailByUserIdAndProductDetailId($userId,$productDetailId);
+                        // var_dump($cartDetailInfo);
                         $this->cart->addAmountProductDetailToCartDetail($cartId, $productDetailId, $amount, $price, $cartDetailInfo);
                         
                     } else {
