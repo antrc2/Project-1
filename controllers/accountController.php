@@ -25,6 +25,7 @@ class accountController
                 require_once "views/account/login1.php";
                 headerAfterXSecondWithSweetAlert2("?act=/", 1500, "success", $result['message']);
                 $_SESSION['messages'] = "Đăng nhập thành công";
+                $_SESSION['icon'] = "success";
             } else {
                 require_once "views/account/login1.php";
                 echo SweetAlert2("error", $result['message']);
@@ -52,6 +53,7 @@ class accountController
                 require_once "views/account/login1.php";
                 headerAfterXSecondWithSweetAlert2("?act=/", 1500, "success", $result['message']);
                 $_SESSION['messages'] = "Đăng kí thành công";
+                $_SESSION['icon'] = "success";
             } else {
                 require_once "views/account/login1.php";
                 echo SweetAlert2("error", $result['message']);

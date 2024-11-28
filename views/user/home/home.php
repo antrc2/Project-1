@@ -14,7 +14,7 @@ include './views/user/components/sideshow.php'
           class="section-header text-start mb-5 wow fadeInUp"
           data-wow-delay="0.1s"
           style="max-width: 500px">
-          <h1 class="display-5 mb-3">Sản Phẩm</h1>
+          <h1 class="display-5 mb-3">Sản phẩm mới về</h1>
         </div>
       </div>
     </div>
@@ -31,18 +31,18 @@ include './views/user/components/sideshow.php'
                 <img
                   class="img-fluid w-100"
                   src="./assets/img/<?= $product['image']?>"
-                  alt="" style="width: 150px; height: 150px;"  />
+                  alt="" style="width: 150px; height: 150px;"/>
                 <div
                   class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
                   New
                 </div>
               </div>
               <div class="text-center p-4">
-                <a class="d-block h5 mb-2" href="index.php?act=chi-tiet-san-pham&id=<?= $product['id']?>"><?= $product['name']?></a>
+                <a class="d-block h5 mb-2" href="index.php?act=chi-tiet-san-pham-khach-hang&id=<?= $product['id']?>"><?= $product['name']?></a>
               </div>
               <div class="d-flex border-top">
                 <small class="w-100 text-center border-end py-2">
-                  <a class="text-body" href="index.php?act=chi-tiet-san-pham&id=<?= $product['id']?>"><i class="fa fa-eye text-red me-2"></i>View
+                  <a class="text-body" href="index.php?act=chi-tiet-san-pham-khach-hang&id=<?= $product['id']?>"><i class="fa fa-eye text-red me-2"></i>View
                     detail</a>
                 </small>
                 <!-- <small class="w-50 text-center py-2">
@@ -176,9 +176,6 @@ include './views/user/components/sideshow.php'
           </div>
         </div>
       </div>
-
-
-
     </div>
   </div>
 </div>

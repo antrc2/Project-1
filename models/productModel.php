@@ -15,9 +15,11 @@ class SanPhamModel
         return $result;
     }
     public function getAllProductByIdCate($id_cate){
-        return $this->conn->query("SELECT product.*, product_detail.status , product_detail.price, product_detail.amount, product_detail.ram, product_detail.color
+        return $this->conn->query("SELECT product.*, product_detail.status , product_detail.price, product_detail.amount, product_detail.ram, product_detail.color,category.cate_name
             FROM product
-            JOIN product_detail ON product.id = product_detail.product_id WHERE product.cate_id=$id_cate")->fetchAll();
+            join category on product.cate_id = category.id
+            JOIN product_detail ON product.id = product_detail.product_id WHERE product.cate_id=$id_cate
+             ORDER BY product.id DESC")->fetchAll();
     }
     function getNewestProductButLimit($limit){
         return $this->conn->query("SELECT * FROM product ORDER BY id DESC LIMIT $limit")->fetchAll();
@@ -280,7 +282,7 @@ class SanPhamModel
     public function getBinhLuan($id)
     {
         try {
-            $sql = "SELECT review.*, account.username
+            $sql = "SELECT review.*, account.username ,account.fullname
             from review
             join account on review.user_id = account.id
             where review.product_id = '$id'";
@@ -294,7 +296,7 @@ class SanPhamModel
     }
     public function getDetailBinhLuan($id) {
 
-         $spl = "select * from review where id = '$id'";
+         $spl = "SELECT * FROM review where id = '$id'";
          $stmt = $this -> conn -> prepare($spl);
          $stmt ->execute();
          $resutl =  $stmt->fetchAll();

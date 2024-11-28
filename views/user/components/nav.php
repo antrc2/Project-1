@@ -44,20 +44,11 @@ $categories = $cate->getListCategory();
                   <?php foreach ($categories as $category): ?>
                     <li><a href="?act=san-pham&id_cate=<?= $category['id']?>"><button class="btn w-100"><?= $category['cate_name']?></button></a></li>
                   <?php endforeach ?>
-
-
                 </ul>
               </div>
             </li>
             <li class="drop-two">
-              <a href="#">About us <span>&#11167</span></a>
-              <div class="menu-two">
-                <ul>
-                  <li><a href="contact.html">Liên hệ với chúng tôi</a> </li>
-                  <li><a href="about.html">Về Cosmetics</a></li>
-                  <li><a href="lie.html">Đổi trả sản phẩm</a></li>
-                </ul>
-              </div>
+              <a href="index.php?act=lien-he">Quy định đổi trả</span></a>
             </li>
           </ul>
         </div>

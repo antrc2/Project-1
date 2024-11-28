@@ -2,13 +2,17 @@
 class homeController
 {
     public $home;
+    public $cart;
     public $product;
     public $discount;
+    public $acc;
     function __construct()
     {
         $this->home = new homeModel;
         $this->product = new SanPhamModel;
         $this->discount = new discountModel;
+        $this->cart = new cartModel;
+        $this->acc = new accountModel;
     }
     function home()
     {
@@ -18,6 +22,10 @@ class homeController
     function productDetail($id)
     {
         $oneProduct = $this->product->getProductById($id);
+        $listBinhLuan = $this->product->getBinhLuan($id);
+        $anhChitiet = $this->product->getAnhSanPham($id);
+        // var_dump($oneProduct);
+        // die();
         if ($oneProduct) {
             // var_dump($oneProduct);
             $detailProducts = $this->product->getAllDetailProduct($oneProduct['id']);
@@ -46,7 +54,6 @@ class homeController
                     $amount = $variant['price'];
                     $discount = 0;
                 }
-                var_dump($amount);
                 $discountAmount = calculatorPriceAfterDiscount($amount, $discount);
             } else {
                 $isPost = false;
@@ -56,11 +63,23 @@ class homeController
     }
     function gioHang()
     {
-        require_once "views/user/home/giohang.php";
+        if (!isset($_SESSION['username'])){
+            require_once "views/user/home/giohang.php";
+            headerAfterXSecondWithSweetAlert2("?act=login",1500, "error","Bạn chưa đăng nhập");
+        } else {
+            $userInfo = $this->acc->getInformationUserByUsername($_SESSION['username']);
+            $cartByUserId = $this->cart->getCartByUserId($userInfo['id']);
+            $cartDetailByCartId = $this->cart->getCartDetailById($cartByUserId['id']);
+            require_once "views/user/home/giohang.php";
+        }
+        
     }
     function thanhToan()
     {
         require_once "views/user/home/thanhtoan.php";
+    }
+    function lienHe(){
+        require_once "views/user/home/lienhe.php";
     }
     function sanPham()
     {
