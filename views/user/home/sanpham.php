@@ -7,6 +7,7 @@ include './views/user/components/sideshow.php'
 
 <!-- Product Start -->
 <main>
+
     <div class="container-xxl py-5">
         <div class="container">
             <div class="row g-0 gx-5 align-items-end">
@@ -34,7 +35,10 @@ include './views/user/components/sideshow.php'
                 <div id="tab-1" class="tab-pane fade show p-0 active">
                     <div class="row g-4">
                         <?php
-                        foreach ($products as $key => $product) { ?>
+                        foreach ($products as $key => $product) {
+                            if($product['status']==1){
+
+                            ?>
                             <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="product-item">
                                     <div class="position-relative bg-light overflow-hidden">
@@ -59,7 +63,8 @@ include './views/user/components/sideshow.php'
                                     </div>
                                 </div>
                             </div>
-                        <?php  } ?>
+                            }
+                        <?php }  } ?>
                     </div>
                 </div>
             </div>

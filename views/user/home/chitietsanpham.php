@@ -22,19 +22,8 @@ include './views/user/components/sideshow.php'
                     <input type="hidden" name="sp_ten" id="sp_ten" value="Samsung Galaxy Tab 10.1 3G 16G">
                     <input type="hidden" name="sp_gia" id="sp_gia" value="10990000.00">
                     <input type="hidden" name="hinhdaidien" id="hinhdaidien" value="samsung-galaxy-tab-10.jpg">
-                    <?php if ($oneProduct): ?>
+                    <?php if ($oneProduct):?>
                         <div class="wrapper row">
-                            <!-- <div class="preview col-md-6">
-                                <ul class="preview-thumbnail nav nav-tabs">
-                                    <li class="">
-                                        <img src="assets/img/<?= $oneProduct['image'] ?>" style="height: 200px; width=300px">
-                                    </li>
-                                </ul>
-                                <br>
-                                <?php foreach ($anhChitiet as $anh) { ?>
-                                 <img src="./assets/img/<?= $anh['image'] ?>" alt="Product Image" style="width: 100px; height=150px" >
-                              <?php  } ?>
-                            </div> -->
                             <div class="preview col-md-6">
                                 <ul class="preview-thumbnail nav nav-tabs">
                                     <li class="">
@@ -65,7 +54,6 @@ include './views/user/components/sideshow.php'
                                             </form>
                                         <?php endforeach ?>
                                     </div>
-
                                 </div>
                                 <?php if ($isPost): ?>
                                     <form action="?act=add-cart" method="POST">
@@ -112,13 +100,13 @@ include './views/user/components/sideshow.php'
                                                 <input type="text" name="comment" id="comment" class="form-control" placeholder="Bình luận của bạn về sản phẩm">
                                             </form>
                                         </td>
-                                        <?php foreach ($listBinhLuan as $binhLuan) { ?>
-                                            <tr>
+                                        <?php foreach ($listBinhLuan as $binhLuan) { 
+                                            if ($binhLuan['star']==1) {?>
+                                                <tr>
                                                 <td><?= $binhLuan['fullname'] ?></td>
                                                 <td><?= $binhLuan['comment'] ?></td>
                                             </tr>
-
-                                        <?php } ?>
+                                        <?php }} ?>
 
                                     </tbody>
 

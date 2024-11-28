@@ -41,9 +41,12 @@ $categories = $cate->getListCategory();
               <a href="?act=san-pham&id_cate=<?= $category['id']?>">Products<span>&#11167</span></a>
               <div class="sub-menu">
                 <ul>
-                  <?php foreach ($categories as $category): ?>
+                  <?php foreach ($categories as $category):
+                    if ($category['status'] == 1) {
+                      
+                    ?>
                     <li><a href="?act=san-pham&id_cate=<?= $category['id']?>"><button class="btn w-100"><?= $category['cate_name']?></button></a></li>
-                  <?php endforeach ?>
+                    <?php } endforeach ?>
                 </ul>
               </div>
             </li>

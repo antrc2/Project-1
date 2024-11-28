@@ -24,7 +24,11 @@ include './views/user/components/sideshow.php'
 
 
           <!-- vòng lặp forech ở đây  lấy 6 sản phẩm mới nhất-->
-          <?php foreach ($limitProduct as $product): ?>
+          <?php foreach ($limitProduct as $product): 
+            if ($product['status'] ==1) {
+              
+            
+            ?>
             <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
             <div class="product-item">
               <div class="position-relative bg-light overflow-hidden">
@@ -52,7 +56,7 @@ include './views/user/components/sideshow.php'
               </div>
             </div>
           </div>
-          <?php endforeach ?>
+          <?php } endforeach ?>
           <!-- <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
             <div class="product-item">
               <div class="position-relative bg-light overflow-hidden">

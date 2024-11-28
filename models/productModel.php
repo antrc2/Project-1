@@ -22,7 +22,9 @@ class SanPhamModel
              ORDER BY product.id DESC")->fetchAll();
     }
     function getNewestProductButLimit($limit){
-        return $this->conn->query("SELECT * FROM product ORDER BY id DESC LIMIT $limit")->fetchAll();
+        return $this->conn->query("SELECT * FROM product
+        join product_detail ON product.id = product_detail.product_id
+         ORDER BY product.id DESC LIMIT $limit")->fetchAll();
     }
     public function getAllSanPham()
     {
