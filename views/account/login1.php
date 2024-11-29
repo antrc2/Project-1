@@ -94,13 +94,16 @@
                     <div id="passworddError" class="error"></div>
                 </div>
                 <a href="#">Quên pass password?</a>
-                <button name="btn_login">Login</button>
+                <button name="btn_login">Đăng nhập</button>
             </form>
         </div>
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
                     <h2>Đăng nhập</h2>
+                    <p>
+                        
+                    </p>
                     <button class="ghost" id="signIn">Đăng nhập</button>
                 </div>
                 <div class="overlay-panel overlay-right">

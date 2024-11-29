@@ -14,7 +14,7 @@ include './views/user/components/sideshow.php'
           class="section-header text-start mb-5 wow fadeInUp"
           data-wow-delay="0.1s"
           style="max-width: 500px">
-          <h1 class="display-5 mb-3">Sản Phẩm</h1>
+          <h1 class="display-5 mb-3">Sản phẩm mới về</h1>
         </div>
       </div>
     </div>
@@ -24,14 +24,18 @@ include './views/user/components/sideshow.php'
 
 
           <!-- vòng lặp forech ở đây  lấy 6 sản phẩm mới nhất-->
-          <?php foreach ($limitProduct as $product): ?>
+          <?php foreach ($limitProduct as $product): 
+            if ($product['status'] ==1) {
+              
+            
+            ?>
             <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
             <div class="product-item">
               <div class="position-relative bg-light overflow-hidden">
                 <img
-                  class="img-fluid w-100 h-100"
-                  src="assets/img/<?= $product['image']?>"
-                  alt="" />
+                  class="img-fluid w-100"
+                  src="./assets/img/<?= $product['image']?>"
+                  alt="" style="width: 150px; height: 150px;"/>
                 <div
                   class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
                   New
@@ -52,7 +56,7 @@ include './views/user/components/sideshow.php'
               </div>
             </div>
           </div>
-          <?php endforeach ?>
+          <?php } endforeach ?>
           <!-- <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
             <div class="product-item">
               <div class="position-relative bg-light overflow-hidden">
@@ -176,9 +180,6 @@ include './views/user/components/sideshow.php'
           </div>
         </div>
       </div>
-
-
-
     </div>
   </div>
 </div>

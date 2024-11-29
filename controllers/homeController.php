@@ -6,7 +6,6 @@ class homeController
     public $product;
     public $discount;
     public $acc;
-
     function __construct()
     {
         $this->home = new homeModel;
@@ -17,13 +16,16 @@ class homeController
     }
     function home()
     {
-        $limitProduct = $this->product->getNewestProductButLimit(6);
+        $limitProduct = $this->product->getNewestProductButLimit(12);
         require_once "views/user/home/home.php";
     }
-
     function productDetail($id)
     {
         $oneProduct = $this->product->getProductById($id);
+        $listBinhLuan = $this->product->getBinhLuan($id);
+        $anhChitiet = $this->product->getAnhSanPham($id);
+        // var_dump($oneProduct);
+        // die();
         if ($oneProduct) {
             // var_dump($oneProduct);
             $detailProducts = $this->product->getAllDetailProduct($oneProduct['id']);
@@ -75,6 +77,9 @@ class homeController
     function thanhToan()
     {
         require_once "views/user/home/thanhtoan.php";
+    }
+    function lienHe(){
+        require_once "views/user/home/lienhe.php";
     }
     function sanPham()
     {

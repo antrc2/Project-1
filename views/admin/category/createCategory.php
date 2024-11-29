@@ -66,24 +66,7 @@ include './views/admin/layouts/footer.php'; ?>
 
 </body>
 <script>
-    var faqs_row = <?= count($listAnhSanPham) ?>;
-
-
-    // function addfaqs() {
-    //     html = '<tr id="faqs-row-' + faqs_row + '">';
-    //     html += '<td><img src="./uploads/th.jpg"  style="width: 100px; height:100px " alt=""></td>';
-    //     html += '<td><input type="file" name="img_array[]"  class="form-control"></td>';
-    //     html +=
-    //         '<td class="mt-10"><button type="button" class="badge badge-danger" onclick="removeRow(' +
-    //         faqs_row + ', null);"><i class="fa fa-trash"></i> Delete</button></td>';
-
-    //     html += '</tr>';
-
-    //     $('#faqs tbody').append(html);
-
-    //     faqs_row++;
-    // }
-
+    var faqs_row = <?= count($listAnhSanPham) ?>
     function addfaqs() {
         html = '<tr id="faqs-row-' + faqs_row + '">';
         html += '<td><img src="./uploads/th.jpg"  style="width: 100px; height:100px " alt=""></td>';
