@@ -63,22 +63,34 @@ class homeController
     }
     function gioHang()
     {
-        if (!isset($_SESSION['username'])){
+        if (!isset($_SESSION['username'])) {
             require_once "views/user/home/giohang.php";
-            headerAfterXSecondWithSweetAlert2("?act=login",1500, "error","Bạn chưa đăng nhập");
+            headerAfterXSecondWithSweetAlert2("?act=login", 1500, "error", "Bạn chưa đăng nhập");
         } else {
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                $id = $_POST['cart_detail_id'];
+                $amount = $_POST['quantity'];
+                $result = $this->cart->setAmountProductDetailToCartDetailById($id, $amount);
+            }
             $userInfo = $this->acc->getInformationUserByUsername($_SESSION['username']);
             $cartByUserId = $this->cart->getCartByUserId($userInfo['id']);
             $cartDetailByCartId = $this->cart->getCartDetailById($cartByUserId['id']);
+            
             require_once "views/user/home/giohang.php";
+            
         }
-        
     }
     function thanhToan()
     {
+        $userInfo = $this->acc->getInformationUserByUsername($_SESSION['username']);
+        $cartByUserId = $this->cart->getCartByUserId($userInfo['id']);
+        $cartDetailByCartId = $this->cart->getCartDetailById($cartByUserId['id']);
+        
         require_once "views/user/home/thanhtoan.php";
+        var_dump($cartDetailByCartId);
     }
-    function lienHe(){
+    function lienHe()
+    {
         require_once "views/user/home/lienhe.php";
     }
     function sanPham()

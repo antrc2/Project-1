@@ -51,6 +51,10 @@ if ($act == "/" || $act == "") {
 }
 elseif ($act == "add-cart"){
     $cart->addCart();
+} elseif ($act == "deletecart"){
+    $cart->deleteCart();
+} elseif ($act == "delete-cart"){
+    $cart->delete_cart($_GET['id']);
 }
 
 
@@ -148,9 +152,9 @@ elseif ($act == "forbidden"){
 else {
     $error->notFound();
 }
-
 $icon = isset($_SESSION['icon']) ? $_SESSION['icon'] : "success";
 if (isset($_SESSION['messages'])) {
     echo SweetAlert2($icon, $_SESSION['messages']);
+    usleep(500);
     unset($_SESSION['messages']);
 }
