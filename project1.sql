@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 29, 2024 at 01:20 PM
+-- Generation Time: Nov 29, 2024 at 07:56 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -46,10 +46,7 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`id`, `fullname`, `username`, `email`, `password`, `address`, `phone`, `created_at`, `updated_at`, `status`, `role_id`) VALUES
-(1, 'Nguyễn Ngọc An ', 'antrc2', 'antrc2gamer@gmail.com', '$2y$10$7.ME8Gm7qDs8LOo75uLNP.lK2.dNHPuq5qTn3.OyNMXE/eSxS2.KC', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1732121865, 1732121865, 1, 2),
-(4, 'Phùng long ', 'hieudp', 'hieudpph48709@fpt.edu.vn', '$2y$10$ntG3FetVGnzunaHs.p4XNe5NR2fcCzM4VtH0WVXpRZOQIOJmrPbs.', 'Hoài Đức-Hà Nội', '0353234345', 1732121295, 1732121295, 1, 2),
-(17, 'Đào Duy Hùng 2', 'hungcom', 'hung@gmail.com', '$2y$10$bqZmb2azBLZIjavCtCjc/OCtJHl0RXXG67/BZHzMY8zLKyRbo11Aa', 'Nam Định', '0964321123', 1732535419, 1732535419, 0, 1),
-(18, 'Hoàng văn long ', 'longtt', 'longtt@gmail.com', '$2y$10$TVEn9EgCgcaBw6XzormMOeJClxyAMVK2G7PXG5dIaLFSt6QD1caMW', 'Cà Mau', '05564332423', 1732122071, 1732122071, 1, 1);
+(20, 'Nguyễn Ngọc An', 'antrc2', 'antrc2gamer@gmail.com', 'd0794f96a42e8391$49ab17437d854d94fe33410e087004e94094b386ff10f7011b51e2359c8ce3f2', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1732906482, 1732906482, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -69,14 +66,6 @@ CREATE TABLE `bill` (
   `ma_don_hang` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `bill`
---
-
-INSERT INTO `bill` (`id`, `user_id`, `fullname_recieved`, `address_recieved`, `phone_reciedved`, `created_at`, `total`, `status`, `ma_don_hang`) VALUES
-(1, 18, 'Trương Anh Tuấn', 'Nông Cống - Thanh Hoá', '0454548454', 1731422283, 0, 2, 'DH_123'),
-(2, 18, 'Trần Văn Thiện', 'Tứ Kì - Hải Dương', '0455432218', 1731422285, 34546677, 1, 'DH_456');
-
 -- --------------------------------------------------------
 
 --
@@ -93,14 +82,6 @@ CREATE TABLE `bill_detail` (
   `trang_thai` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `bill_detail`
---
-
-INSERT INTO `bill_detail` (`id`, `bill_id`, `product_id`, `so_luong`, `thanh_tien`, `was_review`, `trang_thai`) VALUES
-(1, 1, 28, 2, 20000, 0, 1),
-(3, 2, 30, 10, 343454, 0, 4);
-
 -- --------------------------------------------------------
 
 --
@@ -115,6 +96,13 @@ CREATE TABLE `cart` (
   `status` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_id`, `created_at`, `updated_at`, `status`) VALUES
+(1, 20, 1732909515, 1732909515, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -124,13 +112,20 @@ CREATE TABLE `cart` (
 CREATE TABLE `cart_detail` (
   `id` int NOT NULL,
   `cart_id` int NOT NULL,
-  `product_id` int NOT NULL,
+  `product_detail_id` int NOT NULL,
   `amount` int NOT NULL,
   `price` int NOT NULL,
   `created_at` bigint NOT NULL,
   `updated_at` bigint NOT NULL,
   `status` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `cart_detail`
+--
+
+INSERT INTO `cart_detail` (`id`, `cart_id`, `product_detail_id`, `amount`, `price`, `created_at`, `updated_at`, `status`) VALUES
+(2, 1, 42, 1, 34555, 1732909911, 1732909911, 1);
 
 -- --------------------------------------------------------
 
@@ -282,14 +277,6 @@ CREATE TABLE `review` (
   `updated_at` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `review`
---
-
-INSERT INTO `review` (`id`, `user_id`, `product_id`, `star`, `comment`, `created_at`, `updated_at`) VALUES
-(3, 18, 28, 2, 'sản phẩm tôi rất hài lòng ', 1731422283, 1731422283),
-(4, 18, 28, 1, 'sản phẩm vượt ngoài mong đợi của tôi', 1731422285, 1731422283);
-
 -- --------------------------------------------------------
 
 --
@@ -371,7 +358,7 @@ ALTER TABLE `cart`
 ALTER TABLE `cart_detail`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_cart_detail_cart` (`cart_id`),
-  ADD KEY `fk_cart_detail_product` (`product_id`);
+  ADD KEY `fk_cart_detail_product` (`product_detail_id`);
 
 --
 -- Indexes for table `category`
@@ -435,7 +422,7 @@ ALTER TABLE `trang_thai_don_hang`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `bill`
@@ -453,13 +440,13 @@ ALTER TABLE `bill_detail`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `cart_detail`
 --
 ALTER TABLE `cart_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -541,8 +528,8 @@ ALTER TABLE `cart`
 -- Constraints for table `cart_detail`
 --
 ALTER TABLE `cart_detail`
-  ADD CONSTRAINT `fk_cart_detail_cart` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`),
-  ADD CONSTRAINT `fk_cart_detail_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
+  ADD CONSTRAINT `cart_detail_ibfk_1` FOREIGN KEY (`product_detail_id`) REFERENCES `product_detail` (`id`),
+  ADD CONSTRAINT `fk_cart_detail_cart` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`);
 
 --
 -- Constraints for table `discount`
