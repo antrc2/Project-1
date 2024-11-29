@@ -49,5 +49,29 @@
                 header("Location: ?act=method-not-allow");    
             }
         }
+        function deleteCart(){
+            if (isset($_SESSION['username'])){
+                $username = $_SESSION['username'];
+                $result = $this->cart->deleteCart($username);
+                if ($result){
+                    $_SESSION['messages'] = "Xóa giỏ hàng thành công";
+                    header("Location: ?act=gio-hang");
+                    
+                }
+            } else {
+                header("Location: ?act=login");
+            }
+        }
+        function delete_cart($id){
+            if (isset($_SESSION['username'])){
+                $result = $this->cart->delete_cart($id);
+                if($result){
+                    $_SESSION['messages'] = "Xóa sản phẩm trong giỏ hàng thành công";
+                    header("Location: ?act=gio-hang");
+                }
+            } else {
+                header("Location: ?act=login");
+            }
+        }
     }
 ?>
