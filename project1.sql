@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 25, 2024 at 06:09 PM
+-- Generation Time: Nov 29, 2024 at 01:20 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -48,7 +48,7 @@ CREATE TABLE `account` (
 INSERT INTO `account` (`id`, `fullname`, `username`, `email`, `password`, `address`, `phone`, `created_at`, `updated_at`, `status`, `role_id`) VALUES
 (1, 'Nguyễn Ngọc An ', 'antrc2', 'antrc2gamer@gmail.com', '$2y$10$7.ME8Gm7qDs8LOo75uLNP.lK2.dNHPuq5qTn3.OyNMXE/eSxS2.KC', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1732121865, 1732121865, 1, 2),
 (4, 'Phùng long ', 'hieudp', 'hieudpph48709@fpt.edu.vn', '$2y$10$ntG3FetVGnzunaHs.p4XNe5NR2fcCzM4VtH0WVXpRZOQIOJmrPbs.', 'Hoài Đức-Hà Nội', '0353234345', 1732121295, 1732121295, 1, 2),
-(17, 'Đào Duy Hùng ', 'hungcom', 'hung@gmail.com', '$2y$10$bqZmb2azBLZIjavCtCjc/OCtJHl0RXXG67/BZHzMY8zLKyRbo11Aa', 'Nam Định', '0964321123', 1732160874, 1732160874, 0, 1),
+(17, 'Đào Duy Hùng 2', 'hungcom', 'hung@gmail.com', '$2y$10$bqZmb2azBLZIjavCtCjc/OCtJHl0RXXG67/BZHzMY8zLKyRbo11Aa', 'Nam Định', '0964321123', 1732535419, 1732535419, 0, 1),
 (18, 'Hoàng văn long ', 'longtt', 'longtt@gmail.com', '$2y$10$TVEn9EgCgcaBw6XzormMOeJClxyAMVK2G7PXG5dIaLFSt6QD1caMW', 'Cà Mau', '05564332423', 1732122071, 1732122071, 1, 1);
 
 -- --------------------------------------------------------
@@ -74,8 +74,8 @@ CREATE TABLE `bill` (
 --
 
 INSERT INTO `bill` (`id`, `user_id`, `fullname_recieved`, `address_recieved`, `phone_reciedved`, `created_at`, `total`, `status`, `ma_don_hang`) VALUES
-(1, 18, 'Trương Anh Tuấn', 'Nông Cống - Thanh Hoá', '0454548454', 1731422283, 0, 1, 'DH_123'),
-(2, 18, 'Trần Văn Thiện', 'Tứ Kì - Hải Dương', '0455432218', 1731422285, 34546677, 2, 'DH_456');
+(1, 18, 'Trương Anh Tuấn', 'Nông Cống - Thanh Hoá', '0454548454', 1731422283, 0, 2, 'DH_123'),
+(2, 18, 'Trần Văn Thiện', 'Tứ Kì - Hải Dương', '0455432218', 1731422285, 34546677, 1, 'DH_456');
 
 -- --------------------------------------------------------
 
@@ -99,7 +99,6 @@ CREATE TABLE `bill_detail` (
 
 INSERT INTO `bill_detail` (`id`, `bill_id`, `product_id`, `so_luong`, `thanh_tien`, `was_review`, `trang_thai`) VALUES
 (1, 1, 28, 2, 20000, 0, 1),
-(2, 2, 28, 20, 30000, 0, 1),
 (3, 2, 30, 10, 343454, 0, 4);
 
 -- --------------------------------------------------------
@@ -125,7 +124,7 @@ CREATE TABLE `cart` (
 CREATE TABLE `cart_detail` (
   `id` int NOT NULL,
   `cart_id` int NOT NULL,
-  `product_detail_id` int NOT NULL,
+  `product_id` int NOT NULL,
   `amount` int NOT NULL,
   `price` int NOT NULL,
   `created_at` bigint NOT NULL,
@@ -152,8 +151,10 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `cate_name`, `created_at`, `updated_at`, `status`) VALUES
-(1, 'ASUy', 0, 1732520405, 1),
-(2, 'TUF', 0, 1731422315, 1);
+(1, 'ASU', 0, 1732635668, 1),
+(2, 'TUF', 0, 1731422315, 1),
+(3, 'macbook', 1732636579, 1732636579, 1),
+(5, 'Dell', 1732636834, 1732636834, 1);
 
 -- --------------------------------------------------------
 
@@ -171,6 +172,13 @@ CREATE TABLE `discount` (
   `end_price` int NOT NULL,
   `status` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `discount`
+--
+
+INSERT INTO `discount` (`id`, `product_detail_id`, `discount_amount`, `start_date`, `end_date`, `start_price`, `end_price`, `status`) VALUES
+(9, 40, 13, 1731645840, 1730781840, 12, 14332, 1);
 
 -- --------------------------------------------------------
 
@@ -193,9 +201,11 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `cate_id`, `name`, `image`, `created_at`, `updated_at`, `detail`) VALUES
-(28, 2, 'dell', 'e.jpg', 1732421775, 1732421775, 'sds'),
-(30, 1, 'ex', 'tải xuống (3).jpg', 1731946465, 1731946465, 'wewr'),
-(31, 2, 'lap top l dell', 'tải xuống (3).jpg', 1732062514, 1732062514, 'rất ok');
+(28, 2, 'dell', 'e.jpg', 1732636999, 1732636999, 'sds'),
+(30, 1, 'ex', 'tải xuống (3).jpg', 1732841067, 1732841067, 'wewr'),
+(31, 2, 'lap top l dell', 'tải xuống (3).jpg', 1732799541, 1732799541, 'rất ok'),
+(32, 5, 'dell 5i', 'th (2).jpg', 1732637091, 1732637091, 'sản phẩm tốt cho người dùng'),
+(33, 3, 'lap top levo', '673d4160dfbb2_th (3).jpg', 1732638034, 1732638034, 'edefd');
 
 -- --------------------------------------------------------
 
@@ -219,8 +229,10 @@ CREATE TABLE `product_detail` (
 
 INSERT INTO `product_detail` (`id`, `product_id`, `price`, `amount`, `ram`, `color`, `status`) VALUES
 (37, 28, 30, 12, 64, 'Xám', 1),
-(39, 30, 12, 12, 64, 'Xanh', 1),
-(40, 31, 120000, 10, 8, 'Đen', 1);
+(39, 30, 12, 12, 64, 'Xanh', 0),
+(40, 31, 120000, 10, 8, 'Đen', 1),
+(41, 32, 12000, 10, 8, 'Đen', 1),
+(42, 33, 34555, 24, 8, 'Đen', 1);
 
 -- --------------------------------------------------------
 
@@ -243,7 +255,16 @@ INSERT INTO `product_detail_image` (`id`, `product_detail_id`, `image`) VALUES
 (56, 40, '673d2d326915e4.37721963.png'),
 (57, 40, '673d2d326a8185.69787237.jpg'),
 (58, 40, '673d2d326b0f80.10258356.jpg'),
-(77, 37, '67414b83c273a.jpg');
+(77, 37, '67414b83c273a.jpg'),
+(78, 41, '6745f1a311ab59.49877258.png'),
+(79, 41, '6745f1a31246a6.27932691.jpg'),
+(80, 41, '6745f1a312d9a8.79098335.jpg'),
+(81, 41, '6745f1a3137af6.87777998.jpg'),
+(82, 41, '6745f1a313ec25.80076136.png'),
+(83, 41, '6745f1a31488d6.76298121.jpg'),
+(84, 42, '6745f5528f0866.43920586.png'),
+(85, 42, '6745f5528fbd55.69723269.jpg'),
+(86, 42, '6745f552906875.42554343.webp');
 
 -- --------------------------------------------------------
 
@@ -266,8 +287,8 @@ CREATE TABLE `review` (
 --
 
 INSERT INTO `review` (`id`, `user_id`, `product_id`, `star`, `comment`, `created_at`, `updated_at`) VALUES
-(3, 18, 28, 1, 'sản phẩm tôi rất hài lòng ', 1731422283, 1731422283),
-(4, 18, 28, 2, 'sản phẩm vượt ngoài mong đợi của tôi', 1731422285, 1731422283);
+(3, 18, 28, 2, 'sản phẩm tôi rất hài lòng ', 1731422283, 1731422283),
+(4, 18, 28, 1, 'sản phẩm vượt ngoài mong đợi của tôi', 1731422285, 1731422283);
 
 -- --------------------------------------------------------
 
@@ -307,11 +328,7 @@ INSERT INTO `trang_thai_don_hang` (`id`, `ten_trang_thai`) VALUES
 (1, 'Chưa xác nhận'),
 (2, 'Đã Xác nhận'),
 (3, 'Đang chuẩn bị hàng'),
-(4, 'Chưa thanh toán'),
-(5, 'Đã thanh toán'),
 (6, 'Đang giao'),
-(7, 'Đã giao'),
-(8, 'Đã nhận'),
 (9, 'Thành công'),
 (10, 'Hoàn hàng'),
 (11, 'Huỷ đơn');
@@ -354,7 +371,7 @@ ALTER TABLE `cart`
 ALTER TABLE `cart_detail`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_cart_detail_cart` (`cart_id`),
-  ADD KEY `fk_cart_detail_product` (`product_detail_id`);
+  ADD KEY `fk_cart_detail_product` (`product_id`);
 
 --
 -- Indexes for table `category`
@@ -448,31 +465,31 @@ ALTER TABLE `cart_detail`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `discount`
 --
 ALTER TABLE `discount`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `product_detail`
 --
 ALTER TABLE `product_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `product_detail_image`
 --
 ALTER TABLE `product_detail_image`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT for table `review`
@@ -524,9 +541,8 @@ ALTER TABLE `cart`
 -- Constraints for table `cart_detail`
 --
 ALTER TABLE `cart_detail`
-  ADD CONSTRAINT `cart_detail_ibfk_1` FOREIGN KEY (`product_detail_id`) REFERENCES `product_detail` (`id`),
   ADD CONSTRAINT `fk_cart_detail_cart` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`),
-  ADD CONSTRAINT `fk_product_detail` FOREIGN KEY (`product_detail_id`) REFERENCES `product_detail` (`id`);
+  ADD CONSTRAINT `fk_cart_detail_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
 
 --
 -- Constraints for table `discount`

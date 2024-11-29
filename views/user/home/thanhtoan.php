@@ -36,9 +36,14 @@ include './views/user/components/sideshow.php'
                     $total = $cart['cart_detail_price'] * $cart['cart_detail_amount'];
                     $totalCart += $total
                     ?>
-                    <span class="text-muted"><?= $total ?></span>
+                    <span class="text-muted"><?= number_format($total) ?> đ</span>
                   </li>
                 <?php endforeach ?>
+                <li class="list-group-item d-flex justify-content-between">
+                      <span>Tổng thành tiền</span>
+                      <strong><?= number_format($totalCart)?> đ</strong>
+                    </li>
+                  </ul>
 
 
             </div>
@@ -102,9 +107,9 @@ include './views/user/components/sideshow.php'
                 </div>
               </div>
             </div>
-            <div class="mb-4 d-flex   btn-block">
-              <button class="btn btn-pink border-radius " type="submit" name="btnhome" href="index.html">Trở về</button>
-              <button class="btn btn-pink border-radius " type="submit" name="btnDatHang">Đặt hàng</button>
+            <div class="mb-4 d-flex btn-block">
+              <!-- <button class="btn btn-pink border-radius " type="submit" name="btnhome" href="?act=gio-hang">Trở về</button> -->
+              <button class="btn btn-pink border-radius " type="submit" name="btn_checkout">Thanh toán</button>
             </div>
 
           </div>
