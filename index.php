@@ -46,8 +46,9 @@ if ($act == "/" || $act == "") {
     $home->thanhToan();
 }elseif($act =="san-pham"){
     $home->sanPham();
+}elseif($act == "lien-he"){
+    $home->lienHe();
 }
-
 elseif ($act == "add-cart"){
     $cart->addCart();
 }
