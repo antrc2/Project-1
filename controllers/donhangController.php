@@ -17,13 +17,14 @@ class DonHangController
         $listChiTietDonHang = $this->donHangModel->getChiTietDonHang($id_don_hang);
         $listDonHang = $this->donHangModel->getOneDonHang($id_don_hang);
         $sanPhamDonHang  = $this->donHangModel->getDonHang($id_don_hang);
+        // var_dump($sanPhamDonHang);
         $listTrangThaiDonHang = $this->donHangModel->getAllTrangThaiDonHang();
         require_once "./views/admin/donhang/chiTietDonHang.php";
     }
     public function fromsuaDonHang()
     {
-        $id_don_hang = $_POST['id']??"";
-        $status = $_POST['status']??"";
+        $id_don_hang = $_POST['id'] ?? "";
+        $status = $_POST['status'] ?? "";
         $this->donHangModel->updateDonHang($id_don_hang, $status);
         header("Location: index.php?act=chi-tiet-don-hang&id_don_hang=" . $id_don_hang);
         exit();
