@@ -95,9 +95,10 @@ include './views/user/components/sideshow.php'
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <td colspan="3">
-                                            <form action="">
+                                        <td colspan="2">
+                                            <form action="" style="display: flex;">
                                                 <input type="text" name="comment" id="comment" class="form-control" placeholder="Bình luận của bạn về sản phẩm">
+                                                <button type="submit" class="btn btn-primary">Gửi</button>
                                             </form>
                                         </td>
                                         <?php foreach ($listBinhLuan as $binhLuan) { 
