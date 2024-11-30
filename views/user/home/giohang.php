@@ -48,15 +48,13 @@ include './views/user/components/sideshow.php'
 
                                             <td class="quantity">
                                                 <div class="input-group mb-3" style="display: flex">
-                                                    <button type="button" class="quantity-left-minus"><i class="fa fa-minus"
-                                                            aria-hidden="true"></i></button>
+                                                    
                                                     <form action="" method="POST">
                                                         <input type="text" name="quantity"
                                                             class="quantity form-control input-number" value="<?= $cart['cart_detail_amount'] ?>" min="1">
                                                         <input type="hidden" name="cart_detail_id" value="<?= $cart['cart_detail_id'] ?>">
                                                     </form>
-                                                    <button type="button" class="quantity-right-plus"><i class="fa fa-plus"
-                                                            aria-hidden="true"></i></button>
+                                                    
                                                 </div>
                                             </td>
 
