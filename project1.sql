@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 29, 2024 at 07:56 PM
+-- Generation Time: Nov 30, 2024 at 04:11 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -66,6 +66,13 @@ CREATE TABLE `bill` (
   `ma_don_hang` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `bill`
+--
+
+INSERT INTO `bill` (`id`, `user_id`, `fullname_recieved`, `address_recieved`, `phone_reciedved`, `created_at`, `total`, `status`, `ma_don_hang`) VALUES
+(3, 20, 'Nguyễn NGọc An', 'adwadawd', '0838411897', 84562310, 120000, 1, 'DH_234');
+
 -- --------------------------------------------------------
 
 --
@@ -75,12 +82,20 @@ CREATE TABLE `bill` (
 CREATE TABLE `bill_detail` (
   `id` int NOT NULL,
   `bill_id` int NOT NULL,
-  `product_id` int NOT NULL,
+  `product_detail_id` int NOT NULL,
   `so_luong` int NOT NULL,
   `thanh_tien` int NOT NULL,
   `was_review` int NOT NULL DEFAULT '0',
-  `trang_thai` int NOT NULL
+  `trang_thai` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `bill_detail`
+--
+
+INSERT INTO `bill_detail` (`id`, `bill_id`, `product_detail_id`, `so_luong`, `thanh_tien`, `was_review`, `trang_thai`) VALUES
+(4, 3, 42, 2, 120000, 0, 1),
+(5, 3, 40, 33, 1200, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -125,7 +140,7 @@ CREATE TABLE `cart_detail` (
 --
 
 INSERT INTO `cart_detail` (`id`, `cart_id`, `product_detail_id`, `amount`, `price`, `created_at`, `updated_at`, `status`) VALUES
-(2, 1, 42, 1, 34555, 1732909911, 1732909911, 1);
+(5, 1, 42, 2, 34555, 1732937976, 1732937976, 1);
 
 -- --------------------------------------------------------
 
@@ -215,7 +230,7 @@ CREATE TABLE `product_detail` (
   `amount` int NOT NULL,
   `ram` int NOT NULL,
   `color` varchar(255) NOT NULL,
-  `status` int NOT NULL
+  `status` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -343,7 +358,8 @@ ALTER TABLE `bill`
 --
 ALTER TABLE `bill_detail`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_bill_detail_bill` (`bill_id`);
+  ADD KEY `fk_bill_detail_bill` (`bill_id`),
+  ADD KEY `fk_product_detail` (`product_detail_id`);
 
 --
 -- Indexes for table `cart`
@@ -428,13 +444,13 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -446,7 +462,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `cart_detail`
 --
 ALTER TABLE `cart_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -516,7 +532,8 @@ ALTER TABLE `bill`
 -- Constraints for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  ADD CONSTRAINT `fk_bill_detail_bill` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`id`);
+  ADD CONSTRAINT `fk_bill_detail_bill` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`id`),
+  ADD CONSTRAINT `fk_product_detail` FOREIGN KEY (`product_detail_id`) REFERENCES `product_detail` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `cart`
