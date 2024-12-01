@@ -1,9 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
+
 -- Generation Time: Dec 01, 2024 at 07:48 PM
+
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -71,9 +73,11 @@ CREATE TABLE `bill` (
 --
 
 INSERT INTO `bill` (`id`, `user_id`, `fullname_recieved`, `address_recieved`, `phone_reciedved`, `created_at`, `total`, `status`, `ma_don_hang`) VALUES
+
 (3, 20, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733082351, 32360, 9, 'DH_234'),
 (4, 20, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733082351, 32360, 9, 'DH_test'),
 (5, 20, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733082477, 256775, 1, 'DH_test');
+
 
 -- --------------------------------------------------------
 
@@ -96,6 +100,7 @@ CREATE TABLE `bill_detail` (
 --
 
 INSERT INTO `bill_detail` (`id`, `bill_id`, `product_detail_id`, `so_luong`, `thanh_tien`, `was_review`, `trang_thai`) VALUES
+
 (4, 3, 41, 10, 12000, 0, 1),
 (5, 3, 42, 24, 34555, 0, 1),
 (6, 4, 42, 24, 34555, 0, 1),
@@ -109,6 +114,7 @@ INSERT INTO `bill_detail` (`id`, `bill_id`, `product_detail_id`, `so_luong`, `th
 (14, 4, 43, 10, 10000, 0, 1),
 (15, 5, 42, 24, 34555, 0, 1),
 (16, 5, 41, 10, 12000, 0, 1);
+
 
 -- --------------------------------------------------------
 
@@ -453,13 +459,17 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
+
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 
 --
 -- AUTO_INCREMENT for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
+
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -471,7 +481,9 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `cart_detail`
 --
 ALTER TABLE `cart_detail`
+
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
 
 --
 -- AUTO_INCREMENT for table `category`
