@@ -38,7 +38,7 @@ $categories = $cate->getListCategory();
               <a href="index.php?act=/">Home</a>
             </li>
             <li class="drop-menu">
-              <a href="?act=san-pham&id_cate=<?= $category['id']?>">Products<span>&#11167</span></a>
+              <a href="">Products<span>&#11167</span></a>
               <div class="sub-menu">
                 <ul>
                   <?php foreach ($categories as $category):

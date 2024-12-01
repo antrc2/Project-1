@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 ob_start();
 date_default_timezone_set('Asia/Ho_Chi_Minh');
@@ -37,29 +38,23 @@ $act = $_GET['act'] ?? "/";
 //view người dùng
 if ($act == "/" || $act == "") {
     $home->home();
-}elseif ($act == "chi-tiet-san-pham-khach-hang") {
+} elseif ($act == "chi-tiet-san-pham-khach-hang") {
     $home->productDetail($_GET['id']);
-
-}elseif($act == "gio-hang") {
+} elseif ($act == "gio-hang") {
     $home->gioHang();
-}elseif($act=="thanh-toan"){
+} elseif ($act == "thanh-toan") {
     $home->thanhToan();
-}elseif($act =="san-pham"){
+} elseif ($act == "san-pham") {
     $home->sanPham();
-}elseif($act == "lien-he"){
+} elseif ($act == "lien-he") {
     $home->lienHe();
-}
-elseif ($act == "add-cart"){
+} elseif ($act == "add-cart") {
     $cart->addCart();
-} elseif ($act == "deletecart"){
+} elseif ($act == "deletecart") {
     $cart->deleteCart();
-} elseif ($act == "delete-cart"){
+} elseif ($act == "delete-cart") {
     $cart->delete_cart($_GET['id']);
-}
-
-
-
-elseif ($act == "register") {
+} elseif ($act == "register") {
     $account->register();
 } elseif ($act == "login") {
     $account->login();
@@ -85,7 +80,7 @@ elseif ($act == "register") {
     $discount->deleteDiscount($_GET['id']);
 } elseif ($act == "undo-delete-discount") {
     $discount->undoDeleteDiscount($_GET['id']);
-} 
+}
 //admin sản phẩm
 elseif ($act == "danh-sach-admin-san-pham") {
     $product->danhSachSanPham();
@@ -107,11 +102,9 @@ elseif ($act == "danh-sach-admin-san-pham") {
 //dơn hàng
 elseif ($act == "danh-sach-don-hang") {
     $order->danhSachDonHang();
-}
-elseif($act == "chi-tiet-don-hang"){
+} elseif ($act == "chi-tiet-don-hang") {
     $order->chiTietDonHang();
-}
-elseif($act == "sua-don-hang"){
+} elseif ($act == "sua-don-hang") {
     $order->fromsuaDonHang();
 }
 //quản lí tài khoản quản trị
@@ -130,7 +123,7 @@ elseif ($act == "danh-sach-quan-tri") {
 }
 
 //bình luận
-elseif($act =="update-trang-thai-binh-luan"){
+elseif ($act == "update-trang-thai-binh-luan") {
     $product->updateTrangThaiBinhLuan();
 }
 
@@ -141,20 +134,18 @@ elseif ($act == "danh-sach-khach-hang") {
     $account->formSuaTaiKhoanKhachHang();
 } elseif ($act == "sua-tai-khoan-khach-hang") {
     $account->suaTaiKhoanKhachHang();
-}elseif($act == "chi-tiet-khach-hang"){
+} elseif ($act == "chi-tiet-khach-hang") {
     $account->chiTietKhachHang();
-}
-elseif ($act == "forbidden"){
+} elseif ($act == "forbidden") {
     $error->forbidden();
-} elseif ($act == "method-not-allow"){
+} elseif ($act == "method-not-allow") {
     $error->methodNotAllow();
-}
-else {
+} else {
     $error->notFound();
 }
 $icon = isset($_SESSION['icon']) ? $_SESSION['icon'] : "success";
 if (isset($_SESSION['messages'])) {
-    echo SweetAlert2($icon, $_SESSION['messages']);
-    usleep(500);
+    $message = $_SESSION['messages'];
+    echo SweetAlert2($icon, $message);
     unset($_SESSION['messages']);
 }

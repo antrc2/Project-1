@@ -1,10 +1,11 @@
 <?php
 class DonHangController
 {
-    public $donHangModel;
+    public $donHangModel, $cart;
     public function __construct()
     {
         $this->donHangModel = new DonHangModel();
+        $this->cart = new cartModel;
     }
     public function danhSachDonHang()
     {

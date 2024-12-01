@@ -6,6 +6,7 @@ class homeController
     public $product;
     public $discount;
     public $acc;
+    public $bill;
     function __construct()
     {
         $this->home = new homeModel;
@@ -13,6 +14,7 @@ class homeController
         $this->discount = new discountModel;
         $this->cart = new cartModel;
         $this->acc = new accountModel;
+        $this->bill = new DonHangModel;
     }
     function home()
     {
@@ -67,27 +69,80 @@ class homeController
             require_once "views/user/home/giohang.php";
             headerAfterXSecondWithSweetAlert2("?act=login", 1500, "error", "Bạn chưa đăng nhập");
         } else {
-            if ($_SERVER['REQUEST_METHOD'] == "POST") {
-                $id = $_POST['cart_detail_id'];
-                $amount = $_POST['quantity'];
-                $result = $this->cart->setAmountProductDetailToCartDetailById($id, $amount);
-            }
             $userInfo = $this->acc->getInformationUserByUsername($_SESSION['username']);
             $cartByUserId = $this->cart->getCartByUserId($userInfo['id']);
-            $cartDetailByCartId = $this->cart->getCartDetailById($cartByUserId['id']);
+            if(empty($cartByUserId)){
+                $cartDetailByCartId = [];
+            } else {
+                $cartDetailByCartId = $this->cart->getCartDetailById($cartByUserId['id']);
+            }
             
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                $cartDetailId = $_POST['cart_detail_id'];
+                $productDetailId = $_POST['product_detail_id'];
+                $amount = $_POST['quantity'];
+                $productDetail = $this->product->getDetailProductByProductDetailId($productDetailId);
+                if ($amount > $productDetail['amount']){
+                    $productDetailAmount = $productDetail['amount'];
+                    require_once "views/user/home/giohang.php";
+                    echo SweetAlert2("error","Sản phẩm $name có giá là $price không đủ số lượng ($productDetailAmount)");
+                } else {
+                    $result = $this->cart->setAmountProductDetailToCartDetailById($cartDetailId, $amount);
+                }
+            }
+            if(empty($cartByUserId)){
+                $cartDetailByCartId = [];
+            } else {
+                $cartDetailByCartId = $this->cart->getCartDetailById($cartByUserId['id']);
+            }
             require_once "views/user/home/giohang.php";
             
         }
     }
     function thanhToan()
     {
+        
         $userInfo = $this->acc->getInformationUserByUsername($_SESSION['username']);
         $cartByUserId = $this->cart->getCartByUserId($userInfo['id']);
-        $cartDetailByCartId = $this->cart->getCartDetailById($cartByUserId['id']);
+        if(empty($cartByUserId)){
+            $cartDetailByCartId = [];
+        } else {
+            $cartDetailByCartId = $this->cart->getCartDetailById($cartByUserId['id']);
+        }
+        $total =0;
+        foreach ($cartDetailByCartId as $value){
+            $total += $value['cart_detail_price'] * $value['cart_detail_amount'];
+        }
+        if(isset($_POST['btn_checkout'])){
+            $fullname = $_POST['fullname'];
+            $address = $_POST['address'];
+            $phone = $_POST['phone'];
+            $email = $_POST['email'];
+            $payMethod = $_POST['httt_ma'];
+            $this->bill->addOrUpdateBillByUserId($userInfo['id'], $fullname, $address, $phone, $total);
+            $count =0;
+            foreach ($cartDetailByCartId as $cart){
+                // var_dump($cart['product_detail_id']);
+                // var_dump($cartDetailByCartId);
+                $detailProduct = $this->product->getDetailProductByProductDetailId($cart['product_detail_id']);
+                // var_dump($detailProduct['amount']);
+                if ($cart['cart_detail_amount'] > $detailProduct['amount']){
+                    $count++;
+                    $name = $detailProduct['name'];
+                    $price = $detailProduct['price'];
+                    $amount = $detailProduct['amount'];
+                    require_once "views/user/home/thanhtoan.php";
+                    echo SweetAlert2("error","Sản phẩm $name có giá là $price không đủ số lượng ($amount)");
+                    break;
+                }
+            }
+            if ($count ==0){
+                $this->bill->fromCartDetailToBillDetail($userInfo['id'], $cartDetailByCartId);
+                $this->cart->deleteCart($_SESSION['username']);
+            }
+        }
         
         require_once "views/user/home/thanhtoan.php";
-        var_dump($cartDetailByCartId);
     }
     function lienHe()
     {

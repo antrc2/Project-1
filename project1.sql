@@ -3,7 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 30, 2024 at 04:11 AM
+
+-- Generation Time: Dec 01, 2024 at 07:48 PM
+
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -62,7 +64,7 @@ CREATE TABLE `bill` (
   `phone_reciedved` varchar(255) NOT NULL,
   `created_at` bigint NOT NULL,
   `total` int NOT NULL,
-  `status` int NOT NULL,
+  `status` int NOT NULL DEFAULT '1',
   `ma_don_hang` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -71,7 +73,11 @@ CREATE TABLE `bill` (
 --
 
 INSERT INTO `bill` (`id`, `user_id`, `fullname_recieved`, `address_recieved`, `phone_reciedved`, `created_at`, `total`, `status`, `ma_don_hang`) VALUES
-(3, 20, 'Nguyễn NGọc An', 'adwadawd', '0838411897', 84562310, 120000, 1, 'DH_234');
+
+(3, 20, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733082351, 32360, 9, 'DH_234'),
+(4, 20, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733082351, 32360, 9, 'DH_test'),
+(5, 20, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733082477, 256775, 1, 'DH_test');
+
 
 -- --------------------------------------------------------
 
@@ -94,8 +100,21 @@ CREATE TABLE `bill_detail` (
 --
 
 INSERT INTO `bill_detail` (`id`, `bill_id`, `product_detail_id`, `so_luong`, `thanh_tien`, `was_review`, `trang_thai`) VALUES
-(4, 3, 42, 2, 120000, 0, 1),
-(5, 3, 40, 33, 1200, 0, 1);
+
+(4, 3, 41, 10, 12000, 0, 1),
+(5, 3, 42, 24, 34555, 0, 1),
+(6, 4, 42, 24, 34555, 0, 1),
+(7, 4, 43, 10, 10000, 0, 1),
+(8, 4, 42, 24, 34555, 0, 1),
+(9, 4, 43, 10, 10000, 0, 1),
+(10, 4, 42, 24, 34555, 0, 1),
+(11, 4, 43, 10, 10000, 0, 1),
+(12, 4, 41, 10, 12000, 0, 1),
+(13, 4, 37, 12, 30, 0, 1),
+(14, 4, 43, 10, 10000, 0, 1),
+(15, 5, 42, 24, 34555, 0, 1),
+(16, 5, 41, 10, 12000, 0, 1);
+
 
 -- --------------------------------------------------------
 
@@ -116,7 +135,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `created_at`, `updated_at`, `status`) VALUES
-(1, 20, 1732909515, 1732909515, 1);
+(1, 20, 1732909515, 1732909515, 2),
+(3, 20, 1733080458, 1733080458, 1);
 
 -- --------------------------------------------------------
 
@@ -134,13 +154,6 @@ CREATE TABLE `cart_detail` (
   `updated_at` bigint NOT NULL,
   `status` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `cart_detail`
---
-
-INSERT INTO `cart_detail` (`id`, `cart_id`, `product_detail_id`, `amount`, `price`, `created_at`, `updated_at`, `status`) VALUES
-(5, 1, 42, 2, 34555, 1732937976, 1732937976, 1);
 
 -- --------------------------------------------------------
 
@@ -188,7 +201,8 @@ CREATE TABLE `discount` (
 --
 
 INSERT INTO `discount` (`id`, `product_detail_id`, `discount_amount`, `start_date`, `end_date`, `start_price`, `end_price`, `status`) VALUES
-(9, 40, 13, 1731645840, 1730781840, 12, 14332, 1);
+(9, 40, 13, 1731645840, 1730781840, 12, 14332, 1),
+(15, 43, 20, 1732863060, 1733035860, 1000, 10000, 1);
 
 -- --------------------------------------------------------
 
@@ -242,7 +256,8 @@ INSERT INTO `product_detail` (`id`, `product_id`, `price`, `amount`, `ram`, `col
 (39, 30, 12, 12, 64, 'Xanh', 0),
 (40, 31, 120000, 10, 8, 'Đen', 1),
 (41, 32, 12000, 10, 8, 'Đen', 1),
-(42, 33, 34555, 24, 8, 'Đen', 1);
+(42, 33, 34555, 24, 8, 'Đen', 1),
+(43, 28, 10000, 10, 16, 'tím', 1);
 
 -- --------------------------------------------------------
 
@@ -444,25 +459,31 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 
 --
 -- AUTO_INCREMENT for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `cart_detail`
 --
 ALTER TABLE `cart_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -474,7 +495,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `discount`
 --
 ALTER TABLE `discount`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -486,7 +507,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `product_detail`
 --
 ALTER TABLE `product_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `product_detail_image`

@@ -1,46 +1,49 @@
 <?php
     class cartController{
-        public $cart, $acc;
+        public $cart, $acc, $product;
         function __construct()
         {
             $this->cart = new cartModel;
             $this->acc = new accountModel;
+            $this->product = new SanPhamModel;
         }
         function addCart(){
+            $limitProduct = $this->product->getNewestProductButLimit(12);
+            // require_once "views/user/home/home.php";
             if($_SERVER['REQUEST_METHOD'] == "POST"){
+                var_dump($_POST);
             if(!isset($_SESSION['username'])){
-                $_SESSION['messages'] = "Bạn chưa đăng nhập";
-                $_SESSION['icon'] = "error";
-                header("Location: ?act=login");
+                headerAfterXSecondWithSweetAlert2("?act=login",1500,"error","Bạn chưa đăng nhập");
             } else {
                 $productId=$_POST['product_id'];
                 $productDetailId = $_POST['product_detail_id'];
                 if ($_POST['soluong'] > $_POST['amount']){
                     $_SESSION['messages'] = "Không đủ số lượng sản phẩm";
                     $_SESSION['icon'] = "error";
-                    
-                    
                 } else {
                     $username = $_SESSION['username'];
                     $userInfo = $this->acc->getInformationUserByUsername($username);
                     $userId = $userInfo['id'];
                     $check = $this->cart->checkIssetCartByUserId($userId);
+                    // var_dump($check);
                     if (!$check){
                         $this->cart->addCart($userId);
                     } else {
                         // I dont know to do anything in here :((( 
                     }
                     $cartInfo = $this->cart->getCartByUserId($userId);
+                    // var_dump($cartInfo);
                     $price = $_POST['price'];
                     $amount = $_POST['soluong'];
-                    $cartId = $cartInfo['id'];
-                    if ($this->cart->checkIssetProductDetailIdInCartOfUser($userId, $productDetailId)){
+                    $cartDetailId = $cartInfo['id'];
+                    // var_dump($_POST);
+                    if ($this->cart->checkIssetProductDetailIdInCartOfUser($userId, $productDetailId, $cartInfo)){
                         $cartDetailInfo = $this->cart->getInformationOfCartDetailByUserIdAndProductDetailId($userId,$productDetailId);
                         // var_dump($cartDetailInfo);
-                        $this->cart->addAmountProductDetailToCartDetail($cartId, $productDetailId, $amount, $price, $cartDetailInfo);
+                        $this->cart->addAmountProductDetailToCartDetail($cartDetailId, $productDetailId, $amount, $price, $cartDetailInfo);
                         
                     } else {
-                        $this->cart->addCartDetail($cartId, $productDetailId, $amount, $price);
+                        $this->cart->addCartDetail($cartDetailId, $productDetailId, $amount, $price);
                     }
                 }
                 header("Location: ?act=chi-tiet-san-pham-khach-hang&id=$productId");   

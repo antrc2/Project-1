@@ -14,6 +14,7 @@ class SanPhamModel
         $result = $stmt->fetchAll();
         return $result;
     }
+    
     public function getAllProductByIdCate($id_cate){
         return $this->conn->query("SELECT product.*, product_detail.status , product_detail.price, product_detail.amount, product_detail.ram, product_detail.color,category.cate_name
             FROM product
@@ -137,6 +138,9 @@ class SanPhamModel
         }catch (Exception $e) {
             echo "Error: ". $e -> getMessage();
         }
+    }
+    function getDetailProductByProductDetailId($id){
+        return $this->conn->query("SELECT *, product_detail.id as product_detail_id  FROM product_detail JOIN product ON product.id = product_detail.product_id WHERE product_detail.id=$id")->fetch();
     }
     function getDetailProductById($id){
         return $this->conn->query("SELECT *, product_detail.id as product_detail_id, discount.product_detail_id as discount_product_detail_id FROM product_detail JOIN discount ON product_detail.id = discount.product_detail_id JOIN product ON product.id = product_detail.product_id WHERE product_detail.id=$id")->fetch();
