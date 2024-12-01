@@ -8,7 +8,7 @@ class cartModel
     }
     function checkIssetCartByUserId($id)
     {
-        return $this->conn->query("SELECT * FROM cart WHERE user_id=$id")->fetch();
+        return $this->conn->query("SELECT * FROM cart  WHERE status=1 and user_id=$id ORDER BY id DESC" )->fetch();
     }
     function addCart($userId)
     {
@@ -24,20 +24,25 @@ class cartModel
         return $this->conn->query("SELECT * FROM cart_detail WHERE id=$id")->fetch();
     }
     function getCartDetailById($id){
-        return $this->conn->query("SELECT *, cart_detail.amount as cart_detail_amount,cart_detail.id as cart_detail_id, cart_detail.price as cart_detail_price, cart_detail.amount * cart_detail.price as total FROM cart_detail JOIN product_detail ON cart_detail.product_detail_id = product_detail.id JOIN product ON product.id = product_detail.product_id WHERE cart_detail.cart_id = $id")->fetchAll();
+        return $this->conn->query("SELECT *, cart_detail.amount as cart_detail_amount,cart_detail.id as cart_detail_id, cart_detail.price as cart_detail_price, cart_detail.amount * cart_detail.price as total, product_detail.id as product_detail_id FROM cart_detail JOIN product_detail ON cart_detail.product_detail_id = product_detail.id JOIN product ON product.id = product_detail.product_id WHERE cart_detail.cart_id = $id")->fetchAll();
     }
     function checkIssetProductDetailIdInCartOfUser($userId, $productDetailId)
     {
-        return $this->conn->query("SELECT *, cart_detail.id as cart_detail_id FROM cart_detail JOIN cart ON cart_detail.id = cart_detail.id WHERE user_id = $userId AND product_detail_id=$productDetailId")->fetch();
+        return $this->conn->query("SELECT *, cart_detail.id as cart_detail_id FROM cart_detail JOIN cart ON cart_detail.id = cart_detail.id WHERE cart.status =1 and user_id = $userId AND product_detail_id=$productDetailId")->fetch();
     }
     function getInformationOfCartDetailByUserIdAndProductDetailId($userId, $productDetailId)
     {
         return $this->checkIssetProductDetailIdInCartOfUser($userId, $productDetailId);
     }
+    function deleteAllProductFromCartByCartId($id){
+        return $this->conn->prepare("UPDATE cart SET status=2 WHERE id=$id")->execute();
+    }
     function addAmountProductDetailToCartDetail($cartId, $productDetailId, $amount, $price, $cartDetailInfo)
     {
+        // var_dump($cartId);
         // var_dump($cartDetailInfo);
         $id= $cartDetailInfo['cart_detail_id'];
+        // var_dump($id);
         $time = time();
         $cartDetail  = $this->getInformationOfCartDetailById($id);
         // var_dump($cartDetail);

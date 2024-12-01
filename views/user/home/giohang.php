@@ -50,6 +50,7 @@ include './views/user/components/sideshow.php'
                                                 <div class="input-group mb-3" style="display: flex">
                                                     
                                                     <form action="" method="POST">
+                                                        <input type="hidden" name="product_detail_id" value="<?= $cart['product_detail_id']?>">
                                                         <input type="text" name="quantity"
                                                             class="quantity form-control input-number" value="<?= $cart['cart_detail_amount'] ?>" min="1">
                                                         <input type="hidden" name="cart_detail_id" value="<?= $cart['cart_detail_id'] ?>">

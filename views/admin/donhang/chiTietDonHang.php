@@ -126,7 +126,7 @@ include './views/admin/layouts/sidebar.php';
                                             <th>Màu</th>
                                             <th>Ram</th>
                                             <th>Số lượng</th>
-                                            <th>Thành tiền</th>
+                                            <th>Tổng tiền</th>
                                         </tr>
                                     </thead>
                                     <tbody>

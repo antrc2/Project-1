@@ -1,10 +1,11 @@
 <?php
 function database()
 {
-    return new PDO("mysql:host=localhost;dbname=project1", "root", "");
+    return new PDO("mysql:host=localhost;dbname=project1", "root", "Sqrtfl0@t01");
 }
 function SweetAlert2($icon, $message)
 {
+    
     echo "<script src='assets/sweetalert2/sweetalert2.js'></script>";
     echo "<link rel='stylesheet' href='assets/sweetalert2/sweetalert2.css'>";
     return "<script>Swal.fire({
@@ -43,6 +44,7 @@ function deleteSession()
     // session_unset(); 
     // session_destroy();
 }
-function calculatorPriceAfterDiscount($price, $discount =0){
+function calculatorPriceAfterDiscount($price, $discount = 0)
+{
     return ($price * $discount / 100);
 }
