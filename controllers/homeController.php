@@ -166,4 +166,20 @@ class homeController
         $products = $this->product->getAllProductByIdCate($cate_id);
         require_once "views/user/home/sanpham.php";
     }
+    public function commen() {
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = $_POST['id'];
+            $comment = $_POST['comment'];
+            $userInfo = $this->acc->getInformationUserByUsername($_SESSION['username']);
+        
+            $hasBought = $this->home->checkUserBoughtProduct($userInfo['id'], $id);
+            
+            if($hasBought) {
+                $result = $this->home->addComment($userInfo['id'], $id, $comment);
+            } 
+            echo "<script>setTimeout(function(){ window.location.href = '?act=chi-tiet-san-pham-khach-hang&id=$id'; },500);</script>";
+        }
+    }
+    
+    
 }

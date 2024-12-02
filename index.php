@@ -126,7 +126,9 @@ elseif ($act == "danh-sach-quan-tri") {
 elseif ($act == "update-trang-thai-binh-luan") {
     $product->updateTrangThaiBinhLuan();
 }
-
+elseif($act=='commen'){
+    $home->commen();
+}
 //quản lí tài khoản khách hàng
 elseif ($act == "danh-sach-khach-hang") {
     $account->danhSachKhachHang();
