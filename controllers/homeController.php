@@ -177,9 +177,11 @@ class homeController
             if($hasBought) {
                 $result = $this->home->addComment($userInfo['id'], $id, $comment);
             } 
-            echo "<script>setTimeout(function(){ window.location.href = '?act=chi-tiet-san-pham-khach-hang&id=$id'; },500);</script>";
+            header("Location: ?act=chi-tiet-san-pham-khach-hang&id=$id");
+           
         }
     }
+  
     
     
 }

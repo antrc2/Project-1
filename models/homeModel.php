@@ -27,4 +27,5 @@ class homeModel
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([$user_id, $product_id, $comment, time()]);
     }
+    
 }

@@ -43,10 +43,11 @@ $categories = $cate->getListCategory();
                 <ul>
                   <?php foreach ($categories as $category):
                     if ($category['status'] == 1) {
-                      
-                    ?>
-                    <li><a href="?act=san-pham&id_cate=<?= $category['id']?>"><button class="btn w-100"><?= $category['cate_name']?></button></a></li>
-                    <?php } endforeach ?>
+
+                  ?>
+                      <li><a href="?act=san-pham&id_cate=<?= $category['id'] ?>"><button class="btn w-100"><?= $category['cate_name'] ?></button></a></li>
+                  <?php }
+                  endforeach ?>
                 </ul>
               </div>
             </li>
@@ -58,9 +59,27 @@ $categories = $cate->getListCategory();
       </div>
       <div class="d-none d-lg-flex ms-2">
         </a>
-        <a class="btn-sm-square bg-white rounded-circle ms-3" href="index.php?act=login">
-          <small class="fa fa-user text-body"></small>
-        </a>
+        <small style="margin-top:10px; color: red;  padding-right: 10px;" >
+          <b >
+          <?php if (isset($_SESSION['username'])) {
+            echo "Xin chào " . $_SESSION['username'];
+          } ?>
+          </b>
+        </small>
+
+        <form action="" id="search-box">
+          <input type="text" id="search-text" placeholder="Bạn muốn tìm gì?" required>
+          <button id="search-btn"><small class="fa fa-search text-body"></small></button>
+        </form>
+        <?php if (isset($_SESSION['username'])) { ?>
+          <a class="btn-sm-square bg-white rounded-circle ms-3" href="index.php?act=logout">
+            <small class="fas fa-sign-out-alt"></small>
+          </a>
+        <?php } else { ?>
+          <a class="btn-sm-square bg-white rounded-circle ms-3" href="index.php?act=login">
+            <small class="fa fa-user text-body"></small>
+          </a>
+        <?php } ?>
         <a class="btn-sm-square bg-white rounded-circle ms-3" href="index.php?act=gio-hang">
           <small class="fa fa-shopping-bag text-body"></small>
         </a>
@@ -70,3 +89,4 @@ $categories = $cate->getListCategory();
 </div>
 <!-- Navbar End -->
 <!-- header -->
+ 
