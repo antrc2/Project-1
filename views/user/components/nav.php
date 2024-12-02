@@ -59,11 +59,11 @@ $categories = $cate->getListCategory();
       </div>
       <div class="d-none d-lg-flex ms-2">
         </a>
-        <small style="margin-top:10px; color: red;  padding-right: 10px;" >
-          <b >
-          <?php if (isset($_SESSION['username'])) {
-            echo "Xin chào " . $_SESSION['username'];
-          } ?>
+        <small style="margin-top:10px; color: red;  padding-right: 10px;">
+          <b>
+            <?php if (isset($_SESSION['user'])) {
+              echo "Xin chào " . $_SESSION['user']['fullname'];
+            } ?>
           </b>
         </small>
 
@@ -83,10 +83,18 @@ $categories = $cate->getListCategory();
         <a class="btn-sm-square bg-white rounded-circle ms-3" href="index.php?act=gio-hang">
           <small class="fa fa-shopping-bag text-body"></small>
         </a>
+        <?php
+        if (isset($_SESSION['user'])) {
+          $user = $_SESSION['user'];
+          if ($user['role_id'] == 2) { ?>
+            <a href="index.php?act=list-category" class="btn-sm-square bg-white rounded-circle ms-3"><i class="fas fa-user-shield"></i></a>
+        <?php }
+        } ?>
+
+
       </div>
     </div>
   </nav>
 </div>
 <!-- Navbar End -->
 <!-- header -->
- 

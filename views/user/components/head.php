@@ -40,6 +40,5 @@
     <!-- Template Stylesheet -->
     <link href="assets/web/css/style.css" rel="stylesheet" />
   </head>
-
   <body>
     <!-- Spinner Start -->

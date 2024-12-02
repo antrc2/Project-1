@@ -44,8 +44,7 @@ class accountModel
     {
         return $this->conn->query("SELECT * FROM account WHERE email='$email'")->fetch();
     }
-    function login($username, $password)
-    {
+    function login($username, $password) {
         if (!$this->checkIssetUsername($username)) {
             return (['status' => False, "message" => "Tài khoản không tồn tại"]);
         }
@@ -55,11 +54,14 @@ class accountModel
         }
         $hashedPassword = $userInfo['password'];
         if ($this->checkHashedPassword($hashedPassword, $password)) {
+            $_SESSION['user'] = $userInfo; // Store full user info
+            $_SESSION['username'] = $username; // Keep existing username
             return (['status' => True, "message" => "Đăng nhập thành công"]);
         } else {
             return (['status' => False, "message" => "Sai mật khẩu"]);
         }
     }
+    
     function register($username, $fullname, $email, $password, $address, $phone, $created_at)
     {
         if ($this->checkIssetUsername($username)) {
