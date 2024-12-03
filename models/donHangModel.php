@@ -31,6 +31,7 @@ class DonHangModel
             $productDetailid = $cart['product_detail_id'];
             $amount = $cart['cart_detail_amount'];
             $price = $cart['cart_detail_price'];
+            $this->conn->prepare("UPDATE product_detail SET amount = amount - $amount WHERE id=$productDetailid")->execute();
             $this->conn->prepare("INSERT INTO bill_detail(bill_id, product_detail_id, so_luong, thanh_tien) VALUES ($billId, $productDetailid, $amount, $price)")->execute();
         }
         return;
