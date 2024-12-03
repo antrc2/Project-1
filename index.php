@@ -48,7 +48,12 @@ if ($act == "/" || $act == "") {
     $home->sanPham();
 } elseif ($act == "lien-he") {
     $home->lienHe();
-} elseif ($act == "add-cart") {
+} elseif($act == "lich-su-don-hang"){
+    $home->lichSuDonHang();
+}elseif ($act == "huy-don-hang") {
+    $home->huyDonHang();
+}
+elseif ($act == "add-cart") {
     $cart->addCart();
 } elseif ($act == "deletecart") {
     $cart->deleteCart();

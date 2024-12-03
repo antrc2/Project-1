@@ -27,5 +27,23 @@ class homeModel
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([$user_id, $product_id, $comment, time()]);
     }
-    
+    public function getDonHangs($tai_khoan_id){
+        $sql = "SELECT bill.*, trang_thai_don_hang.ten_trang_thai FROM bill
+        join trang_thai_don_hang on bill.status = trang_thai_don_hang.id
+         WHERE user_id = $tai_khoan_id";
+         $stmt = $this->conn->prepare($sql);
+         $stmt->execute();
+         return $stmt->fetchAll();
+    }
+    public function getDonHang($donHangId){
+        $sql = "SELECT * FROM bill WHERE id = $donHangId";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+    public function updateStatusBill($donHangId, $status){
+        $sql = "UPDATE bill SET status =? WHERE id =?";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([$status, $donHangId]);
+    }
 }

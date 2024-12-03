@@ -131,6 +131,7 @@ class homeController
             $phone = $_POST['phone'];
             $email = $_POST['email'];
             $payMethod = $_POST['httt_ma'];
+
             $this->bill->addOrUpdateBillByUserId($userInfo['id'], $fullname, $address, $phone, $total);
             $count = 0;
             foreach ($cartDetailByCartId as $cart) {
@@ -166,22 +167,55 @@ class homeController
         $products = $this->product->getAllProductByIdCate($cate_id);
         require_once "views/user/home/sanpham.php";
     }
-    public function commen() {
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    public function commen()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id = $_POST['id'];
             $comment = $_POST['comment'];
             $userInfo = $this->acc->getInformationUserByUsername($_SESSION['username']);
-        
+
             $hasBought = $this->home->checkUserBoughtProduct($userInfo['id'], $id);
-            
-            if($hasBought) {
+
+            if ($hasBought) {
                 $result = $this->home->addComment($userInfo['id'], $id, $comment);
-            } 
+            }
             header("Location: ?act=chi-tiet-san-pham-khach-hang&id=$id");
-           
         }
     }
-  
-    
-    
+
+    function lichSuDonHang()
+    {
+        if (isset($_SESSION['username'])) {
+            // var_dump($_SESSION['user']);
+            // die;
+            $user = $this->acc->getInformationUserByUsername($_SESSION['username']);
+            //    print_r($user);
+            //     die;
+            $tai_khoan_id = $user['id'];
+
+            $donHangs= $this->home->getDonHangs($tai_khoan_id);
+            require_once "views/user/home/lichsudonhang.php";
+        }
+    }
+    function huyDonHang(){
+        if (isset($_SESSION['username'])) {
+            $user = $this->acc->getInformationUserByUsername($_SESSION['username']);
+            $tai_khoan_id = $user['id'];
+            $donHangId = $_GET['id'];
+            $donHang = $this->home->getDonHang($donHangId);
+
+            if ($donHang['user_id'] != $tai_khoan_id) {
+                echo "Bạn không có quyền hủy đơn hàng này";
+                exit();
+            }
+            if ($donHang['status'] != 1) {
+                echo "Đơn hàng đã xác nhận không thể huỷ";      
+                exit();
+            }
+
+            $this ->home->updateStatusBill($donHangId, 11);
+
+            header("Location:?act=lich-su-don-hang");
+        }
+    }
 }

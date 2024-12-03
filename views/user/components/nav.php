@@ -71,6 +71,21 @@ $categories = $cate->getListCategory();
           <input type="text" id="search-text" placeholder="Bạn muốn tìm gì?" required>
           <button id="search-btn"><small class="fa fa-search text-body"></small></button>
         </form>
+        <div class="menuf">
+          <div class="dropdown">
+            <a class="btn-sm-square bg-white rounded-circle ms-3" href="index.php?act=gio-hang">
+              <small class="fa fa-shopping-bag text-body"></small>
+            </a>
+            <!-- Menuf con -->
+            <div class="submenf">
+              <a href="index.php?act=gio-hang">
+                <small >Giỏ hàng</small>
+              </a>
+              <a href="index.php?act=lich-su-don-hang"><small>Lịch sử</small></a>
+        
+            </div>
+          </div>
+        </div>
         <?php if (isset($_SESSION['username'])) { ?>
           <a class="btn-sm-square bg-white rounded-circle ms-3" href="index.php?act=logout">
             <small class="fas fa-sign-out-alt"></small>
@@ -80,9 +95,8 @@ $categories = $cate->getListCategory();
             <small class="fa fa-user text-body"></small>
           </a>
         <?php } ?>
-        <a class="btn-sm-square bg-white rounded-circle ms-3" href="index.php?act=gio-hang">
-          <small class="fa fa-shopping-bag text-body"></small>
-        </a>
+
+
         <?php
         if (isset($_SESSION['user'])) {
           $user = $_SESSION['user'];
@@ -98,3 +112,47 @@ $categories = $cate->getListCategory();
 </div>
 <!-- Navbar End -->
 <!-- header -->
+<style>
+  .menuf {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .menuf-item {
+    margin-left: 10px;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+  }
+
+  .submenf {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .submenf a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    white-space: nowrap;
+  }
+
+  .submenf a:hover {
+    background: #f0f0f0;
+  }
+
+  .dropdown:hover .submenf {
+    display: block;
+  }
+</style>
