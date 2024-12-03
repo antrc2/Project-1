@@ -54,8 +54,6 @@ class accountModel
         }
         $hashedPassword = $userInfo['password'];
         if ($this->checkHashedPassword($hashedPassword, $password)) {
-            $_SESSION['user'] = $userInfo; // Store full user info
-            $_SESSION['username'] = $username; // Keep existing username 
             return (['status' => True, "message" => "Đăng nhập thành công"]);
         } else {
             return (['status' => False, "message" => "Sai mật khẩu"]);
