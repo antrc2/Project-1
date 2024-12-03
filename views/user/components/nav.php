@@ -78,6 +78,7 @@ if ($check){
           <button id="search-btn"><small class="fa fa-search text-body"></small></button>
         </form>
         <?php if ($check) { ?>
+
           <a class="btn-sm-square bg-white rounded-circle ms-3" href="index.php?act=logout">
             <small class="fas fa-sign-out-alt"></small>
           </a>
@@ -86,11 +87,13 @@ if ($check){
             <small class="fa fa-user text-body"></small>
           </a>
         <?php } ?>
+
         <a class="btn-sm-square bg-white rounded-circle ms-3" href="index.php?act=gio-hang">
           <small class="fa fa-shopping-bag text-body"></small>
         </a>
         <?php if ($check): ?>
           <?php if ($informationOfUser['role_id'] ==2): ?>
+
             <a href="index.php?act=list-category" class="btn-sm-square bg-white rounded-circle ms-3"><i class="fas fa-user-shield"></i></a>
         
             <?php endif ?>
@@ -103,3 +106,47 @@ if ($check){
 </div>
 <!-- Navbar End -->
 <!-- header -->
+<style>
+  .menuf {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .menuf-item {
+    margin-left: 10px;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+  }
+
+  .submenf {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .submenf a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    white-space: nowrap;
+  }
+
+  .submenf a:hover {
+    background: #f0f0f0;
+  }
+
+  .dropdown:hover .submenf {
+    display: block;
+  }
+</style>

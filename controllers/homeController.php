@@ -218,4 +218,41 @@ class homeController
             header("Location: ?act=chi-tiet-san-pham-khach-hang&id=$id");
         }
     }
+
+
+    function lichSuDonHang()
+    {
+        if (isset($_SESSION['username'])) {
+            // var_dump($_SESSION['user']);
+            // die;
+            $user = $this->acc->getInformationUserByUsername($_SESSION['username']);
+            //    print_r($user);
+            //     die;
+            $tai_khoan_id = $user['id'];
+
+            $donHangs= $this->home->getDonHangs($tai_khoan_id);
+            require_once "views/user/home/lichsudonhang.php";
+        }
+    }
+    function huyDonHang(){
+        if (isset($_SESSION['username'])) {
+            $user = $this->acc->getInformationUserByUsername($_SESSION['username']);
+            $tai_khoan_id = $user['id'];
+            $donHangId = $_GET['id'];
+            $donHang = $this->home->getDonHang($donHangId);
+
+            if ($donHang['user_id'] != $tai_khoan_id) {
+                echo "Bạn không có quyền hủy đơn hàng này";
+                exit();
+            }
+            if ($donHang['status'] != 1) {
+                echo "Đơn hàng đã xác nhận không thể huỷ";      
+                exit();
+            }
+
+            $this ->home->updateStatusBill($donHangId, 11);
+
+            header("Location:?act=lich-su-don-hang");
+        }
+    }
 }
