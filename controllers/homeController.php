@@ -101,15 +101,14 @@ class homeController
             }
         }
         require_once "views/user/home/chitietsanpham.php";
-        if ($res == ""){
-
+        if ($res == "") {
         } else {
-            if ($res->status){
+            if ($res->status) {
                 $icon = "success";
             } else {
                 $icon = "error";
             }
-            echo SweetAlert2($icon,$res->message);
+            echo SweetAlert2($icon, $res->message);
         }
     }
     function gioHang()
@@ -149,49 +148,53 @@ class homeController
     }
     function thanhToan()
     {
-
-        $userInfo = $this->acc->getInformationUserByUsername($_SESSION['username']);
-        $cartByUserId = $this->cart->getCartByUserId($userInfo['id']);
-        if (empty($cartByUserId)) {
-            $cartDetailByCartId = [];
+        if (!isset($_SESSION['username'])) {
+            header("Location: ?act=login");
         } else {
-            $cartDetailByCartId = $this->cart->getCartDetailById($cartByUserId['id']);
-        }
-        $total = 0;
-        foreach ($cartDetailByCartId as $value) {
-            $total += $value['cart_detail_price'] * $value['cart_detail_amount'];
-        }
-        if (isset($_POST['btn_checkout'])) {
-            $fullname = $_POST['fullname'];
-            $address = $_POST['address'];
-            $phone = $_POST['phone'];
-            $email = $_POST['email'];
-            $payMethod = $_POST['httt_ma'];
-            // $this->bill->addOrUpdateBillByUserId($userInfo['id'], $fullname, $address, $phone, $total);
-            $count = 0;
-            // var_dump($cartDetailByCartId);
-            foreach ($cartDetailByCartId as $cart) {
-                // var_dump($cart['product_detail_id']);
+            $userInfo = $this->acc->getInformationUserByUsername($_SESSION['username']);
+            $cartByUserId = $this->cart->getCartByUserId($userInfo['id']);
+            if (empty($cartByUserId)) {
+                $cartDetailByCartId = [];
+            } else {
+                $cartDetailByCartId = $this->cart->getCartDetailById($cartByUserId['id']);
+            }
+            $total = 0;
+            foreach ($cartDetailByCartId as $value) {
+                $total += $value['cart_detail_price'] * $value['cart_detail_amount'];
+            }
+            if (isset($_POST['btn_checkout'])) {
+                $fullname = $_POST['fullname'];
+                $address = $_POST['address'];
+                $phone = $_POST['phone'];
+                $email = $_POST['email'];
+                $payMethod = $_POST['httt_ma'];
+                // $this->bill->addOrUpdateBillByUserId($userInfo['id'], $fullname, $address, $phone, $total);
+                $count = 0;
                 // var_dump($cartDetailByCartId);
-                $detailProduct = $this->product->getDetailProductByProductDetailId($cart['product_detail_id']);
-                // var_dump($detailProduct['amount']);
-                if ($cart['cart_detail_amount'] > $detailProduct['amount']) {
-                    $count++;
-                    $name = $detailProduct['name'];
-                    $price = $detailProduct['price'];
-                    $amount = $detailProduct['amount'];
-                    require_once "views/user/home/thanhtoan.php";
-                    echo SweetAlert2("error", "Sản phẩm $name có giá là $price không đủ số lượng ($amount)");
-                    break;
+                foreach ($cartDetailByCartId as $cart) {
+                    // var_dump($cart['product_detail_id']);
+                    // var_dump($cartDetailByCartId);
+                    $detailProduct = $this->product->getDetailProductByProductDetailId($cart['product_detail_id']);
+                    // var_dump($detailProduct['amount']);
+                    if ($cart['cart_detail_amount'] > $detailProduct['amount']) {
+                        $count++;
+                        $name = $detailProduct['name'];
+                        $price = $detailProduct['price'];
+                        $amount = $detailProduct['amount'];
+                        require_once "views/user/home/thanhtoan.php";
+                        echo SweetAlert2("error", "Sản phẩm $name có giá là $price không đủ số lượng ($amount)");
+                        break;
+                    }
                 }
-            }
-            if ($count == 0) {
-                $this->bill->fromCartDetailToBillDetail($userInfo['id'], $fullname, $address, $phone, $total, $cartDetailByCartId);
-                $this->cart->deleteCart($_SESSION['username']);
-                $cartByUserId = [];
-            }
-        };
-        require_once "views/user/home/thanhtoan.php";
+                if ($count == 0) {
+                    $this->bill->fromCartDetailToBillDetail($userInfo['id'], $fullname, $address, $phone, $total, $cartDetailByCartId);
+                    $this->cart->deleteCart($_SESSION['username']);
+                    // $cartByUserId = [];
+                    header("Location: ?act=lich-su-don-hang");
+                }
+            };
+            require_once "views/user/home/thanhtoan.php";
+        }
     }
     function lienHe()
     {
@@ -230,11 +233,12 @@ class homeController
             //     die;
             $tai_khoan_id = $user['id'];
 
-            $donHangs= $this->home->getDonHangs($tai_khoan_id);
+            $donHangs = $this->home->getDonHangs($tai_khoan_id);
             require_once "views/user/home/lichsudonhang.php";
         }
     }
-    function huyDonHang(){
+    function huyDonHang()
+    {
         if (isset($_SESSION['username'])) {
             $user = $this->acc->getInformationUserByUsername($_SESSION['username']);
             $tai_khoan_id = $user['id'];
@@ -246,11 +250,11 @@ class homeController
                 exit();
             }
             if ($donHang['status'] != 1) {
-                echo "Đơn hàng đã xác nhận không thể huỷ";      
+                echo "Đơn hàng đã xác nhận không thể huỷ";
                 exit();
             }
 
-            $this ->home->updateStatusBill($donHangId, 11);
+            $this->home->updateStatusBill($donHangId, 11);
 
             header("Location:?act=lich-su-don-hang");
         }
