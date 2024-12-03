@@ -63,6 +63,11 @@ class accountController
     }
     function logout()
     {
+            
+        if (isset($_SESSION['user'])) {
+            unset($_SESSION['user']);
+            header("Location: ?act=/");
+        } 
         if (isset($_SESSION['username'])) {
             unset($_SESSION['username']);
             header("Location: ?act=/");

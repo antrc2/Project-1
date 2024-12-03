@@ -163,16 +163,16 @@ include './views/admin/layouts/sidebar.php';
                                             <tr>
                                                 <th style="width:50%">Thành tiền:</th>
                                                 <td>
-                                                    <?= $tong_tien ?> VNĐ
+                                                    <?= number_format($tong_tien) ?> VNĐ
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>Vận chuyển:</th>
-                                                <td>200.000</td>
+                                                <td>0 đ</td>
                                             </tr>
                                             <tr>
                                                 <th>Tổng tiền:</th>
-                                                <td><?= $tong_tien + 200.000 ?>.000 VNĐ</td>
+                                                <td><?= number_format($tong_tien) ?> VNĐ</td>
                                             </tr>
                                         </tbody>
                                     </table>

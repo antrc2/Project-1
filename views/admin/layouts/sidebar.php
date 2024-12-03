@@ -1,8 +1,7 @@
 <aside class="main-sidebar sidebar-primary elevation-4" style="background-color: #663265;">
     <!-- Brand Logo -->
-    <a href="../../index3.html" class="brand-link">
-        <i class="fas fa-user-tie"></i>
-        <span class="brand-text font-weight-light">Trang Admin</span>
+    <a href="index.php?act/" class="brand-link">
+        <button class="btn btn-primary"><span class="brand-text font-weight-light">Quay lại</span></button>
     </a>
 
     <!-- Sidebar -->
@@ -13,7 +12,11 @@
                 <img src="./assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+
+                <?php if (isset($_SESSION['user'])) {
+                    echo $_SESSION['user']['fullname'];
+                } ?>
+
             </div>
         </div>
 
@@ -62,7 +65,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="<?= 'index.php?act=list-discount' ?>" class="nav-link">
-                    <i class="fas fa-percent"></i>
+                        <i class="fas fa-percent"></i>
                         <p>
                             Khuyến mãi
                         </p>

@@ -50,13 +50,13 @@ include './views/user/components/sideshow.php'
                                                 <input type="hidden" name="id" value="<?= $product['id'] ?>">
                                                 <input type="hidden" name="ram" value="<?= $product['ram'] ?>">
                                                 <input type="hidden" name="color" value="<?= $product['color'] ?>">
-                                                <button name="btn_detailProduct">RAM: <?= $product['ram'] ?> - Màu: <?= $product['color'] ?></button>
+                                                <button class="btn btn-outline-primary" name="btn_detailProduct">RAM: <?= $product['ram'] ?> - Màu: <?= $product['color'] ?></button>
                                             </form>
                                         <?php endforeach ?>
                                     </div>
                                 </div>
                                 <?php if ($isPost): ?>
-                                    <form action="?act=add-cart" method="POST">
+                                    <form action="index.php?act=add-cart" method="POST">
                                         <input type="hidden" name="product_detail_id" value="<?= isset($_POST['btn_detailProduct']) ? $variant['product_detail_id'] : $detailProducts[0]['id'] ?>">
                                         <input type="hidden" name="product_id" value="<?= $_GET['id'] ?>">
                                         <div class="detail">
@@ -86,7 +86,8 @@ include './views/user/components/sideshow.php'
                             </div>
                             <div>
                                 <table class="table">
-                                    <b>Bình Luận</b>
+                                <?php $countComment = count($listBinhLuan) ?>
+                                    <b>Bình Luận <?=$countComment ?></b>
                                     <thead>
                                         <tr>
                                             <th></th>
@@ -96,8 +97,9 @@ include './views/user/components/sideshow.php'
                                     </thead>
                                     <tbody>
                                         <td colspan="2">
-                                            <form action="" style="display: flex;">
-                                                <input type="text" name="comment" id="comment" class="form-control" placeholder="Bình luận của bạn về sản phẩm">
+                                            <form action="index.php?act=commen" method="post" style="display: flex;">
+                                                <input type="text" name="id" value="<?= $oneProduct['id'] ?>" hidden>
+                                                <input type="text" name="comment" id="comment" class="form-control" placeholder="Bình luận của bạn về sản phẩm" required >
                                                 <button type="submit" class="btn btn-primary">Gửi</button>
                                             </form>
                                         </td>

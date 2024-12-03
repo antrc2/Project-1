@@ -7,21 +7,24 @@ class DonHangModel
         $this->conn = database();
     }
 
-    function getBillByUserId($userId){
+    function getBillByUserId($userId)
+    {
         return $this->conn->query("SELECT * FROM bill WHERE status =1 and user_id = $userId")->fetch();
     }
-    function addOrUpdateBillByUserId($userId, $fullname, $address, $phone, $total){
+    function addOrUpdateBillByUserId($userId, $fullname, $address, $phone, $total)
+    {
         $checkIssetBill = $this->getBillByUserId($userId);
         $time = time();
-        if($checkIssetBill){
+        if ($checkIssetBill) {
             return $this->conn->prepare("UPDATE bill SET fullname_recieved = '$fullname', address_recieved = '$address', phone_reciedved='$phone', created_at = $time, total = $total WHERE user_id = $userId")->execute();
         } else {
             return $this->conn->prepare("INSERT INTO bill (user_id, fullname_recieved, address_recieved, phone_reciedved, created_at, total, ma_don_hang) VALUES ($userId, '$fullname','$address','$phone',$time, $total, 'DH_test')")->execute();
         }
     }
-    function fromCartDetailToBillDetail($userId, $carts){
+    function fromCartDetailToBillDetail($userId, $carts)
+    {
         $billId = $this->getBillByUserId($userId)['id'];
-        foreach ($carts as $cart){
+        foreach ($carts as $cart) {
             $productDetailid = $cart['product_detail_id'];
             $amount = $cart['amount'];
             $price = $cart['price'];
@@ -29,7 +32,8 @@ class DonHangModel
         }
         return;
     }
-    public function getAllDonHang(){
+    public function getAllDonHang()
+    {
 
         $sql = "SELECT bill.*,trang_thai_don_hang.ten_trang_thai 
         from bill
@@ -65,7 +69,8 @@ class DonHangModel
 
 
 
-    public function getDonHang($id_don_hang){
+    public function getDonHang($id_don_hang)
+    {
         $sql = "SELECT *, (bill_detail.so_luong * bill_detail.thanh_tien) as thanh_tien
         from bill_detail
         join product_detail on bill_detail.product_detail_id = product_detail.id
@@ -106,7 +111,9 @@ class DonHangModel
         $sql = "SELECT bill.*, trang_thai_don_hang.ten_trang_thai,product.name FROM bill
       join bill_detail on bill.id = bill_detail.bill_id
       join trang_thai_don_hang on bill.status = trang_thai_don_hang.id
-      join product on bill_detail.product_id = product.id
+      join product_detail on bill_detail.product_detail_id = product_detail.id 
+      join product on product_detail.product_id = product.id
+
       where bill.user_id = $id";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();

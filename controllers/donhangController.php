@@ -17,6 +17,7 @@ class DonHangController
         $id_don_hang = $_GET['id_don_hang'];
         $listChiTietDonHang = $this->donHangModel->getChiTietDonHang($id_don_hang);
         $listDonHang = $this->donHangModel->getOneDonHang($id_don_hang);
+      
         $sanPhamDonHang  = $this->donHangModel->getDonHang($id_don_hang);
         // var_dump($sanPhamDonHang);
         $listTrangThaiDonHang = $this->donHangModel->getAllTrangThaiDonHang();
