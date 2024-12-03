@@ -21,13 +21,16 @@ class DonHangModel
             return $this->conn->prepare("INSERT INTO bill (user_id, fullname_recieved, address_recieved, phone_reciedved, created_at, total, ma_don_hang) VALUES ($userId, '$fullname','$address','$phone',$time, $total, 'DH_test')")->execute();
         }
     }
-    function fromCartDetailToBillDetail($userId, $carts)
+    function fromCartDetailToBillDetail($userId, $fullname, $address, $phone, $total, $carts)
     {
-        $billId = $this->getBillByUserId($userId)['id'];
+        $time = time();
+        $this->conn->prepare("INSERT INTO bill (user_id, fullname_recieved, address_recieved, phone_reciedved, created_at, total, ma_don_hang) VALUES ($userId, '$fullname','$address','$phone',$time, $total, 'DH_test')")->execute();
+        $result = $this->conn->query("SELECT * from bill WHERE user_id = $userId ORDER BY id DESC ")->fetch();
+        $billId = $result['id'];
         foreach ($carts as $cart) {
             $productDetailid = $cart['product_detail_id'];
-            $amount = $cart['amount'];
-            $price = $cart['price'];
+            $amount = $cart['cart_detail_amount'];
+            $price = $cart['cart_detail_price'];
             $this->conn->prepare("INSERT INTO bill_detail(bill_id, product_detail_id, so_luong, thanh_tien) VALUES ($billId, $productDetailid, $amount, $price)")->execute();
         }
         return;
