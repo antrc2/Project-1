@@ -1,6 +1,12 @@
 <?php
 $cate = new categoryModel;
 $categories = $cate->getListCategory();
+$acc = new accountModel;
+$check = isset($_SESSION['username']);
+if ($check){
+  $informationOfUser = $acc->getInformationUserByUsername($_SESSION['username']);
+}
+
 ?>
 <div
   id="spinner"
@@ -60,18 +66,18 @@ $categories = $cate->getListCategory();
       <div class="d-none d-lg-flex ms-2">
         </a>
         <small style="margin-top:10px; color: red;  padding-right: 10px;">
-          <b>
-            <?php if (isset($_SESSION['user'])) {
-              echo "Xin chào " . $_SESSION['user']['fullname'];
-            } ?>
-          </b>
+          
+            <?php if ($check): ?>
+              <b>Xin chào <?= $informationOfUser['fullname']?></b>
+            <?php endif ?>
+          
         </small>
 
         <form action="" id="search-box">
           <input type="text" id="search-text" placeholder="Bạn muốn tìm gì?" required>
           <button id="search-btn"><small class="fa fa-search text-body"></small></button>
         </form>
-        <?php if (isset($_SESSION['username'])) { ?>
+        <?php if ($check) { ?>
           <a class="btn-sm-square bg-white rounded-circle ms-3" href="index.php?act=logout">
             <small class="fas fa-sign-out-alt"></small>
           </a>
@@ -83,13 +89,12 @@ $categories = $cate->getListCategory();
         <a class="btn-sm-square bg-white rounded-circle ms-3" href="index.php?act=gio-hang">
           <small class="fa fa-shopping-bag text-body"></small>
         </a>
-        <?php
-        if (isset($_SESSION['user'])) {
-          $user = $_SESSION['user'];
-          if ($user['role_id'] == 2) { ?>
+        <?php if ($check): ?>
+          <?php if ($informationOfUser['role_id'] ==2): ?>
             <a href="index.php?act=list-category" class="btn-sm-square bg-white rounded-circle ms-3"><i class="fas fa-user-shield"></i></a>
-        <?php }
-        } ?>
+        
+            <?php endif ?>
+        <?php endif ?>
 
 
       </div>
