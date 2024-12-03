@@ -122,6 +122,7 @@ elseif ($act == "danh-sach-quan-tri") {
     $account->resetTaiKhoan();
 }
 
+
 //bình luận
 elseif ($act == "update-trang-thai-binh-luan") {
     $product->updateTrangThaiBinhLuan();

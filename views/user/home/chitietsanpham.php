@@ -50,7 +50,7 @@ include './views/user/components/sideshow.php'
                                                 <input type="hidden" name="id" value="<?= $product['id'] ?>">
                                                 <input type="hidden" name="ram" value="<?= $product['ram'] ?>">
                                                 <input type="hidden" name="color" value="<?= $product['color'] ?>">
-                                                <button name="btn_detailProduct">RAM: <?= $product['ram'] ?> - Màu: <?= $product['color'] ?></button>
+                                                <button class="btn btn-outline-primary" name="btn_detailProduct">RAM: <?= $product['ram'] ?> - Màu: <?= $product['color'] ?></button>
                                             </form>
                                         <?php endforeach ?>
                                     </div>
