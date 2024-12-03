@@ -1,6 +1,6 @@
 <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
-        <b>By: Shop bán laptop suprebee</b>
+        <b>By: Shop bán Laptop Gaming SuperBee</b>
     </div>
     <strong>Website </strong>
 </footer>

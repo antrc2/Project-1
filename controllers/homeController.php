@@ -18,6 +18,11 @@ class homeController
     }
     function home()
     {
+        $listLimitProduct = $this->product->getNewestProductButLimit(12);
+        require_once "views/user/home/home.php";
+    }
+    function homee()
+    {
         $limitProduct = $this->product->getNewestProductButLimit(12);
         $uniqueProducts = [];
         $seenIds = [];
@@ -36,6 +41,27 @@ class homeController
     }
     function productDetail($id)
     {
+        $res = "";
+        if (isset($_POST['btn_addCart'])) {
+            if (isset($_SESSION['username'])) {
+                $_POST['username'] = $_SESSION['username'];
+                $url = "http://localhost/project-1/index.php?act=add-cart";
+
+                // Khởi tạo cURL
+                $ch = curl_init($url);
+
+                // Cấu hình cURL
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Lấy kết quả trả về
+                curl_setopt($ch, CURLOPT_POST, true); // Phương thức POST
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($_POST)); // Gửi dữ liệu POST
+
+                // Thực thi cURL và lấy kết quả
+                // $response = curl_exec($ch);
+            } else {
+                $response = json_encode(['status' => false, 'message' => "Bạn chưa đăng nhập"]);
+            }
+            $res = json_decode($response);
+        }
         $oneProduct = $this->product->getProductById($id);
         $listBinhLuan = $this->product->getBinhLuan($id);
         $anhChitiet = $this->product->getAnhSanPham($id);
@@ -75,6 +101,16 @@ class homeController
             }
         }
         require_once "views/user/home/chitietsanpham.php";
+        if ($res == ""){
+
+        } else {
+            if ($res->status){
+                $icon = "success";
+            } else {
+                $icon = "error";
+            }
+            echo SweetAlert2($icon,$res->message);
+        }
     }
     function gioHang()
     {
@@ -131,9 +167,9 @@ class homeController
             $phone = $_POST['phone'];
             $email = $_POST['email'];
             $payMethod = $_POST['httt_ma'];
-
-            $this->bill->addOrUpdateBillByUserId($userInfo['id'], $fullname, $address, $phone, $total);
+            // $this->bill->addOrUpdateBillByUserId($userInfo['id'], $fullname, $address, $phone, $total);
             $count = 0;
+            // var_dump($cartDetailByCartId);
             foreach ($cartDetailByCartId as $cart) {
                 // var_dump($cart['product_detail_id']);
                 // var_dump($cartDetailByCartId);
@@ -150,11 +186,11 @@ class homeController
                 }
             }
             if ($count == 0) {
-                $this->bill->fromCartDetailToBillDetail($userInfo['id'], $cartDetailByCartId);
+                $this->bill->fromCartDetailToBillDetail($userInfo['id'], $fullname, $address, $phone, $total, $cartDetailByCartId);
                 $this->cart->deleteCart($_SESSION['username']);
+                $cartByUserId = [];
             }
-        }
-
+        };
         require_once "views/user/home/thanhtoan.php";
     }
     function lienHe()
@@ -182,6 +218,7 @@ class homeController
             header("Location: ?act=chi-tiet-san-pham-khach-hang&id=$id");
         }
     }
+
 
     function lichSuDonHang()
     {

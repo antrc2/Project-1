@@ -56,7 +56,7 @@ include './views/user/components/sideshow.php'
                                     </div>
                                 </div>
                                 <?php if ($isPost): ?>
-                                    <form action="index.php?act=add-cart" method="POST">
+                                    <form action="" method="POST">
                                         <input type="hidden" name="product_detail_id" value="<?= isset($_POST['btn_detailProduct']) ? $variant['product_detail_id'] : $detailProducts[0]['id'] ?>">
                                         <input type="hidden" name="product_id" value="<?= $_GET['id'] ?>">
                                         <div class="detail">
