@@ -131,8 +131,9 @@ class homeController
             $phone = $_POST['phone'];
             $email = $_POST['email'];
             $payMethod = $_POST['httt_ma'];
-            $this->bill->addOrUpdateBillByUserId($userInfo['id'], $fullname, $address, $phone, $total);
+            // $this->bill->addOrUpdateBillByUserId($userInfo['id'], $fullname, $address, $phone, $total);
             $count = 0;
+            // var_dump($cartDetailByCartId);
             foreach ($cartDetailByCartId as $cart) {
                 // var_dump($cart['product_detail_id']);
                 // var_dump($cartDetailByCartId);
@@ -149,11 +150,12 @@ class homeController
                 }
             }
             if ($count == 0) {
-                $this->bill->fromCartDetailToBillDetail($userInfo['id'], $cartDetailByCartId);
+                $this->bill->fromCartDetailToBillDetail($userInfo['id'], $fullname, $address, $phone, $total, $cartDetailByCartId);
                 $this->cart->deleteCart($_SESSION['username']);
+                $cartByUserId = [];
             }
         }
-
+        ;
         require_once "views/user/home/thanhtoan.php";
     }
     function lienHe()
