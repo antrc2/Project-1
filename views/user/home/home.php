@@ -24,7 +24,7 @@ include './views/user/components/sideshow.php'
 
 
           <!-- vòng lặp forech ở đây  lấy 6 sản phẩm mới nhất-->
-          <?php foreach ($limitProduct as $product): 
+          <?php foreach ($listLimitProduct as $product): 
             if ($product['status'] ==1) {
               
             
