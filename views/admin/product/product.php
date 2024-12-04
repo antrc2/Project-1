@@ -1,8 +1,4 @@
-<?php
-include './views/admin/layouts/header.php';
-include './views/admin/layouts/navbar.php';
-include './views/admin/layouts/sidebar.php';
-?>
+
 <a href="?act=add-product"><button>Thêm</button></a>
 <table class="table">
     <thead>
@@ -44,7 +40,3 @@ include './views/admin/layouts/sidebar.php';
         <?php endforeach ?>
     </tbody>
 </table>
-
-<?php
-include './views/admin/layouts/footer.php';
-?>
