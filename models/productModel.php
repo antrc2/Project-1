@@ -194,7 +194,9 @@ class SanPhamModel
     public function getChiTietSanPham($id){
 
         try {
-            $sql = "SELECT * FROM `product_detail` WHERE  `product_id`= $id";
+            $sql = "SELECT  product_detail.*, bill_detail.* FROM product_detail
+            join bill_detail on product_detail.id = bill_detail.product_detail_id
+             WHERE  `product_id`= $id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $resutl =  $stmt->fetch();

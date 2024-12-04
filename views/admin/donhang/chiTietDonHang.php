@@ -108,7 +108,7 @@ include './views/admin/layouts/sidebar.php';
                             <!-- /.col -->
                             <div class="col-sm-4 invoice-col">
                                 <b>Mã đơn hàng:<?= $listChiTietDonHang['ma_don_hang'] ?></b><br>
-                                <b> Tổng tiền:</b><?= $listChiTietDonHang['total'] ?> vnđ<br>
+                                <b> Tổng tiền:</b><?= number_format($listChiTietDonHang['total'] )?> vnđ<br>
                             </div>
                             <!-- /.col -->
                         </div>
@@ -136,11 +136,11 @@ include './views/admin/layouts/sidebar.php';
                                             <tr>
                                                 <td><?= $key + 1 ?></td>
                                                 <td><?= $sanPham['name'] ?> </td>
-                                                <td><?= $sanPham['price'] ?></td>
+                                                <td><?= number_format( $sanPham['price'] ) ?></td>
                                                 <td><?= $sanPham['color'] ?></td>
                                                 <td><?= $sanPham['ram'] ?></td>
                                                 <td><?= $sanPham['so_luong'] ?></td>
-                                                <td><?= $sanPham['thanh_tien'] ?></td>
+                                                <td><?= number_format($sanPham['thanh_tien']) ?></td>
                                             </tr>
                                             <?php $tong_tien += $sanPham['thanh_tien']; ?>
                                         <?php } ?>

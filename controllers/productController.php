@@ -245,6 +245,7 @@ class productController
             }
         }
     }
+    
     public function chiTietSanPham()
     {
         $id = $_GET['id_san_pham'];

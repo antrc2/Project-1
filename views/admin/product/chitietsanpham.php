@@ -42,17 +42,15 @@ include './views/admin/layouts/sidebar.php';
                         </div>
                     </div>
                     <div class="col-12 col-sm-6">
-                        <h1 class="my-3">Chi tiết của sản phẩm : <?= $product['name'] ?></h1>
+                        <h3 class="my-3">Chi tiết của sản phẩm mua : <?= $product['name'] ?></h3>
                         <hr>
                         <h5><b>Tên sản phẩm :</b> <?= $product['name'] ?></h5>
                         <h5><b>Màu : </b><?= $chiTietSanPham['color'] ?></h5>
-                        <h5><b>Giá :</b><?= $chiTietSanPham['price'] ?></h5>
+                        <h5><b>Giá :</b><?= number_format($chiTietSanPham['price']) ?></h5>
                         <h5><b>Danh mục :</b><?= $danhmuc['cate_name'] ?></h5>
-                        <h5><b>Số lượng :</b><?= $chiTietSanPham['amount'] ?></h5>
+                        <h5><b>Số lượng mua:</b><?= $chiTietSanPham['so_luong'] ?></h5>
                         <h5><b>RAM: </b><?= $chiTietSanPham['ram'] ?>GB</h5>
-                        <h5><b>Mô tả::</b>
-                            <p><?= $product['detail'] ?></p>
-                        </h5>
+                        <h5><b>Thành tiền thanh toán: </b><?= number_format($chiTietSanPham['thanh_tien'] )?>GB</h5>
                         <div class="row mt-4">
                             <ul class="nav nav-tabs row mt-4" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
