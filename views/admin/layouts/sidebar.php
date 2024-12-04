@@ -13,9 +13,11 @@
             </div>
             <div class="info">
 
-                <?php if (isset($_SESSION['username'])) {
-                    echo $_SESSION['username'];
-                } ?>
+                <?php  
+                $acc = new accountModel;
+                $userInfo = $acc->getInformationUserByUsername($_SESSION['username']);
+                echo $userInfo['fullname'];
+                ?>
             </div>
         </div>
 
