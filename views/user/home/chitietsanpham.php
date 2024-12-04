@@ -46,12 +46,14 @@ include './views/user/components/sideshow.php'
                                 <div class="variants">
                                     <div class="variant">
                                         <?php foreach ($detailProducts as $product): ?>
+                                            <?php if($product['status'] ==1): ?>
                                             <form action="" method="POST">
                                                 <input type="hidden" name="id" value="<?= $product['id'] ?>">
                                                 <input type="hidden" name="ram" value="<?= $product['ram'] ?>">
                                                 <input type="hidden" name="color" value="<?= $product['color'] ?>">
                                                 <button class="btn btn-outline-primary" name="btn_detailProduct">RAM: <?= $product['ram'] ?> - Màu: <?= $product['color'] ?></button>
                                             </form>
+                                            <?php endif ?>
                                         <?php endforeach ?>
                                     </div>
                                 </div>

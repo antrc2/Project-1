@@ -11,10 +11,99 @@ class productController
 
     public function danhSachSanPham()
     {
-        $listSanPham = $this->modelSanPham->getAllSanPham();
-        require_once "./views/admin/product/createProduct.php";
+        $products  = $this->modelSanPham->getAllProductWithCate();
+        // $listSanPham = $this->modelSanPham->getAllSanPham();
+        require_once "./views/admin/product/product.php";
     }
+    function listProductDetail($id){
+        $productDetails = $this->modelSanPham->getAllDetailProduct($id);
+        require_once "views/admin/productDetail/listProductDetail.php";
+    }
+    function updateProduct($id){
+        $product = $this->modelSanPham->getOneProduct($id);
+        $cates = $this->modelDanhMuc->getListCategory();
+        require_once "views/admin/product/updateProduct.php";
+        if(isset($_POST['btn_updateProduct'])){
+            $name = $_POST['name'];
+            $detail = $_POST['detail'];
+            $cate_id = $_POST['cate_id'];
+            if (empty($_FILES['image'])){
 
+            } else {
+                move_uploaded_file($_FILES['image']['tmp_name'],"assets/img/".$_FILES['image']['name']);
+            }
+            $result = $this->modelSanPham->updateProduct($id, $name, $detail, $cate_id,$_FILES['image']);
+            if($result){
+                headerAfterXSecondWithSweetAlert2("?act=danh-sach-admin-san-pham",1500,"success",'Cập nhật sản phẩm thành công');
+            }
+        }
+        
+    }
+    function addProductDetail($product_id){
+        require_once "views/admin/productDetail/addProductDetail.php";
+        if (isset($_POST['btn_addProductDetail'])){
+            $amount = $_POST['amount'];
+            $ram = $_POST['ram'];
+            $color = $_POST['color'];
+            $price = $_POST['price'];
+            $result = $this->modelSanPham->addProductDetail($product_id, $amount, $ram, $color, $price);
+            if ($result){
+                headerAfterXSecondWithSweetAlert2("?act=list-product-detail&id=$product_id",1500,"success","Thêm chi tiết sản phẩm thành công");
+            }
+        }
+        
+    }
+    function addProduct(){
+        $cates = $this->modelDanhMuc->getListCategory();
+        require_once "views/admin/product/addProduct.php";
+        if(isset($_POST['btn_addProduct'])){
+            $name = $_POST['name'];
+            $detail = $_POST['detail'];
+            $cate_id = $_POST['cate_id'];
+            move_uploaded_file($_FILES['image']['tmp_name'],"assets/img/".$_FILES['image']['name']);
+            $result = $this->modelSanPham->addProduct($name,$detail,$cate_id,$_FILES['image']['name']);
+            if ($result){
+                headerAfterXSecondWithSweetAlert2("?act=danh-sach-admin-san-pham",1500,"success","Thêm sản phẩm thành công");
+            }
+        }
+    }
+    function deleteProduct($id){
+        $result = $this->modelSanPham->deleteProduct($id);
+        header("Location: ?act=danh-sach-admin-san-pham");
+    }
+    function undoDeleteProduct($id){
+        $result = $this->modelSanPham->undoDeleteProduct($id);
+        header("Location: ?act=danh-sach-admin-san-pham");
+    }
+    function updateProductDetail($id){
+        $productDetail = $this->modelSanPham->getOneProductDetail($id);
+        require_once "views/admin/productDetail/updateProductDetail.php";
+        if (isset($_POST['btn_updateProductDetail'])){
+            $amount = $_POST['amount'];
+            $ram = $_POST['ram'];
+            $color = $_POST['color'];
+            $price = $_POST['price'];
+            $result = $this->modelSanPham->updateProductDetail($id, $amount, $ram, $color, $price);
+            if ($result){
+                $product_id = $_GET['product_id'];
+                headerAfterXSecondWithSweetAlert2("?act=list-product-detail&id=$product_id", 1500, "success","Sửa chi tiết sản phẩm thành công");
+            }
+        }
+    }
+    function deleteProductDetail($id){
+        $result = $this->modelSanPham->deleteProductDetail($id);
+        if($result){
+            $product_id = $_GET['product_id'];
+            header("Location: ?act=list-product-detail&id=$product_id");
+        }
+    }
+    function undoDeleteProductDetail($id){
+        $result = $this->modelSanPham->undoDeleteProductDetail($id);
+        if($result){
+            $product_id = $_GET['product_id'];
+            header("Location: ?act=list-product-detail&id=$product_id");
+        }
+    }
     public function formThemSanPham()
     {
         $listDanhMuc = $this->modelSanPham->getAll();

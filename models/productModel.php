@@ -14,7 +14,9 @@ class SanPhamModel
         $result = $stmt->fetchAll();
         return $result;
     }
-    
+    function getAllProductWithCate(){
+        return $this->conn->query("SELECT *,product.id AS product_id,product.created_at AS product_created_at, product.updated_at AS product_updated_at ,product.status AS product_status, category.status AS category_status FROM product JOIN category ON product.cate_id = category.id")->fetchAll();
+    }
     public function getAllProductByIdCate($id_cate){
         return $this->conn->query("SELECT product.*, product_detail.status , product_detail.price, product_detail.amount, product_detail.ram, product_detail.color,category.cate_name
             FROM product
@@ -23,7 +25,7 @@ class SanPhamModel
              ORDER BY product.id DESC")->fetchAll();
     }
     function getNewestProductButLimit($limit){
-        return $this->conn->query("SELECT * FROM product ORDER BY id DESC LIMIT $limit")->fetchAll();
+        return $this->conn->query("SELECT *,product.id AS product_id, product.status AS product_status, category.status AS category_status FROM product JOIN category ON product.cate_id = category.id ORDER BY product.id DESC LIMIT $limit")->fetchAll();
         // return $this->conn->query("SELECT product.*, product_detail.status FROM product 
         // join product_detail ON product.id = product_detail.product_id
         //  ORDER BY product.id DESC LIMIT $limit")->fetchAll();
@@ -66,6 +68,39 @@ class SanPhamModel
             echo "Error: " . $e->getMessage();
         }
     }
+    function getOneProduct($id){
+        return $this->conn->query("SELECT * FROM product WHERE id=$id")->fetch();
+    }
+    function getOneProductDetail($id){
+        return $this->conn->query("SELECT * FROM product_detail WHERE id=$id")->fetch();
+    }
+    function updateProduct($id, $name, $detail, $cate_id,$img){
+        $time = time();
+        if ($img['name'] == ""){
+            return $this->conn->prepare("UPDATE product SET name='$name',detail='$detail', updated_at = $time,cate_id = $cate_id WHERE id=$id")->execute();
+        } else {
+            $nameImg = $img['name'];
+            return $this->conn->prepare("UPDATE product SET name='$name',detail='$detail', updated_at = $time,image = '$nameImg',cate_id = $cate_id WHERE id=$id")->execute();
+        }
+    }
+    function addProduct($name,$detail,$cate_id,$img){
+        $time = time();
+        return $this->conn->prepare("INSERT INTO product (cate_id, name, image, created_at, updated_at, detail) VALUES ($cate_id, '$name', '$img',$time, $time, '$detail')")->execute();
+    }
+    function updateProductDetail($id, $amount, $ram, $color, $price){
+        $time = time();
+        return $this->conn->prepare("UPDATE product_detail SET updated_at=$time, amount=$amount, ram=$ram,color='$color',price=$price WHERE id=$id")->execute();
+    }
+    function deleteProductDetail($id){
+        return $this->conn->prepare("UPDATE product_detail SET status=2 WHERE id=$id")->execute();
+    }
+    function undoDeleteProductDetail($id){
+        return $this->conn->prepare("UPDATE product_detail SET status=1 WHERE id=$id")->execute();
+    }
+    function addProductDetail($product_id, $amount, $ram, $color, $price){
+        $time = time();
+        return $this->conn->prepare("INSERT INTO product_detail(product_id, created_at, updated_at, price, amount, ram, color) VALUES($product_id,$time, $time, $price, $amount, $ram, '$color')")->execute();
+    }
     public function insertChiTietSanPham($product_id, $soLuong, $ram, $mau, $giaSanPham, $status)
     {
         try {
@@ -79,6 +114,12 @@ class SanPhamModel
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
+    }
+    function deleteProduct($id){
+        return $this->conn->prepare("UPDATE product SET status=2 WHERE id=$id")->execute();
+    }
+    function undoDeleteProduct($id){
+        return $this->conn->prepare("UPDATE product SET status=1 WHERe id=$id")->execute();
     }
     public function insertHinhAnh($product_id, $hinhAnh)
     {
