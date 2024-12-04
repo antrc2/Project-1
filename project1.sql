@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 03, 2024 at 03:37 AM
+-- Generation Time: Dec 04, 2024 at 07:12 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -46,9 +46,10 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`id`, `fullname`, `username`, `email`, `password`, `address`, `phone`, `created_at`, `updated_at`, `status`, `role_id`) VALUES
-(20, 'Nguyễn Ngọc An', 'antrc2', 'antrc2gamer@gmail.com', 'd0794f96a42e8391$49ab17437d854d94fe33410e087004e94094b386ff10f7011b51e2359c8ce3f2', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1732906482, 1732906482, 1, 1),
+(20, 'Nguyễn Ngọc An', 'antrc2', 'antrc2gamer@gmail.com', 'd0794f96a42e8391$49ab17437d854d94fe33410e087004e94094b386ff10f7011b51e2359c8ce3f2', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1732906482, 1732906482, 1, 2),
 (21, 'Đỗ Phú Hiếu', 'hieudp', 'gtvbehieu@gmail.com', 'f61fa41e31687f0a$08e3513a8e10e4e8cb0349840845e76c28f8ceacc08fc27858d242f840226560', 'Hoài Đức-Hà Nội', '0353276676', 1733132264, 1733132264, 1, 1),
-(23, 'Văn đạt', 'dat29', 'dat@gmail.com', '9a95df92e3a02162$08dfda87e5fc06555d75ef39204ad6ae758eedd5f4bcbbae47cc2d212b45eab3', 'Hoài Đức-Hà Nội', '0353234345', 1733161720, 1733161720, 1, 2);
+(23, 'Văn đạt', 'dat29', 'dat@gmail.com', '9a95df92e3a02162$08dfda87e5fc06555d75ef39204ad6ae758eedd5f4bcbbae47cc2d212b45eab3', 'Hoài Đức-Hà Nội', '0353234345', 1733161720, 1733161720, 1, 2),
+(24, 'Nguyễn Ngọc An', 'antrc3', 'antrcgamer@gmail.com', '69a0a0db49f54a53$907355ee4cd607022f0823c4c61b59817c3af7f363f466fe4cf74fbeb34e255a', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411898', 1733199144, 1733199144, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -73,11 +74,14 @@ CREATE TABLE `bill` (
 --
 
 INSERT INTO `bill` (`id`, `user_id`, `fullname_recieved`, `address_recieved`, `phone_reciedved`, `created_at`, `total`, `status`, `ma_don_hang`) VALUES
-(3, 20, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733082351, 32360, 9, 'DH_234'),
-(4, 20, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733082351, 32360, 9, 'DH_test'),
-(5, 20, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733082477, 256775, 10, 'DH_test'),
-(6, 21, 'Đỗ Phú Hiếu', 'Hoài Đức-Hà Nội', '0353276676', 1733194047, 0, 1, 'DH_test'),
-(7, 23, 'Văn đạt', 'Hoài Đức-Hà Nội', '0353234345', 1733196181, 121410, 1, 'DH_test');
+(10, 20, 'Nguyễn Ngọc Anh', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733208531, 12000, 1, 'DH_test'),
+(11, 20, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733232556, 12630, 1, 'DH_test'),
+(12, 20, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733233335, 24690, 1, 'DH_test'),
+(13, 20, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733233549, 24690, 1, 'DH_test'),
+(14, 20, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733234663, 240000, 1, 'DH_test'),
+(15, 20, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733234686, 24000, 1, 'DH_test'),
+(16, 20, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733234823, 570, 1, 'DH_test'),
+(17, 20, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733241256, 840000, 1, 'DH_test');
 
 -- --------------------------------------------------------
 
@@ -100,30 +104,22 @@ CREATE TABLE `bill_detail` (
 --
 
 INSERT INTO `bill_detail` (`id`, `bill_id`, `product_detail_id`, `so_luong`, `thanh_tien`, `was_review`, `trang_thai`) VALUES
-(4, 3, 41, 10, 12000, 0, 1),
-(5, 3, 42, 24, 34555, 0, 1),
-(6, 4, 42, 24, 34555, 0, 1),
-(7, 4, 43, 10, 10000, 0, 1),
-(8, 4, 42, 24, 34555, 0, 1),
-(9, 4, 43, 10, 10000, 0, 1),
-(10, 4, 42, 24, 34555, 0, 1),
-(11, 4, 43, 10, 10000, 0, 1),
-(12, 4, 41, 10, 12000, 0, 1),
-(13, 4, 37, 12, 30, 0, 1),
-(14, 4, 43, 10, 10000, 0, 1),
-(15, 5, 42, 24, 34555, 0, 1),
-(16, 5, 41, 10, 12000, 0, 1),
-(17, 6, 40, 10, 120000, 0, 1),
-(18, 6, 41, 10, 12000, 0, 1),
-(19, 6, 42, 24, 34555, 0, 1),
-(20, 6, 42, 24, 34555, 0, 1),
-(21, 6, 43, 10, 10000, 0, 1),
-(22, 6, 41, 10, 12000, 0, 1),
-(23, 6, 41, 10, 12000, 0, 1),
-(24, 6, 43, 18, 30, 0, 1),
-(25, 7, 40, 10, 120000, 0, 1),
-(26, 7, 43, 10, 150, 0, 1),
-(27, 7, 37, 18, 30, 0, 1);
+(33, 10, 43, 10, 150, 0, 1),
+(34, 10, 37, 18, 30, 0, 1),
+(35, 10, 41, 10, 12000, 0, 1),
+(36, 10, 42, 24, 34555, 0, 1),
+(37, 10, 41, 10, 12000, 0, 1),
+(38, 10, 41, 1, 12000, 0, 1),
+(39, 10, 43, 4, 150, 0, 1),
+(40, 10, 37, 1, 30, 0, 1),
+(41, 13, 41, 2, 12000, 0, 1),
+(42, 13, 43, 4, 150, 0, 1),
+(43, 13, 37, 3, 30, 0, 1),
+(44, 14, 40, 2, 120000, 0, 1),
+(45, 15, 41, 2, 12000, 0, 1),
+(46, 16, 43, 3, 150, 0, 1),
+(47, 16, 37, 4, 30, 0, 1),
+(48, 17, 40, 7, 120000, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -147,7 +143,8 @@ INSERT INTO `cart` (`id`, `user_id`, `created_at`, `updated_at`, `status`) VALUE
 (1, 20, 1732909515, 1732909515, 2),
 (3, 20, 1733080458, 1733080458, 1),
 (4, 21, 1733132276, 1733132276, 1),
-(5, 23, 1733195999, 1733195999, 1);
+(5, 23, 1733195999, 1733195999, 1),
+(6, 24, 1733199959, 1733199959, 1);
 
 -- --------------------------------------------------------
 
@@ -165,14 +162,6 @@ CREATE TABLE `cart_detail` (
   `updated_at` bigint NOT NULL,
   `status` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `cart_detail`
---
-
-INSERT INTO `cart_detail` (`id`, `cart_id`, `product_detail_id`, `amount`, `price`, `created_at`, `updated_at`, `status`) VALUES
-(38, 5, 43, 7, 150, 1733196758, 1733196769, 1),
-(39, 5, 37, 4, 30, 1733196764, 1733196797, 1);
 
 -- --------------------------------------------------------
 
@@ -236,19 +225,21 @@ CREATE TABLE `product` (
   `image` varchar(255) NOT NULL,
   `created_at` bigint NOT NULL,
   `updated_at` bigint NOT NULL,
-  `detail` varchar(255) NOT NULL
+  `detail` varchar(255) NOT NULL,
+  `status` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`id`, `cate_id`, `name`, `image`, `created_at`, `updated_at`, `detail`) VALUES
-(28, 2, 'dell', 'th (9).jpg', 1733194296, 1733194296, 'sds'),
-(30, 1, 'ex', 'th (1).jpg', 1733145988, 1733145988, 'wewr'),
-(31, 2, 'lap top l dell', 'th (3).jpg', 1733146048, 1733146048, 'rất ok'),
-(32, 5, 'dell 5i', 'th (5).jpg', 1733146117, 1733146117, 'sản phẩm tốt cho người dùng'),
-(33, 3, 'lap top levo', 'th.jpg', 1733146086, 1733146086, 'edefd');
+INSERT INTO `product` (`id`, `cate_id`, `name`, `image`, `created_at`, `updated_at`, `detail`, `status`) VALUES
+(28, 2, 'dell', '400350684_756076966348762_7191393029513830909_n.jpg', 1733194296, 1733246962, 'sds', 1),
+(30, 1, 'ex', '122959113_449563376022943_7005312100385151816_n.jpg', 1733145988, 1733247057, 'An 18cm', 1),
+(31, 2, 'lap top l dell', 'th (3).jpg', 1733146048, 1733146048, 'rất ok', 2),
+(32, 5, 'dell 5i', 'th (5).jpg', 1733146117, 1733146117, 'sản phẩm tốt cho người dùng', 1),
+(33, 3, 'lap top levo', 'th.jpg', 1733146086, 1733146086, 'edefd', 1),
+(34, 2, 'AnTrc2', '400350684_756076966348762_7191393029513830909_n.jpg', 1733296049, 1733296049, '18cm', 1);
 
 -- --------------------------------------------------------
 
@@ -259,6 +250,8 @@ INSERT INTO `product` (`id`, `cate_id`, `name`, `image`, `created_at`, `updated_
 CREATE TABLE `product_detail` (
   `id` int NOT NULL,
   `product_id` int NOT NULL,
+  `created_at` int NOT NULL DEFAULT '0',
+  `updated_at` int NOT NULL DEFAULT '0',
   `price` int NOT NULL,
   `amount` int NOT NULL,
   `ram` int NOT NULL,
@@ -270,13 +263,15 @@ CREATE TABLE `product_detail` (
 -- Dumping data for table `product_detail`
 --
 
-INSERT INTO `product_detail` (`id`, `product_id`, `price`, `amount`, `ram`, `color`, `status`) VALUES
-(37, 28, 30, 18, 4, 'Xám', 1),
-(39, 30, 12, 12, 64, 'Xanh', 0),
-(40, 31, 120000, 10, 8, 'Đen', 1),
-(41, 32, 12000, 10, 8, 'Đen', 1),
-(42, 33, 34555, 24, 8, 'Đen', 1),
-(43, 28, 150, 10, 64, 'Đen', 1);
+INSERT INTO `product_detail` (`id`, `product_id`, `created_at`, `updated_at`, `price`, `amount`, `ram`, `color`, `status`) VALUES
+(37, 28, 0, 0, 300, 14, 4, 'Xám', 1),
+(39, 30, 0, 0, 12, 12, 64, 'Xanh', 1),
+(40, 31, 0, 0, 120000, 1, 8, 'Đen', 1),
+(41, 32, 0, 0, 12000, 8, 8, 'Đen', 1),
+(42, 33, 0, 0, 34555, 24, 8, 'Đen', 1),
+(43, 28, 0, 0, 150, 7, 64, 'Đen', 1),
+(44, 28, 1733295146, 1733295146, 120000, 10, 16, 'Đỏ', 1),
+(45, 34, 1733296104, 1733296171, 10000, 10, 4, 'Xanh than', 1);
 
 -- --------------------------------------------------------
 
@@ -488,31 +483,31 @@ ALTER TABLE `trang_thai_don_hang`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `cart_detail`
 --
 ALTER TABLE `cart_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -530,13 +525,13 @@ ALTER TABLE `discount`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `product_detail`
 --
 ALTER TABLE `product_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `product_detail_image`
