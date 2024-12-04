@@ -13,10 +13,9 @@
             </div>
             <div class="info">
 
-                <?php if (isset($_SESSION['user'])) {
-                    echo $_SESSION['user']['fullname'];
+                <?php if (isset($_SESSION['username'])) {
+                    echo $_SESSION['username'];
                 } ?>
-
             </div>
         </div>
 

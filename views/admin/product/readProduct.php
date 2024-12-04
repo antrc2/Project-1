@@ -110,7 +110,6 @@ include './views/admin/layouts/sidebar.php';
                                 </div>
                                 <div class="form-group  col-md-6">
                                     <label>Màu</label>
-
                                     <select name="color" class="form-control">
                                         <option selected disabled>Chọn màu của sản phẩm</option>
                                         <option value="Xanh">Xanh</option>

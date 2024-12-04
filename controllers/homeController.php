@@ -247,7 +247,6 @@ class homeController
             }
 
             $this->home->updateStatusBill($donHangId, 11);
-
             header("Location:?act=lich-su-don-hang");
         } else {
             header("Location: ?act=login");

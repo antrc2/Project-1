@@ -72,7 +72,7 @@ include './views/admin/layouts/sidebar.php';
                                                 <?=epochTimeToDateTime($donHang["created_at"])  ?>
                                             </td> 
                                              <td>
-                                                <?= $donHang["total"] ?>
+                                                <?= number_format($donHang["total"] )?>
                                             </td>
                                             <td>
                                                 <?= $donHang["ten_trang_thai"] ?>
