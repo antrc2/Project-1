@@ -18,13 +18,13 @@ class DonHangModel
         if ($checkIssetBill) {
             return $this->conn->prepare("UPDATE bill SET fullname_recieved = '$fullname', address_recieved = '$address', phone_reciedved='$phone', created_at = $time, total = $total WHERE user_id = $userId")->execute();
         } else {
-            return $this->conn->prepare("INSERT INTO bill (user_id, fullname_recieved, address_recieved, phone_reciedved, created_at, total, ma_don_hang) VALUES ($userId, '$fullname','$address','$phone',$time, $total, 'DH_test')")->execute();
+            return $this->conn->prepare("INSERT INTO bill (user_id, fullname_recieved, address_recieved, phone_reciedved, created_at, total) VALUES ($userId, '$fullname','$address','$phone',$time, $total)")->execute();
         }
     }
     function fromCartDetailToBillDetail($userId, $fullname, $address, $phone, $total, $carts)
     {
         $time = time();
-        $this->conn->prepare("INSERT INTO bill (user_id, fullname_recieved, address_recieved, phone_reciedved, created_at, total, ma_don_hang) VALUES ($userId, '$fullname','$address','$phone',$time, $total, 'DH_test')")->execute();
+        $this->conn->prepare("INSERT INTO bill (user_id, fullname_recieved, address_recieved, phone_reciedved, created_at, total) VALUES ($userId, '$fullname','$address','$phone',$time, $total)")->execute();
         $result = $this->conn->query("SELECT * from bill WHERE user_id = $userId ORDER BY id DESC ")->fetch();
         $billId = $result['id'];
         foreach ($carts as $cart) {
