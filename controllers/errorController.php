@@ -11,7 +11,7 @@
         }
         function forbidden(){
             http_response_code(403);
-            require_once "views/user/error/404.php";
+            require_once "views/user/error/403.php";
         }
         function methodNotAllow(){
             http_response_code(405);
