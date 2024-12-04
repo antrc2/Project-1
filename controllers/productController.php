@@ -11,13 +11,60 @@ class productController
 
     public function danhSachSanPham()
     {
+        
         $products  = $this->modelSanPham->getAllProductWithCate();
         // $listSanPham = $this->modelSanPham->getAllSanPham();
         require_once "./views/admin/product/product.php";
     }
     function listProductDetail($id){
         $productDetails = $this->modelSanPham->getAllDetailProduct($id);
+        $isPost = false;
+        $icon = "";
+        $message = "";
+        if(isset($_POST['btn_listImages'])){
+            $isPost = true;
+            $productDetailId = $_POST['product_detail_id'];
+            $images = $this->modelSanPham->getListImageByProductDetailId($productDetailId);
+        }
+        if(isset($_POST['btn_addImages'])){
+            $productDetailId = $_POST['product_detail_id'];
+            $images = $this->modelSanPham->getListImageByProductDetailId($productDetailId);
+            $newImage = $_FILES['image'];
+            $amountImages = count($newImage['name']);
+            for ($i =0; $i<$amountImages; $i++){
+                move_uploaded_file($newImage['tmp_name'][$i], "assets/img/". $newImage['name'][$i]);
+                $this->modelSanPham->addAnhSanPham($productDetailId,$newImage['name'][$i]);
+            }
+            $icon = "success";
+            $message = "Thêm album ảnh thành công";
+        }
+        if(isset($_POST['btn_deleteImage'])){
+            $result = $this->modelSanPham->deleteAnhSanPham($_POST['id']);
+            if($result){
+                $icon = "success";
+                $message = "Xóa ảnh thành công";
+            } else {
+                $icon = "error";
+                $message = "Xóa ảnh thất bại";
+            } 
+        }
+        if(isset($_POST['btn_updateImage'])){
+            $img = $_FILES['img'];
+            move_uploaded_file($img['tmp_name'], "assets/img/".$img['name']);
+            $result = $this->modelSanPham->updateProductImage($_POST['id'], $img['name']);
+            if ($result){
+                $icon = "success";
+                $message = "Sửa ảnh thành công";
+            } else {
+                $icon = "error";
+                $message = "Sửa ảnh thất bại";
+            }
+        }
+        
         require_once "views/admin/productDetail/listProductDetail.php";
+        if ($icon != "" & $message != ""){
+            echo SweetAlert2($icon, $message);
+        }
     }
     function updateProduct($id){
         $product = $this->modelSanPham->getOneProduct($id);

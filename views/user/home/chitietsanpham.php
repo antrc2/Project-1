@@ -62,8 +62,10 @@ include './views/user/components/sideshow.php'
                                         <input type="hidden" name="product_detail_id" value="<?= isset($_POST['btn_detailProduct']) ? $variant['product_detail_id'] : $detailProducts[0]['id'] ?>">
                                         <input type="hidden" name="product_id" value="<?= $_GET['id'] ?>">
                                         <div class="detail">
-                                            <?php if (boolval($check) & $discountAmount != 0) : ?>
+                                            <?php if (boolval($check) & $discountAmount != 0): ?>
+                                                <?php if($check['status'] ==1): ?>
                                                 <small class="text-muted">Giá cũ: <s><span><?= number_format($variant['price']) ?>đ</span></s></small>
+                                                <?php endif ?>
                                             <?php endif ?>
                                             <h4 class="price">Giá hiện tại: <span><?= number_format($variant['price'] - $discountAmount) ?>đ</span></h4>
                                             <input type="hidden" name="price" value="<?= $variant['price'] - $discountAmount ?>">
