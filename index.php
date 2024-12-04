@@ -73,8 +73,7 @@ elseif ($act == "list-product-detail"){
     $product->addProductDetail($_GET['id']);
 } elseif ($act == "add-product"){
     $product->addProduct();
-}
-elseif ($act == "danh-sach-admin-san-pham") {
+} elseif ($act == "danh-sach-admin-san-pham") {
     $product->danhSachSanPham();
 }
 
