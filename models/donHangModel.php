@@ -21,10 +21,18 @@ class DonHangModel
             return $this->conn->prepare("INSERT INTO bill (user_id, fullname_recieved, address_recieved, phone_reciedved, created_at, total) VALUES ($userId, '$fullname','$address','$phone',$time, $total)")->execute();
         }
     }
+    function getNewestBillByUserId($userId){
+        return $this->conn->query("SELECT * FROM bill WHERE user_id = $userId ORDER BY id DESC ")->fetch();
+    }
     function fromCartDetailToBillDetail($userId, $fullname, $address, $phone, $total, $carts)
     {
         $time = time();
-        $this->conn->prepare("INSERT INTO bill (user_id, fullname_recieved, address_recieved, phone_reciedved, created_at, total) VALUES ($userId, '$fullname','$address','$phone',$time, $total)")->execute();
+        $this->conn->prepare("INSERT INTO bill (user_id, fullname_recieved, address_recieved, phone_reciedved, created_at, total, ma_don_hang) VALUES ($userId, '$fullname','$address','$phone',$time, $total, 'hehe')")->execute();
+        $newestBill = $this->getNewestBillByUserId($userId);
+        var_dump($newestBill);
+        $newestBillid = $newestBill['id'];
+        $ma_don_hang = "DH_".$newestBillid;
+        $this->conn->prepare("UPDATE bill SET ma_don_hang='$ma_don_hang' WHERE id=$newestBillid")->execute();
         $result = $this->conn->query("SELECT * from bill WHERE user_id = $userId ORDER BY id DESC ")->fetch();
         $billId = $result['id'];
         foreach ($carts as $cart) {
