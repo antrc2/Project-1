@@ -219,6 +219,8 @@ class homeController
 
             $donHangs = $this->home->getDonHangs($tai_khoan_id);
             require_once "views/user/home/lichsudonhang.php";
+        } else {
+            header("Location: ?act=login");
         }
     }
     function huyDonHang()
@@ -241,6 +243,8 @@ class homeController
             $this->home->updateStatusBill($donHangId, 11);
 
             header("Location:?act=lich-su-don-hang");
+        } else {
+            header("Location: ?act=login");
         }
     }
 }
