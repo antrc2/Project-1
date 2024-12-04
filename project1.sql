@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 04, 2024 at 09:44 AM
+-- Generation Time: Dec 04, 2024 at 10:13 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -74,20 +74,8 @@ CREATE TABLE `bill` (
 --
 
 INSERT INTO `bill` (`id`, `user_id`, `fullname_recieved`, `address_recieved`, `phone_reciedved`, `created_at`, `total`, `status`, `ma_don_hang`) VALUES
-(23, 20, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411897', 1733305427, 20000, 1, 'DH_23');
-
---
--- Triggers `bill`
---
-DELIMITER $$
-CREATE TRIGGER `before_insert_bill` BEFORE INSERT ON `bill` FOR EACH ROW BEGIN
-    -- Đảm bảo rằng id được tự động tạo trước khi gán ma_don_hang
-    SET @next_id = (SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES 
-                    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'bill');
-    SET NEW.ma_don_hang = CONCAT('DH_', @next_id);
-END
-$$
-DELIMITER ;
+(39, 24, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411898', 1733307195, 34555, 1, 'DH_39'),
+(40, 24, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411898', 1733307226, 12, 1, 'DH_40');
 
 -- --------------------------------------------------------
 
@@ -104,6 +92,14 @@ CREATE TABLE `bill_detail` (
   `was_review` int NOT NULL DEFAULT '0',
   `trang_thai` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `bill_detail`
+--
+
+INSERT INTO `bill_detail` (`id`, `bill_id`, `product_detail_id`, `so_luong`, `thanh_tien`, `was_review`, `trang_thai`) VALUES
+(65, 39, 42, 1, 34555, 0, 1),
+(66, 40, 39, 1, 12, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -250,13 +246,13 @@ CREATE TABLE `product_detail` (
 
 INSERT INTO `product_detail` (`id`, `product_id`, `created_at`, `updated_at`, `price`, `amount`, `ram`, `color`, `status`) VALUES
 (37, 28, 0, 1733303596, 300, 11, 4, 'Xám', 1),
-(39, 30, 0, 0, 12, 9, 64, 'Xanh', 1),
+(39, 30, 0, 0, 12, 7, 64, 'Xanh', 1),
 (40, 31, 0, 0, 120000, 1, 8, 'Đen', 1),
-(41, 32, 0, 0, 12000, 4, 8, 'Đen', 1),
-(42, 33, 0, 0, 34555, 13, 8, 'Đen', 1),
+(41, 32, 0, 0, 12000, 2, 8, 'Đen', 1),
+(42, 33, 0, 0, 34555, 11, 8, 'Đen', 1),
 (43, 28, 0, 0, 150, 4, 64, 'Đen', 1),
 (44, 28, 1733295146, 1733295146, 120000, 8, 16, 'Đỏ', 1),
-(45, 34, 1733296104, 1733296171, 10000, 3, 4, 'Xanh than', 1);
+(45, 34, 1733296104, 1733296171, 10000, 2, 4, 'Xanh than', 1);
 
 -- --------------------------------------------------------
 
@@ -487,13 +483,13 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -505,7 +501,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `cart_detail`
 --
 ALTER TABLE `cart_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `category`
