@@ -25,7 +25,10 @@ include './views/user/components/sideshow.php'
 
           <!-- vòng lặp forech ở đây  lấy 6 sản phẩm mới nhất-->
           <?php foreach ($listLimitProduct as $product): 
-            if ($product['status'] ==1) {
+            if($product['category_status'] ==1){
+              if ($product['product_status'] ==1) {
+            
+            
               
             
             ?>
@@ -42,11 +45,11 @@ include './views/user/components/sideshow.php'
                 </div>
               </div>
               <div class="text-center p-4">
-                <a class="d-block h5 mb-2" href="index.php?act=chi-tiet-san-pham-khach-hang&id=<?= $product['id']?>"><?= $product['name']?></a>
+                <a class="d-block h5 mb-2" href="index.php?act=chi-tiet-san-pham-khach-hang&id=<?= $product['product_id']?>"><?= $product['name']?></a>
               </div>
               <div class="d-flex border-top">
                 <small class="w-100 text-center border-end py-2">
-                  <a class="text-body" href="index.php?act=chi-tiet-san-pham-khach-hang&id=<?= $product['id']?>"><i class="fa fa-eye text-red me-2"></i>View
+                  <a class="text-body" href="index.php?act=chi-tiet-san-pham-khach-hang&id=<?= $product['product_id']?>"><i class="fa fa-eye text-red me-2"></i>View
                     detail</a>
                 </small>
                 <!-- <small class="w-50 text-center py-2">
@@ -56,7 +59,7 @@ include './views/user/components/sideshow.php'
               </div>
             </div>
           </div>
-          <?php } endforeach ?>
+          <?php }} endforeach ?>
           <!-- <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
             <div class="product-item">
               <div class="position-relative bg-light overflow-hidden">

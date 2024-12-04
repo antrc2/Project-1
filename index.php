@@ -52,7 +52,34 @@ if ($act == "/" || $act == "") {
     $home->lichSuDonHang();
 }elseif ($act == "huy-don-hang") {
     $home->huyDonHang();
+} 
+// Cần giao diện
+
+elseif ($act == "list-product-detail"){
+    $product->listProductDetail($_GET['id']);
+} elseif ($act == "update-product"){
+    $product->updateProduct($_GET['id']);
+} elseif ($act == "delete-product"){
+    $product->deleteProduct($_GET['id']);
+} elseif ($act == "undo-delete-product"){
+    $product->undoDeleteProduct($_GET['id']);
+} elseif ($act == "update-product-detail"){
+    $product->updateProductDetail($_GET['id']);
+} elseif ($act == "delete-product-detail"){
+    $product->deleteProductDetail($_GET['id']);
+} elseif ($act == "undo-delete-product-detail"){
+    $product->undoDeleteProductDetail($_GET['id']);
+} elseif ($act == "add-product-detail"){
+    $product->addProductDetail($_GET['id']);
+} elseif ($act == "add-product"){
+    $product->addProduct();
 }
+elseif ($act == "danh-sach-admin-san-pham") {
+    $product->danhSachSanPham();
+} 
+
+
+
 elseif ($act == "add-cart") {
     $cart->addCart();
 } elseif ($act == "deletecart") {
@@ -87,9 +114,7 @@ elseif ($act == "add-cart") {
     $discount->undoDeleteDiscount($_GET['id']);
 }
 //admin sản phẩm
-elseif ($act == "danh-sach-admin-san-pham") {
-    $product->danhSachSanPham();
-} elseif ($act == "form-them-san-pham") {
+elseif ($act == "form-them-san-pham") {
     $product->formThemSanPham();
 } elseif ($act == "them-san-pham") {
     $product->themSanPham();

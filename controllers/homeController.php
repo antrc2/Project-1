@@ -21,24 +21,6 @@ class homeController
         $listLimitProduct = $this->product->getNewestProductButLimit(12);
         require_once "views/user/home/home.php";
     }
-    function homee()
-    {
-        $limitProduct = $this->product->getNewestProductButLimit(12);
-        $uniqueProducts = [];
-        $seenIds = [];
-
-        foreach ($limitProduct as $product) {
-            if (!in_array($product['id'], $seenIds)) {
-                $uniqueProducts[] = $product;
-                $seenIds[] = $product['id'];
-            }
-        }
-        $limitProduct = $uniqueProducts;
-        require_once "views/user/home/home.php";
-
-
-        // Kết quả sau khi loại bỏ id trùng nhau
-    }
     function productDetail($id)
     {
         $res = "";
@@ -69,35 +51,37 @@ class homeController
         // die();
         if ($oneProduct) {
             // var_dump($oneProduct);
-            $detailProducts = $this->product->getAllDetailProduct($oneProduct['id']);
-            if (isset($_POST['btn_detailProduct'])) {
-                $isPost = true;
-                $id = $_POST['id'];
-                $check = $this->discount->getDiscountProductDetailId($id);
-                if ($check) {
-                    $variant = $this->product->getDetailProductById($id);
-                    if ($variant['start_date'] < time() & $variant['end_date'] >= time()) {
-                        $discount = $variant['discount_amount'];
-                    } else {
-                        $discount = 0;
-                    }
-                    if ($variant['start_price'] < $variant['price']) {
-                        if ($variant['end_price'] <= $variant['price']) {
-                            $amount = $variant['end_price'];
+            if ($oneProduct['status'] == 1) {
+                $detailProducts = $this->product->getAllDetailProduct($oneProduct['id']);
+                if (isset($_POST['btn_detailProduct'])) {
+                    $isPost = true;
+                    $id = $_POST['id'];
+                    $check = $this->discount->getDiscountProductDetailId($id);
+                    if ($check) {
+                        $variant = $this->product->getDetailProductById($id);
+                        if ($variant['start_date'] < time() & $variant['end_date'] >= time()) {
+                            $discount = $variant['discount_amount'];
                         } else {
-                            $amount = $variant['price'];
+                            $discount = 0;
+                        }
+                        if ($variant['start_price'] < $variant['price']) {
+                            if ($variant['end_price'] <= $variant['price']) {
+                                $amount = $variant['end_price'];
+                            } else {
+                                $amount = $variant['price'];
+                            }
+                        } else {
+                            $amount = 0;
                         }
                     } else {
-                        $amount = 0;
+                        $variant = $this->product->getDetailProductByIdButWithoutDiscount($id);
+                        $amount = $variant['price'];
+                        $discount = 0;
                     }
+                    $discountAmount = calculatorPriceAfterDiscount($amount, $discount);
                 } else {
-                    $variant = $this->product->getDetailProductByIdButWithoutDiscount($id);
-                    $amount = $variant['price'];
-                    $discount = 0;
+                    $isPost = false;
                 }
-                $discountAmount = calculatorPriceAfterDiscount($amount, $discount);
-            } else {
-                $isPost = false;
             }
         }
         require_once "views/user/home/chitietsanpham.php";
