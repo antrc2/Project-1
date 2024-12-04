@@ -38,7 +38,7 @@ class homeController
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($_POST)); // Gửi dữ liệu POST
 
                 // Thực thi cURL và lấy kết quả
-                // $response = curl_exec($ch);
+                $response = curl_exec($ch);
             } else {
                 $response = json_encode(['status' => false, 'message' => "Bạn chưa đăng nhập"]);
             }

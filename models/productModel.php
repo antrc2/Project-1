@@ -214,6 +214,9 @@ class SanPhamModel
     //         echo "Error: ". $e -> getMessage();
     //     }
     // }
+    function getListImageByProductDetailId($id){
+        return $this->conn->query("SELECT * FROM product_detail_image WHERE product_detail_id = $id")->fetchAll();
+    }
     public function getAnhSanPham($id)
     {
         try {
