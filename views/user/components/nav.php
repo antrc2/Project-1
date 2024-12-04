@@ -1,6 +1,11 @@
 <?php
 $cate = new categoryModel;
 $categories = $cate->getListCategory();
+$acc = new accountModel;
+$check = isset($_SESSION['username']);
+if ($check){
+  $informationOfUser = $acc->getInformationUserByUsername($_SESSION['username']);
+}
 ?>
 <div
   id="spinner"
@@ -60,11 +65,11 @@ $categories = $cate->getListCategory();
       <div class="d-none d-lg-flex ms-2">
         </a>
         <small style="margin-top:10px; color: red;  padding-right: 10px;">
-          <b>
-            <?php if (isset($_SESSION['user'])) {
-              echo "Xin chào " . $_SESSION['user']['fullname'];
-            } ?>
-          </b>
+          
+            <?php if ($check): ?>
+              <b>Xin chào <?= $informationOfUser['fullname']?></b>
+            <?php endif ?>
+          
         </small>
 
         <form action="" id="search-box">
@@ -97,13 +102,13 @@ $categories = $cate->getListCategory();
         <?php } ?>
 
 
-        <?php
-        if (isset($_SESSION['user'])) {
-          $user = $_SESSION['user'];
-          if ($user['role_id'] == 2) { ?>
+        <?php if ($check): ?>
+          <?php if ($informationOfUser['role_id'] ==2): ?>
+
             <a href="index.php?act=list-category" class="btn-sm-square bg-white rounded-circle ms-3"><i class="fas fa-user-shield"></i></a>
-        <?php }
-        } ?>
+        
+            <?php endif ?>
+        <?php endif ?>
 
 
       </div>
