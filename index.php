@@ -14,7 +14,9 @@ require_once "controllers/discountController.php";
 require_once "controllers/donhangController.php";
 require_once "controllers/homeController.php";
 require_once "controllers/cartController.php";
+require_once "controllers/thongkeControler.php";
 
+require_once "models/thongke.php";
 require_once "models/accountModel.php";
 require_once "models/productModel.php";
 require_once "models/categoryModel.php";
@@ -32,7 +34,7 @@ $discount = new discountController;
 $order = new DonHangController;
 $cart = new cartController;
 $home = new homeController;
-
+$thongke = new thongkeController;
 $act = $_GET['act'] ?? "/";
 
 //view người dùng
@@ -174,7 +176,12 @@ elseif ($act == "danh-sach-khach-hang") {
     $error->forbidden();
 } elseif ($act == "method-not-allow") {
     $error->methodNotAllow();
-} else {
+} elseif($act == 'thong-ke'){
+    $thongke->thongKe();
+}
+
+
+else {
     $error->notFound();
 }
 $icon = isset($_SESSION['icon']) ? $_SESSION['icon'] : "success";

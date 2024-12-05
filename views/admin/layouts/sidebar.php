@@ -29,7 +29,7 @@
 
 
                 <li class="nav-item">
-                    <a href="../widgets.html" class="nav-link">
+                    <a href="index.php?act=thong-ke" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Thống kê

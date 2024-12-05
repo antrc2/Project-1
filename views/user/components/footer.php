@@ -85,6 +85,34 @@
 
 <!-- Template Javascript -->
 <script src="assets/web/js/main.js"></script>
+<script>
+  function sortProducts(sortType) {
+    const productContainer = document.querySelector('.row.g-4');
+    const products = Array.from(productContainer.children);
+    
+    products.sort((a, b) => {
+        const nameA = a.querySelector('.h5.mb-2').textContent;
+        const nameB = b.querySelector('.h5.mb-2').textContent;
+        
+        switch(sortType) {
+            case 'az':
+                return nameA.localeCompare(nameB, 'vi');
+            case 'za':
+                return nameB.localeCompare(nameA, 'vi');
+            case 'price_asc':
+                return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+            case 'price_desc':
+                return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+            default:
+                return 0;
+        }
+    });
+    
+    productContainer.innerHTML = '';
+    products.forEach(product => productContainer.appendChild(product));
+}
+
+</script>
 </body>
 
 </html>
