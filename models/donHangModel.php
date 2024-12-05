@@ -29,7 +29,7 @@ class DonHangModel
         $time = time();
         $this->conn->prepare("INSERT INTO bill (user_id, fullname_recieved, address_recieved, phone_reciedved, created_at, total, ma_don_hang) VALUES ($userId, '$fullname','$address','$phone',$time, $total, 'hehe')")->execute();
         $newestBill = $this->getNewestBillByUserId($userId);
-        var_dump($newestBill);
+        // var_dump($newestBill);
         $newestBillid = $newestBill['id'];
         $ma_don_hang = "DH_".$newestBillid;
         $this->conn->prepare("UPDATE bill SET ma_don_hang='$ma_don_hang' WHERE id=$newestBillid")->execute();
@@ -39,8 +39,9 @@ class DonHangModel
             $productDetailid = $cart['product_detail_id'];
             $amount = $cart['cart_detail_amount'];
             $price = $cart['cart_detail_price'];
+            $thanh_tien = $amount * $price;
             $this->conn->prepare("UPDATE product_detail SET amount = amount - $amount WHERE id=$productDetailid")->execute();
-            $this->conn->prepare("INSERT INTO bill_detail(bill_id, product_detail_id, so_luong, thanh_tien) VALUES ($billId, $productDetailid, $amount, $price)")->execute();
+            $this->conn->prepare("INSERT INTO bill_detail(bill_id, product_detail_id, so_luong, thanh_tien) VALUES ($billId, $productDetailid, $amount, $thanh_tien)")->execute();
         }
         return;
     }

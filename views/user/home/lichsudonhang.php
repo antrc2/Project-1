@@ -26,7 +26,7 @@ include './views/user/components/sideshow.php'
                                     <th>Địa chỉ</th>
                                     <th>Tên người nhận</th>
                                     <th>Trạng thái đơn hàng</th>
-                                    <th>Thao tác</th>
+                                    <t>Thao tác</t
                                 </tr>
                             </thead>
                            <tbody>
@@ -44,12 +44,12 @@ include './views/user/components/sideshow.php'
                                     <?php if($donHang['status'] == 1){ ?>
                                     <a href="index.php?act=huy-don-hang&id=<?=$donHang['id']?>" class="btn btn-srl" onclick="return confirm('Bạn có muốn huỷ đơn hàng không')">Huỷ đơn hàng</a>
                                     <?php } ?>
+                                    <a href="index.php?act=chi-tiet-don-hang-thanh-toan&id=<?=$donHang['id']?>" class="btn btn-srl">Chi tiết</a>
                                 </td>
                             </tr>
                             <?php }?>
                            </tbody>
                         </table>
-
                     </div>
 
                 </div>
