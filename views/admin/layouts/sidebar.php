@@ -11,7 +11,7 @@
             <div class="image">
                 <img src="./assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
-            <div class="info">
+            <div class="info" style="color: white">
 
                 <?php  
                 $acc = new accountModel;
@@ -31,7 +31,7 @@
 
 
                 <li class="nav-item">
-                    <a href="../widgets.html" class="nav-link">
+                    <a href="?act=statistic" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Thống kê

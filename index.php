@@ -164,6 +164,8 @@ elseif ($act == "update-trang-thai-binh-luan") {
 }
 elseif($act=='commen'){
     $home->commen();
+} elseif ($act == "statistic"){
+    $order->statistic();
 }
 //quản lí tài khoản khách hàng
 elseif ($act == "danh-sach-khach-hang") {

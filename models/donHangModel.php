@@ -156,4 +156,54 @@ class DonHangModel
         $result = $stmt->fetchAll();
         return $result;
     }
+    
+    function statistic($fullname = "",$buyFrom =0,$buyTo=0,$nameProduct="",$priceFrom=0,$priceTo=0,$amountFrom=0,$amountTo=0,$totalFrom=0,$totalTo=0,$maDonHang="",$ram=0,$color=""){
+        $sql = "SELECT *, bill.created_at AS bill_created_at, bill_detail.thanh_tien / bill_detail.so_luong AS bill_price FROM bill_detail JOIN bill ON bill_detail.bill_id = bill.id JOIN account ON bill.user_id=account.id JOIN product_detail ON bill_detail.product_detail_id = product_detail.id JOIN product ON product.id = product_detail.product_id WHERE 1=1";
+
+        if($fullname != ""){
+            $sql .= " AND account.fullname LIKE '%$fullname%'";
+        }
+        if ($buyFrom !="" & $buyFrom != 0) {
+            $buyFromInt = dateTimeToEpochTime($buyFrom);
+            
+            $sql .= " AND bill.created_at >= '$buyFromInt'";
+        }
+        if ($buyTo !="" & $buyTo != 0) {
+            $buyToInt = dateTimeToEpochTime($buyTo);
+            $sql .= " AND bill.created_at <= '$buyToInt'";
+        }
+        if ($nameProduct != "") {
+            $sql .= " AND product.name LIKE '%$nameProduct%'";
+        }
+        if ($priceFrom !="" & $priceFrom != 0) {
+            $sql .= " AND (bill_detail.thanh_tien / bill_detail.so_luong) >= $priceFrom";
+        }
+        // var_dump($priceFrom);
+        if ($priceTo !="" & $priceTo != 0) {
+            $sql .= " AND (bill_detail.thanh_tien / bill_detail.so_luong) <= $priceTo";
+        }
+        if ($amountFrom !="" & $amountFrom != 0) {
+            $sql .= " AND bill_detail.so_luong >= $amountFrom";
+        }
+        if ($amountTo !="" & $amountTo != 0) {
+            $sql .= " AND bill_detail.so_luong <= $amountTo";
+        }
+        if ($totalFrom !="" & $totalFrom != 0) {
+            $sql .= " AND total_price >= $totalFrom";
+        }
+        if ($totalTo !="" & $totalTo != 0) {
+            $sql .= " AND total_price <= $totalTo";
+        }
+        if ($maDonHang !="") {
+            $sql .= " AND ma_don_hang LIKE '%$maDonHang%'";
+        }
+        if ($ram !="" & $ram != 0) {
+            $sql .= " AND product_detail.ram = '$ram'";
+        }
+        if ($color != "") {
+            $sql .= " AND product_detail.color = '$color'";
+        }
+        // var_dump($sql);
+        return $this->conn->query($sql)->fetchAll();
+    }
 }

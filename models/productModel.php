@@ -381,4 +381,11 @@ class SanPhamModel
             echo "Error: " . $e->getMessage();
         }
     }
+    function getAllRam(){
+        return $this->conn->query("SELECT DISTINCT ram FROM product_detail ORDER BY ram ASC")->fetchAll();
+    }
+    function getAllColor(){
+        return $this->conn->query("SELECT DISTINCT color FROM product_detail ORDER BY color ASC")->fetchAll();
+    }
+    
 }
