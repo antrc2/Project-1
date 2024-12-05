@@ -279,7 +279,7 @@ class homeController
         } else {
             header("Location: ?act=login");
         }
-
+    }
     function payMethod($id){
         $orderInfo = $this->bill->getOneDonHang($id);
         if($orderInfo['status'] ==0){

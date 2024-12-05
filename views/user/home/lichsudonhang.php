@@ -26,7 +26,7 @@ include './views/user/components/sideshow.php'
                                     <th>Địa chỉ</th>
                                     <th>Tên người nhận</th>
                                     <th>Trạng thái đơn hàng</th>
-                                    <t>Thao tác</t
+                                    <th>Trạng thái</th>
                                 </tr>
                             </thead>
 
