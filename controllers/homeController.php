@@ -46,7 +46,7 @@ class homeController
         }
         $oneProduct = $this->product->getProductById($id);
         $listBinhLuan = $this->product->getBinhLuan($id);
-        $anhChitiet = $this->product->getAnhSanPham($id);
+        // $anhChitiet = $this->product->getListImageByProductDetailId($id);
         // var_dump($oneProduct);
         // die();
         if ($oneProduct) {
@@ -87,9 +87,11 @@ class homeController
                     $discountAmount = calculatorPriceAfterDiscount($amount, $discount);
                 } else {
                     $isPost = false;
+                    $id = $detailProducts[0]['id'];
                 }
             }
         }
+        $anhChitiet = $this->product->getListImageByProductDetailId($id);
         require_once "views/user/home/chitietsanpham.php";
         if ($res == "") {
         } else {
@@ -158,6 +160,11 @@ class homeController
                 $phone = $_POST['phone'];
                 $email = $_POST['email'];
                 $payMethod = $_POST['httt_ma'];
+                if($payMethod ==2){
+                    $status =0;
+                } else {
+                    $status =1;
+                }
                 // $this->bill->addOrUpdateBillByUserId($userInfo['id'], $fullname, $address, $phone, $total);
                 $count = 0;
                 // var_dump($cartDetailByCartId);
@@ -171,13 +178,14 @@ class homeController
                         $name = $detailProduct['name'];
                         $price = $detailProduct['price'];
                         $amount = $detailProduct['amount'];
+                        
                         require_once "views/user/home/thanhtoan.php";
                         echo SweetAlert2("error", "Sản phẩm $name có giá là $price không đủ số lượng ($amount)");
                         break;
                     }
                 }
                 if ($count == 0) {
-                    $this->bill->fromCartDetailToBillDetail($userInfo['id'], $fullname, $address, $phone, $total, $cartDetailByCartId);
+                    $this->bill->fromCartDetailToBillDetail($userInfo['id'], $fullname, $address, $phone, $total, $cartDetailByCartId, $status);
                     $this->cart->deleteCart($_SESSION['username']);
                     // $cartByUserId = [];
                     header("Location: ?act=lich-su-don-hang");
@@ -252,6 +260,7 @@ class homeController
             header("Location: ?act=login");
         }
     }
+
     public function chiTietDonHangThanhToan()
     {
         if (isset($_SESSION['username'])) {
@@ -270,5 +279,17 @@ class homeController
         } else {
             header("Location: ?act=login");
         }
+
+    function payMethod($id){
+        $orderInfo = $this->bill->getOneDonHang($id);
+        if($orderInfo['status'] ==0){
+            $amount = $orderInfo['total'];
+            require_once "views/user/home/payMethod.php";
+        } else {
+            require_once "views/user/home/payMethod.php";
+            headerAfterXSecondWithSweetAlert2("?act=lich-su-don-hang",1500,"error","Đơn hàng đã được thanh toán");
+        }
+        
+
     }
 }

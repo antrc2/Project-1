@@ -21,17 +21,18 @@ class DonHangModel
             return $this->conn->prepare("INSERT INTO bill (user_id, fullname_recieved, address_recieved, phone_reciedved, created_at, total) VALUES ($userId, '$fullname','$address','$phone',$time, $total)")->execute();
         }
     }
-    function getNewestBillByUserId($userId){
+    function getNewestBillByUserId($userId)
+    {
         return $this->conn->query("SELECT * FROM bill WHERE user_id = $userId ORDER BY id DESC ")->fetch();
     }
-    function fromCartDetailToBillDetail($userId, $fullname, $address, $phone, $total, $carts)
+    function fromCartDetailToBillDetail($userId, $fullname, $address, $phone, $total, $carts, $status = 1)
     {
         $time = time();
-        $this->conn->prepare("INSERT INTO bill (user_id, fullname_recieved, address_recieved, phone_reciedved, created_at, total, ma_don_hang) VALUES ($userId, '$fullname','$address','$phone',$time, $total, 'hehe')")->execute();
+        $this->conn->prepare("INSERT INTO bill (user_id, fullname_recieved, address_recieved, phone_reciedved, created_at, total,status, ma_don_hang) VALUES ($userId, '$fullname','$address','$phone',$time, $total,$status, 'hehe')")->execute();
         $newestBill = $this->getNewestBillByUserId($userId);
         // var_dump($newestBill);
         $newestBillid = $newestBill['id'];
-        $ma_don_hang = "DH_".$newestBillid;
+        $ma_don_hang = "DH_" . $newestBillid;
         $this->conn->prepare("UPDATE bill SET ma_don_hang='$ma_don_hang' WHERE id=$newestBillid")->execute();
         $result = $this->conn->query("SELECT * from bill WHERE user_id = $userId ORDER BY id DESC ")->fetch();
         $billId = $result['id'];
@@ -44,6 +45,28 @@ class DonHangModel
             $this->conn->prepare("INSERT INTO bill_detail(bill_id, product_detail_id, so_luong, thanh_tien) VALUES ($billId, $productDetailid, $amount, $thanh_tien)")->execute();
         }
         return;
+    }
+    function callbackOrder($data)
+    {
+        $message = $data['addDescription'];
+        $messages = explode(" ", $message);
+        $money = $data['creditAmount'];
+        foreach ($messages as $message) {
+            if ($message != "") {
+                $ma_don_hang = "DH_".$message;
+                $result = $this->conn->query("SELECT * FROM bill WHERE ma_don_hang = '$ma_don_hang' and status=0")->fetch();
+                if ($result) {
+                    if ($money >= $result['total']) {
+                        $id = $result['id'];
+                        $output = $this->conn->query("UPDATE bill SET status=1 WHERE id=$id")->execute();
+                        return ['status' => true, 'message' => "Đơn hàng $ma_don_hang đã thanh toán thành công"];
+                    } else {
+                        return ['status' => false, 'message' => "Đơn hàng $ma_don_hang thanh toán thất bại vì thiếu tiền"];
+                    }
+                }
+            }
+        }
+        return ['status' => false, 'message' => "Không có đơn hàng nào được thanh toán thành công"];
     }
     public function getAllDonHang()
     {
@@ -80,7 +103,13 @@ class DonHangModel
     //     return $result;
     // }
 
-
+    public function updateDonHang($id_don_hang, $status)
+    {
+        $sql = "UPDATE bill SET status = $status WHERE id = $id_don_hang";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return true;
+    }
 
     public function getDonHang($id_don_hang)
     {
@@ -112,13 +141,7 @@ class DonHangModel
         $result = $stmt->fetch();
         return $result;
     }
-    public function updateDonHang($id_don_hang, $status)
-    {
-        $sql = "UPDATE bill SET status = $status WHERE id = $id_don_hang";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        return true;
-    }
+
     public function getDonHangFromKhachHang($id)
     {
         $sql = "SELECT bill.*, trang_thai_don_hang.ten_trang_thai,product.name FROM bill

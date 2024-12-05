@@ -77,6 +77,10 @@ elseif ($act == "list-product-detail"){
     $product->addProduct();
 } elseif ($act == "danh-sach-admin-san-pham") {
     $product->danhSachSanPham();
+} elseif ($act == "callback"){
+    $order->callbackOrder();
+} elseif ($act == "pay-method"){
+    $home->payMethod($_GET['id']);
 }
 
 

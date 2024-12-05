@@ -19,7 +19,7 @@ include './views/user/components/sideshow.php'
                             <thead class="thead-primary">
                                 <tr class="text-center">
                                     <th>Stt</th>
-                        
+
                                     <th>Mã đơn hàng</th>
                                     <th>Ngày đặt</th>
                                     <th>Tổng tiền</th>
@@ -29,26 +29,32 @@ include './views/user/components/sideshow.php'
                                     <t>Thao tác</t
                                 </tr>
                             </thead>
-                           <tbody>
-                            <?php foreach($donHangs as $key => $donHang){ ?>
-                            <tr>
-                               
-                                <td><?=$key+1 ?></td>
-                                <td><?=$donHang['ma_don_hang'] ?></td>
-                                <td><?=$donHang['created_at'] ?></td>
-                                <td><?=$donHang['total'] ?></td>
-                                <td><?=$donHang['address_recieved'] ?></td>
-                                <td><?=$donHang['fullname_recieved'] ?></td>
-                                <td><?=$donHang['ten_trang_thai'] ?></td>
-                                <td>
-                                    <?php if($donHang['status'] == 1){ ?>
-                                    <a href="index.php?act=huy-don-hang&id=<?=$donHang['id']?>" class="btn btn-srl" onclick="return confirm('Bạn có muốn huỷ đơn hàng không')">Huỷ đơn hàng</a>
-                                    <?php } ?>
-                                    <a href="index.php?act=chi-tiet-don-hang-thanh-toan&id=<?=$donHang['id']?>" class="btn btn-srl">Chi tiết</a>
-                                </td>
-                            </tr>
-                            <?php }?>
-                           </tbody>
+
+                            <tbody>
+                                <?php foreach ($donHangs as $key => $donHang) { ?>
+                                    <tr>
+
+                                        <td><?= $key + 1 ?></td>
+                                        <td><?= $donHang['ma_don_hang'] ?></td>
+                                        <td><?= $donHang['created_at'] ?></td>
+                                        <td><?= $donHang['total'] ?></td>
+                                        <td><?= $donHang['address_recieved'] ?></td>
+                                        <td><?= $donHang['fullname_recieved'] ?></td>
+                                        <td><?= $donHang['ten_trang_thai'] ?></td>
+                                        <td>
+                                            <?php if ($donHang['status'] == 0): ?>
+                                                <a class="btn btn-success" href="?act=pay-method&id=<?= $donHang['id'] ?>">Thanh toán</a>
+                                            <?php elseif ($donHang['status'] == 1): ?>
+                                                <a href="index.php?act=huy-don-hang&id=<?= $donHang['id'] ?>" class="btn btn-srl" onclick="return confirm('Bạn có muốn huỷ đơn hàng không')">Hủy đơn hàng</a>
+                                            <?php else: ?>
+                                                <a href="index.php?act=chi-tiet-don-hang-thanh-toan&id=<?=$donHang['id']?>" class="btn btn-srl">Chi tiết</a>
+                                            <?php endif ?>
+
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+
                         </table>
                     </div>
 

@@ -17,7 +17,7 @@ class DonHangController
         $id_don_hang = $_GET['id_don_hang'];
         $listChiTietDonHang = $this->donHangModel->getChiTietDonHang($id_don_hang);
         $listDonHang = $this->donHangModel->getOneDonHang($id_don_hang);
-      
+
         $sanPhamDonHang  = $this->donHangModel->getDonHang($id_don_hang);
         // var_dump($sanPhamDonHang);
         $listTrangThaiDonHang = $this->donHangModel->getAllTrangThaiDonHang();
@@ -30,5 +30,13 @@ class DonHangController
         $this->donHangModel->updateDonHang($id_don_hang, $status);
         header("Location: index.php?act=chi-tiet-don-hang&id_don_hang=" . $id_don_hang);
         exit();
+    }
+    function callbackOrder()
+    {
+        $json_data = file_get_contents('php://input');
+        $data = json_decode($json_data, true);
+        // echo json_encode($messages);
+        $result = $this->donHangModel->callbackOrder($data);
+        echo json_encode($result);
     }
 }
