@@ -26,9 +26,10 @@ include './views/user/components/sideshow.php'
                                     <th>Địa chỉ</th>
                                     <th>Tên người nhận</th>
                                     <th>Trạng thái đơn hàng</th>
-                                    <th>Thao tác</th>
+                                    <t>Thao tác</t
                                 </tr>
                             </thead>
+
                             <tbody>
                                 <?php foreach ($donHangs as $key => $donHang) { ?>
                                     <tr>
@@ -46,15 +47,15 @@ include './views/user/components/sideshow.php'
                                             <?php elseif ($donHang['status'] == 1): ?>
                                                 <a href="index.php?act=huy-don-hang&id=<?= $donHang['id'] ?>" class="btn btn-srl" onclick="return confirm('Bạn có muốn huỷ đơn hàng không')">Hủy đơn hàng</a>
                                             <?php else: ?>
-                                                <a class="btn btn-outline-primary" href="?act=/&id=<?= $donHang['status'] ?>">Xem chi tiết</a>
+                                                <a href="index.php?act=chi-tiet-don-hang-thanh-toan&id=<?=$donHang['id']?>" class="btn btn-srl">Chi tiết</a>
                                             <?php endif ?>
 
                                         </td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
-                        </table>
 
+                        </table>
                     </div>
 
                 </div>

@@ -52,7 +52,9 @@ if ($act == "/" || $act == "") {
     $home->lichSuDonHang();
 }elseif ($act == "huy-don-hang") {
     $home->huyDonHang();
-} 
+} elseif($act == 'chi-tiet-don-hang-thanh-toan'){
+    $home->chiTietDonHangThanhToan();
+}
 // Cần giao diện
 
 elseif ($act == "list-product-detail"){

@@ -260,6 +260,26 @@ class homeController
             header("Location: ?act=login");
         }
     }
+
+    public function chiTietDonHangThanhToan()
+    {
+        if (isset($_SESSION['username'])) {
+            $user = $this->acc->getInformationUserByUsername($_SESSION['username']);
+            $tai_khoan_id = $user['id'];
+
+            $donHangId = $_GET['id'];
+            $donHangs = $this->home->getDonHang($donHangId);
+            $donHangDetail = $this->home->getDonHangDetail($donHangId);
+
+            if ($donHangs['user_id'] != $tai_khoan_id) {
+                header("Location: index.php?act=lich-su-don-hang");
+                exit();
+            }
+            require_once "views/user/home/chitietdonhangthanhtoan.php";
+        } else {
+            header("Location: ?act=login");
+        }
+
     function payMethod($id){
         $orderInfo = $this->bill->getOneDonHang($id);
         if($orderInfo['status'] ==0){
@@ -270,5 +290,6 @@ class homeController
             headerAfterXSecondWithSweetAlert2("?act=lich-su-don-hang",1500,"error","Đơn hàng đã được thanh toán");
         }
         
+
     }
 }
