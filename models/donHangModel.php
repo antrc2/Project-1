@@ -206,4 +206,12 @@ class DonHangModel
         // var_dump($sql);
         return $this->conn->query($sql)->fetchAll();
     }
+    function huyDonHang($id){
+        $billDetails = $this->conn->query("SELECT * FROM bill_detail WHERE bill_detail.bill_id = $id")->fetchAll();
+        foreach ($billDetails as $billDetail){
+            $amount = $billDetail['so_luong'];
+            $productDetailId = $billDetail['product_detail_id'];
+            $this->conn->prepare("UPDATE product_detail SET amount = amount + $amount WHERE product_detail.id=$productDetailId")->execute();
+        }
+    }
 }

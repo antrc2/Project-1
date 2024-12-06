@@ -253,7 +253,7 @@ class homeController
                 echo "Đơn hàng đã xác nhận không thể huỷ";
                 exit();
             }
-
+            $this->bill->huyDonHang($donHangId);
             $this->home->updateStatusBill($donHangId, 11);
             header("Location:?act=lich-su-don-hang");
         } else {
