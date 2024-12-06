@@ -433,5 +433,18 @@ class SanPhamModel
     function getAllColor(){
         return $this->conn->query("SELECT DISTINCT color FROM product_detail ORDER BY color ASC")->fetchAll();
     }
+    function getCheapestProductButLimit($limit){
+
+        $cheapestProducts = [];
+        $listProductId = $this->conn->query("SELECT product_id FROM product_detail GROUP BY product_id ORDER BY MIN(price) ASC LIMIT $limit")->fetchAll();
+        // var_dump($listProductId);
+        foreach ($listProductId as $productId){
+            $id = $productId['product_id'];
+            $product = $this->conn->query("SELECT *,product.id AS product_id, product.status AS product_status, category.status AS category_status FROM product JOIN category ON product.cate_id = category.id WHERE product.id=$id")->fetch();
+            array_push($cheapestProducts, $product);
+        }
+        // var_dump($cheapestProducts);
+        return $cheapestProducts;
+    }
     
 }
