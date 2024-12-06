@@ -101,7 +101,7 @@ include './views/user/components/sideshow.php'
                                         <td colspan="2">
                                             <form action="index.php?act=commen" method="post" style="display: flex;">
                                                 <input type="text" name="id" value="<?= $oneProduct['id'] ?>" hidden>
-                                                <input type="text" name="comment" id="comment" class="form-control" placeholder="Bình luận của bạn về sản phẩm" required >
+                                                <input type="text" name="comment" id="comment" class="form-control" placeholder="Bình luận của bạn về sản phẩm" require>
                                                 <button type="submit" class="btn btn-primary">Gửi</button>
                                             </form>
                                         </td>
