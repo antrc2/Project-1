@@ -20,6 +20,7 @@ class homeController
     {
         $banChays = $this->product->getBanChay(8);
         $listLimitProduct = $this->product->getNewestProductButLimit(12);
+        $cheapestProducts = $this->product->getCheapestProductButLimit(4);
         require_once "views/user/home/home.php";
     }
     function productDetail($id)

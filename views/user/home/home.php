@@ -150,17 +150,35 @@ include './views/user/components/sideshow.php'
 
 
       <!-- vòng lặp forech 4 sản phẩm có giá rẻ nhất của shop -->
-      <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-        <img class="img-fluid" src="assets/web/img/f6.webp" alt="" />
-        <div class="bg-light p-4">
-          <a class="d-block h5 lh-base mb-4" href="">Từ Điển Sống Khỏe - Wellness</a>
-          <div class="text-muted border-top pt-4">
-            <small class="me-3"><i class="fa fa-user text-red me-2"></i>Admin</small>
-            <small class="me-3"><i class="fa fa-calendar text-red me-2"></i>01 July,
-              2022</small>
-          </div>
-        </div>
-      </div>
+      <?php foreach ($cheapestProducts as $product):
+            if ($product['category_status'] == 1) {
+              if ($product['product_status'] == 1) {
+          ?>
+                <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                  <div class="product-item">
+                    <div class="position-relative bg-light overflow-hidden">
+                      <img
+                        class="img-fluid w-100"
+                        src="./assets/img/<?= $product['image'] ?>"
+                        alt="" style="width: 150px; height: 150px;" />
+                    </div>
+                    <div class="text-center p-4">
+                      <a class="d-block h5 mb-2" href="index.php?act=chi-tiet-san-pham-khach-hang&id=<?= $product['product_id'] ?>"><?= $product['name'] ?></a>
+                    </div>
+                    <div class="d-flex border-top">
+                      <small class="w-100 text-center border-end py-2">
+                        <a class="text-body" href="index.php?act=chi-tiet-san-pham-khach-hang&id=<?= $product['product_id'] ?>">
+                          <i class="fa fa-eye text-red me-2"></i>View detail
+                        </a>
+                      </small>
+                    </div>
+                  </div>
+                </div>
+          <?php
+              }
+            }
+          endforeach
+          ?>
     </div>
   </div>
 </div>
