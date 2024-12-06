@@ -37,8 +37,8 @@ include './views/user/components/sideshow.php'
                                 foreach ($donHangDetail as $key => $donHang) { ?>
                                     <tr class="text-center">
                                         <td><?= $key + 1 ?></td>
-                                        <td><?= $donHang['name'] ?></td>
-                                        <td><img src="assets/img/<?= $donHang['image'] ?>" width="200px" height="200px"></td>
+                                        <td><a href="index.php?act=chi-tiet-san-pham-khach-hang&id=<?=$donHang['id'] ?>"><?= $donHang['name'] ?></a></td>
+                                        <td><a href="index.php?act=chi-tiet-san-pham-khach-hang&id=<?=$donHang['id'] ?>"><img src="assets/img/<?= $donHang['image'] ?>" width="200px" height="200px"></a></td>
                                         <td><?= $donHang['ram'] ?> GB</td>
                                         <td><?= $donHang['color'] ?></td>
                                         <td><?= number_format($donHang['price']) ?>đ</td>
