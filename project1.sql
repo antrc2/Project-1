@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 04, 2024 at 10:13 AM
+-- Generation Time: Dec 05, 2024 at 10:30 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -74,8 +74,13 @@ CREATE TABLE `bill` (
 --
 
 INSERT INTO `bill` (`id`, `user_id`, `fullname_recieved`, `address_recieved`, `phone_reciedved`, `created_at`, `total`, `status`, `ma_don_hang`) VALUES
-(39, 24, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411898', 1733307195, 34555, 1, 'DH_39'),
-(40, 24, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411898', 1733307226, 12, 1, 'DH_40');
+(39, 24, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411898', 1733307195, 34555, 0, 'DH_39'),
+(40, 24, 'Nguyễn Ngọc An', 'Vĩnh Ninh - Vĩnh Quỳnh - Thanh Trì - Hà Nội', '0838411898', 1733307226, 12, 1, 'DH_40'),
+(41, 21, 'anh hiếu', 'Hoài Đức-Hà Nội', '0353276676', 1733330849, 20000, 2, 'DH_41'),
+(42, 21, 'Đỗ Phú Hiếu', 'Hoài Đức-Hà Nội', '0353276676', 1733331217, 380105, 1, 'DH_42'),
+(43, 21, 'Đỗ Phú Hiếu', 'Hoài Đức-Hà Nội', '0353276676', 1733331338, 1140, 1, 'DH_43'),
+(44, 21, 'Đỗ Phú Hiếu', 'Hoài Đức-Hà Nội', '0353276676', 1733332114, 12, 0, 'DH_44'),
+(45, 21, 'Long Phú Quốc', 'Hoài Đức-Hà Nội', '0353276676', 1733370043, 902718, 1, 'DH_45');
 
 -- --------------------------------------------------------
 
@@ -99,7 +104,14 @@ CREATE TABLE `bill_detail` (
 
 INSERT INTO `bill_detail` (`id`, `bill_id`, `product_detail_id`, `so_luong`, `thanh_tien`, `was_review`, `trang_thai`) VALUES
 (65, 39, 42, 1, 34555, 0, 1),
-(66, 40, 39, 1, 12, 0, 1);
+(66, 40, 39, 1, 12, 0, 1),
+(67, 41, 45, 2, 10000, 0, 1),
+(68, 42, 42, 11, 34555, 0, 1),
+(69, 43, 37, 3, 300, 0, 1),
+(70, 43, 43, 2, 120, 0, 1),
+(71, 44, 39, 1, 12, 0, 1),
+(72, 45, 39, 2, 24, 0, 1),
+(73, 45, 47, 3, 902694, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -143,6 +155,13 @@ CREATE TABLE `cart_detail` (
   `status` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `cart_detail`
+--
+
+INSERT INTO `cart_detail` (`id`, `cart_id`, `product_detail_id`, `amount`, `price`, `created_at`, `updated_at`, `status`) VALUES
+(90, 5, 37, 1, 300, 1733391439, 1733391439, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -162,8 +181,8 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `cate_name`, `created_at`, `updated_at`, `status`) VALUES
-(1, 'ASUS', 0, 1733195705, 1),
-(2, 'TUF', 0, 1731422315, 1),
+(1, 'Acer', 0, 1733332406, 1),
+(2, 'LG ', 0, 1733332451, 1),
 (3, 'macbook', 1732636579, 1732636579, 1),
 (5, 'Dell', 1732636834, 1732636834, 1);
 
@@ -215,12 +234,13 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `cate_id`, `name`, `image`, `created_at`, `updated_at`, `detail`, `status`) VALUES
-(28, 2, 'dell', '400350684_756076966348762_7191393029513830909_n.jpg', 1733194296, 1733246962, 'sds', 1),
-(30, 1, 'ex', '122959113_449563376022943_7005312100385151816_n.jpg', 1733145988, 1733247057, 'An 18cm', 1),
-(31, 2, 'lap top l dell', 'th (3).jpg', 1733146048, 1733146048, 'rất ok', 2),
-(32, 5, 'dell 5i', 'th (5).jpg', 1733146117, 1733146117, 'sản phẩm tốt cho người dùng', 1),
-(33, 3, 'lap top levo', 'th.jpg', 1733146086, 1733146086, 'edefd', 1),
-(34, 2, 'AnTrc2', '400350684_756076966348762_7191393029513830909_n.jpg', 1733296049, 1733296049, '18cm', 1);
+(28, 1, 'Acer Swift 14 AI ', '714fQRug1+L._AC_SX679_.jpg', 1733194296, 1733333450, '  Máy tính Copilot+. Kỷ nguyên AI mới bắt đầu - Biến ý tưởng của bạn từ lời nhắc văn bản thành tác phẩm nghệ thuật được tạo ra', 1),
+(30, 1, 'Acer Swift', 'th (5).jpg', 1733145988, 1733329936, 'Giữ sự mát mẻ: Giữ sự mát mẻ giữa những thiên hà chơi game khốc liệt nhất, nhờ quạt kép cải tiến và hệ thống thoát khí hiệu quả của Nitro V 15', 1),
+(31, 2, 'Intel Evo Edition', '71UTfYZOmZL._AC_SX466_.jpg', 1733146048, 1733332581, 'Màn hình IPS 14\" nhỏ gọn, màu sắc sống động với độ chói thấp - Mở rộng phạm vi khả thi với màn hình IPS 14” nhỏ gọn có tỷ lệ khung hình 16:10 có thể biến tầm nhìn của bạn thành hiện thực. ', 1),
+(32, 2, 'LG UltraGear', 'th (5).jpg', 1733146117, 1733332885, 'sản phẩm tốt cho người dùng', 1),
+(33, 2, 'LG Ultra PC', 'th.jpg', 1733146086, 1733332851, 'Laptop hiệu năng cao, phù hợp cho công việc sáng tạo hoặc giải trí.', 1),
+(34, 2, 'Intel Core', '717pottSkKL._AC_SX466_.jpg', 1733296049, 1733332719, 'Windows 11 Home - Windows 11 đưa bạn đến gần hơn với những gì bạn yêu thích. Theo đuổi đam mê và tối đa hóa năng suất của bạn với Windows 11 mới', 1),
+(38, 1, 'Acer Nitro V Gaming Laptop', '71F-Wcriq4L._AC_SX466_.jpg', 1733329431, 1733329892, 'Giữ sự mát mẻ: Giữ sự mát mẻ giữa những thiên hà chơi game khốc liệt nhất, nhờ quạt kép cải tiến và hệ thống thoát khí hiệu quả của Nitro V 15', 1);
 
 -- --------------------------------------------------------
 
@@ -245,14 +265,16 @@ CREATE TABLE `product_detail` (
 --
 
 INSERT INTO `product_detail` (`id`, `product_id`, `created_at`, `updated_at`, `price`, `amount`, `ram`, `color`, `status`) VALUES
-(37, 28, 0, 1733303596, 300, 11, 4, 'Xám', 1),
-(39, 30, 0, 0, 12, 7, 64, 'Xanh', 1),
+(37, 28, 0, 1733303596, 300, 8, 4, 'Xám', 1),
+(39, 30, 0, 0, 12, 4, 64, 'Xanh', 1),
 (40, 31, 0, 0, 120000, 1, 8, 'Đen', 1),
 (41, 32, 0, 0, 12000, 2, 8, 'Đen', 1),
-(42, 33, 0, 0, 34555, 11, 8, 'Đen', 1),
-(43, 28, 0, 0, 150, 4, 64, 'Đen', 1),
+(42, 33, 0, 0, 34555, 0, 8, 'Đen', 1),
+(43, 28, 0, 1733336526, 150, 49, 568, 'Đen', 1),
 (44, 28, 1733295146, 1733295146, 120000, 8, 16, 'Đỏ', 1),
-(45, 34, 1733296104, 1733296171, 10000, 2, 4, 'Xanh than', 1);
+(45, 34, 1733296104, 1733296171, 10000, 0, 4, 'Xanh than', 1),
+(46, 28, 1733335750, 1733335750, 600000, 13, 128, 'xanh', 1),
+(47, 28, 1733336194, 1733336194, 300898, 42, 264, 'đen', 1);
 
 -- --------------------------------------------------------
 
@@ -298,7 +320,13 @@ INSERT INTO `product_detail_image` (`id`, `product_detail_id`, `image`) VALUES
 (97, 44, '386879197_274394835576707_5557031970033408359_n.jpg'),
 (98, 44, '400350684_756076966348762_7191393029513830909_n.jpg'),
 (99, 37, '122959113_449563376022943_7005312100385151816_n.jpg'),
-(101, 37, '400350684_756076966348762_7191393029513830909_n.jpg');
+(101, 37, '400350684_756076966348762_7191393029513830909_n.jpg'),
+(104, 46, '71F-Wcriq4L._AC_SX466_.jpg'),
+(105, 46, '71UTfYZOmZL._AC_SX466_.jpg'),
+(106, 46, '714fQRug1+L._AC_SX679_.jpg'),
+(107, 46, 'th (2).jpg'),
+(108, 46, 'th (3).jpg'),
+(109, 46, 'th (4).jpg');
 
 -- --------------------------------------------------------
 
@@ -329,7 +357,8 @@ INSERT INTO `review` (`id`, `user_id`, `product_id`, `star`, `comment`, `created
 (14, 21, 33, 1, 'sản phẩm rất tốt 7', 1733139012, NULL),
 (15, 21, 32, 1, 'dd', 1733160965, NULL),
 (16, 21, 32, 1, 'hhh', 1733194078, NULL),
-(17, 20, 33, 1, 'adadad', 1733297849, NULL);
+(17, 20, 33, 1, 'adadad', 1733297849, NULL),
+(18, 21, 34, 1, 'sản phẩm rất chất lượng cao', 1733330927, NULL);
 
 -- --------------------------------------------------------
 
@@ -366,6 +395,7 @@ CREATE TABLE `trang_thai_don_hang` (
 --
 
 INSERT INTO `trang_thai_don_hang` (`id`, `ten_trang_thai`) VALUES
+(0, 'Chưa thanh toán'),
 (1, 'Chưa xác nhận'),
 (2, 'Đã Xác nhận'),
 (3, 'Đang chuẩn bị hàng'),
@@ -483,13 +513,13 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -501,7 +531,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `cart_detail`
 --
 ALTER TABLE `cart_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -519,25 +549,25 @@ ALTER TABLE `discount`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `product_detail`
 --
 ALTER TABLE `product_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `product_detail_image`
 --
 ALTER TABLE `product_detail_image`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -549,7 +579,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `trang_thai_don_hang`
 --
 ALTER TABLE `trang_thai_don_hang`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

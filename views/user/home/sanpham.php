@@ -26,9 +26,7 @@ include './views/user/components/sideshow.php'
                                 <option value="price_asc">Giá thấp đến cao</option>
                                 <option value="price_desc">Giá cao đến thấp</option>
                             </select>
-
                         </li>
-
                     </ul>
                 </div>
             </div>
@@ -36,9 +34,8 @@ include './views/user/components/sideshow.php'
                 <div id="tab-1" class="tab-pane fade show p-0 active">
                     <div class="row g-4">
                         <?php
-                        foreach ($products as $key => $product) {
+                        foreach ($products as $key => $product){
                             if ($product['status'] == 1) {
-
                         ?>
                                 <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                                     <div class="product-item">
@@ -51,7 +48,6 @@ include './views/user/components/sideshow.php'
                                                 echo "";
                                             }
                                             ?>
-                                            <!-- <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div> -->
                                         </div>
                                         <div class="text-center p-4">
                                             <a class="d-block h5 mb-2" href=""><?= $product['name'] ?></a>
@@ -64,7 +60,7 @@ include './views/user/components/sideshow.php'
                                         </div>
                                     </div>
                                 </div>
-                                }
+                                
                         <?php }
                         } ?>
                     </div>

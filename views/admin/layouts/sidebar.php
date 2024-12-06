@@ -11,11 +11,13 @@
             <div class="image">
                 <img src="./assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
-            <div class="info">
+            <div class="info" style="color: white">
 
-                <?php if (isset($_SESSION['username'])) {
-                    echo $_SESSION['username'];
-                } ?>
+                <?php  
+                $acc = new accountModel;
+                $userInfo = $acc->getInformationUserByUsername($_SESSION['username']);
+                echo $userInfo['fullname'];
+                ?>
             </div>
         </div>
 
@@ -24,12 +26,9 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-
-
                 <li class="nav-item">
                     <a href="index.php?act=thong-ke" class="nav-link">
+                    <a href="?act=statistic" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Thống kê

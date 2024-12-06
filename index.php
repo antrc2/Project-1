@@ -79,6 +79,10 @@ elseif ($act == "list-product-detail"){
     $product->addProduct();
 } elseif ($act == "danh-sach-admin-san-pham") {
     $product->danhSachSanPham();
+} elseif ($act == "callback"){
+    $order->callbackOrder();
+} elseif ($act == "pay-method"){
+    $home->payMethod($_GET['id']);
 }
 
 
@@ -162,6 +166,8 @@ elseif ($act == "update-trang-thai-binh-luan") {
 }
 elseif($act=='commen'){
     $home->commen();
+} elseif ($act == "statistic"){
+    $order->statistic();
 }
 //quản lí tài khoản khách hàng
 elseif ($act == "danh-sach-khach-hang") {

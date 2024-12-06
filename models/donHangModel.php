@@ -21,17 +21,18 @@ class DonHangModel
             return $this->conn->prepare("INSERT INTO bill (user_id, fullname_recieved, address_recieved, phone_reciedved, created_at, total) VALUES ($userId, '$fullname','$address','$phone',$time, $total)")->execute();
         }
     }
-    function getNewestBillByUserId($userId){
+    function getNewestBillByUserId($userId)
+    {
         return $this->conn->query("SELECT * FROM bill WHERE user_id = $userId ORDER BY id DESC ")->fetch();
     }
-    function fromCartDetailToBillDetail($userId, $fullname, $address, $phone, $total, $carts)
+    function fromCartDetailToBillDetail($userId, $fullname, $address, $phone, $total, $carts, $status = 1)
     {
         $time = time();
-        $this->conn->prepare("INSERT INTO bill (user_id, fullname_recieved, address_recieved, phone_reciedved, created_at, total, ma_don_hang) VALUES ($userId, '$fullname','$address','$phone',$time, $total, 'hehe')")->execute();
+        $this->conn->prepare("INSERT INTO bill (user_id, fullname_recieved, address_recieved, phone_reciedved, created_at, total,status, ma_don_hang) VALUES ($userId, '$fullname','$address','$phone',$time, $total,$status, 'hehe')")->execute();
         $newestBill = $this->getNewestBillByUserId($userId);
         // var_dump($newestBill);
         $newestBillid = $newestBill['id'];
-        $ma_don_hang = "DH_".$newestBillid;
+        $ma_don_hang = "DH_" . $newestBillid;
         $this->conn->prepare("UPDATE bill SET ma_don_hang='$ma_don_hang' WHERE id=$newestBillid")->execute();
         $result = $this->conn->query("SELECT * from bill WHERE user_id = $userId ORDER BY id DESC ")->fetch();
         $billId = $result['id'];
@@ -44,6 +45,28 @@ class DonHangModel
             $this->conn->prepare("INSERT INTO bill_detail(bill_id, product_detail_id, so_luong, thanh_tien) VALUES ($billId, $productDetailid, $amount, $thanh_tien)")->execute();
         }
         return;
+    }
+    function callbackOrder($data)
+    {
+        $message = $data['addDescription'];
+        $messages = explode(" ", $message);
+        $money = $data['creditAmount'];
+        foreach ($messages as $message) {
+            if ($message != "") {
+                $ma_don_hang = "DH_".$message;
+                $result = $this->conn->query("SELECT * FROM bill WHERE ma_don_hang = '$ma_don_hang' and status=0")->fetch();
+                if ($result) {
+                    if ($money >= $result['total']) {
+                        $id = $result['id'];
+                        $output = $this->conn->query("UPDATE bill SET status=1 WHERE id=$id")->execute();
+                        return ['status' => true, 'message' => "Đơn hàng $ma_don_hang đã thanh toán thành công"];
+                    } else {
+                        return ['status' => false, 'message' => "Đơn hàng $ma_don_hang thanh toán thất bại vì thiếu tiền"];
+                    }
+                }
+            }
+        }
+        return ['status' => false, 'message' => "Không có đơn hàng nào được thanh toán thành công"];
     }
     public function getAllDonHang()
     {
@@ -80,7 +103,13 @@ class DonHangModel
     //     return $result;
     // }
 
-
+    public function updateDonHang($id_don_hang, $status)
+    {
+        $sql = "UPDATE bill SET status = $status WHERE id = $id_don_hang";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return true;
+    }
 
     public function getDonHang($id_don_hang)
     {
@@ -112,13 +141,7 @@ class DonHangModel
         $result = $stmt->fetch();
         return $result;
     }
-    public function updateDonHang($id_don_hang, $status)
-    {
-        $sql = "UPDATE bill SET status = $status WHERE id = $id_don_hang";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        return true;
-    }
+
     public function getDonHangFromKhachHang($id)
     {
         $sql = "SELECT bill.*, trang_thai_don_hang.ten_trang_thai,product.name FROM bill
@@ -132,5 +155,63 @@ class DonHangModel
         $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;
+    }
+    
+    function statistic($fullname = "",$buyFrom =0,$buyTo=0,$nameProduct="",$priceFrom=0,$priceTo=0,$amountFrom=0,$amountTo=0,$totalFrom=0,$totalTo=0,$maDonHang="",$ram=0,$color=""){
+        $sql = "SELECT *, bill.created_at AS bill_created_at, bill_detail.thanh_tien / bill_detail.so_luong AS bill_price FROM bill_detail JOIN bill ON bill_detail.bill_id = bill.id JOIN account ON bill.user_id=account.id JOIN product_detail ON bill_detail.product_detail_id = product_detail.id JOIN product ON product.id = product_detail.product_id WHERE 1=1";
+
+        if($fullname != ""){
+            $sql .= " AND account.fullname LIKE '%$fullname%'";
+        }
+        if ($buyFrom !="" & $buyFrom != 0) {
+            $buyFromInt = dateTimeToEpochTime($buyFrom);
+            
+            $sql .= " AND bill.created_at >= '$buyFromInt'";
+        }
+        if ($buyTo !="" & $buyTo != 0) {
+            $buyToInt = dateTimeToEpochTime($buyTo);
+            $sql .= " AND bill.created_at <= '$buyToInt'";
+        }
+        if ($nameProduct != "") {
+            $sql .= " AND product.name LIKE '%$nameProduct%'";
+        }
+        if ($priceFrom !="" & $priceFrom != 0) {
+            $sql .= " AND (bill_detail.thanh_tien / bill_detail.so_luong) >= $priceFrom";
+        }
+        // var_dump($priceFrom);
+        if ($priceTo !="" & $priceTo != 0) {
+            $sql .= " AND (bill_detail.thanh_tien / bill_detail.so_luong) <= $priceTo";
+        }
+        if ($amountFrom !="" & $amountFrom != 0) {
+            $sql .= " AND bill_detail.so_luong >= $amountFrom";
+        }
+        if ($amountTo !="" & $amountTo != 0) {
+            $sql .= " AND bill_detail.so_luong <= $amountTo";
+        }
+        if ($totalFrom !="" & $totalFrom != 0) {
+            $sql .= " AND total_price >= $totalFrom";
+        }
+        if ($totalTo !="" & $totalTo != 0) {
+            $sql .= " AND total_price <= $totalTo";
+        }
+        if ($maDonHang !="") {
+            $sql .= " AND ma_don_hang LIKE '%$maDonHang%'";
+        }
+        if ($ram !="" & $ram != 0) {
+            $sql .= " AND product_detail.ram = '$ram'";
+        }
+        if ($color != "") {
+            $sql .= " AND product_detail.color = '$color'";
+        }
+        // var_dump($sql);
+        return $this->conn->query($sql)->fetchAll();
+    }
+    function huyDonHang($id){
+        $billDetails = $this->conn->query("SELECT * FROM bill_detail WHERE bill_detail.bill_id = $id")->fetchAll();
+        foreach ($billDetails as $billDetail){
+            $amount = $billDetail['so_luong'];
+            $productDetailId = $billDetail['product_detail_id'];
+            $this->conn->prepare("UPDATE product_detail SET amount = amount + $amount WHERE product_detail.id=$productDetailId")->execute();
+        }
     }
 }
