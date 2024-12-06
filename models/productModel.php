@@ -18,10 +18,10 @@ class SanPhamModel
         return $this->conn->query("SELECT *,product.id AS product_id,product.created_at AS product_created_at, product.updated_at AS product_updated_at ,product.status AS product_status, category.status AS category_status FROM product JOIN category ON product.cate_id = category.id")->fetchAll();
     }
     public function getAllProductByIdCate($id_cate){
-        return $this->conn->query("SELECT product.*, product_detail.status , product_detail.price, product_detail.amount, product_detail.ram, product_detail.color,category.cate_name
+        return $this->conn->query("SELECT product.*,category.cate_name
             FROM product
             join category on product.cate_id = category.id
-            JOIN product_detail ON product.id = product_detail.product_id WHERE product.cate_id=$id_cate
+            WHERE product.cate_id=$id_cate
              ORDER BY product.id DESC")->fetchAll();
     }
     function getNewestProductButLimit($limit){
@@ -30,6 +30,52 @@ class SanPhamModel
         // join product_detail ON product.id = product_detail.product_id
         //  ORDER BY product.id DESC LIMIT $limit")->fetchAll();
     }
+    // public function getBanChay($limit){
+    //     $sql = "SELECT product.*,  product_detail.*, bill.*,bill_detail.*,product.status AS product_status, category.status AS category_status from product
+    //     join category on product.cate_id = category.id
+    //     join product_detail ON product.id = product_detail.product_id
+    //     join bill_detail ON product_detail.id = bill_detail.product_detail_id
+    //     JOIN bill ON bill_detail.bill_id = bill.id
+    //     order by bill_detail.so_luong DESC LIMIT $limit";
+    //     $stmt = $this->conn->prepare($sql);
+    //     $stmt->execute();
+    //     $result = $stmt->fetchAll();
+    //     return $result;
+    // }
+
+    public function getBanChay($limit){
+        $sql = "SELECT 
+            product.id,
+            product.name,
+            product.image,
+            product.detail,
+            product.status AS product_status,
+            category.status AS category_status,
+            MIN(product_detail.price) as min_price,
+            SUM(bill_detail.so_luong) as total_sold
+        FROM product
+        JOIN category ON product.cate_id = category.id
+        JOIN product_detail ON product.id = product_detail.product_id
+        JOIN bill_detail ON product_detail.id = bill_detail.product_detail_id
+        JOIN bill ON bill_detail.bill_id = bill.id
+        WHERE product.status = 1
+        GROUP BY 
+            product.id,
+            product.name,
+            product.image,
+            product.detail,
+            product.status,
+            category.status
+        ORDER BY total_sold DESC 
+        LIMIT $limit";
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+    
+    
     public function getAllSanPham()
     {
         try {

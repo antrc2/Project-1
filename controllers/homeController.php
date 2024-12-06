@@ -18,6 +18,7 @@ class homeController
     }
     function home()
     {
+        $banChays = $this->product->getBanChay(8);
         $listLimitProduct = $this->product->getNewestProductButLimit(12);
         require_once "views/user/home/home.php";
     }
@@ -289,7 +290,5 @@ class homeController
             require_once "views/user/home/payMethod.php";
             headerAfterXSecondWithSweetAlert2("?act=lich-su-don-hang",1500,"error","Đơn hàng đã được thanh toán");
         }
-        
-
     }
 }
